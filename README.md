@@ -6,6 +6,6 @@ HEP stands for "home exercise program." If you've ever gone to any type of physi
 ## The Frontend Stack
 [<img src="https://github.com/FortAwesome/Font-Awesome/blob/6.x/svgs/brands/react.svg" width="50" height="50" />React - javascript library](https://reactjs.org)
 
-[Axios - http client for node.js](https://axios-http.com)
+[<img src="https://user-images.githubusercontent.com/43313420/105883616-57dbeb00-6007-11eb-9df2-de0e2a42655c.png" width="50" height="50" /> Axios - http client for node.js](https://axios-http.com)
 
-[<img src="https://github.com/chakra-ui/chakra-ui/blob/main/logo/logo-black.svg" width="200" height="50" /> Chakra UI - React component library](https://chakra-ui.com)
+[<img src="https://github.com/chakra-ui/chakra-ui/blob/main/logo/logomark-black.svg" width="50" height="50" /> Chakra UI - React component library](https://chakra-ui.com)
