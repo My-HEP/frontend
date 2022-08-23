@@ -8,4 +8,6 @@ HEP stands for "home exercise program." If you've ever gone to any type of physi
 
 [<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRraHaS4n1HwkvIX_P9s_BJ81_pjpdPMbqUaA&usqp=CAU" width="50" height="50" /> Axios - http client for node.js](https://axios-http.com)
 
+[<img src="https://react-query-v3.tanstack.com/_next/static/images/emblem-light-628080660fddb35787ff6c77e97ca43e.svg" width="50" height="50" />TanStack Query - library for working with fetched data](https://tanstack.com/query/v4)
+
 [<img src="https://github.com/chakra-ui/chakra-ui/blob/main/logo/logomark-black.svg" width="50" height="50" /> Chakra UI - React component library](https://chakra-ui.com)
