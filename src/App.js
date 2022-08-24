@@ -13,15 +13,17 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import { useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
+import axios from 'axios';
+ 
+const fetchBackend = async () => {
+    const {data} = await axios.get('http://localhost:3001')
+    console.log(data)
+    return data
+  }
 
 function App() {
 
-  const query = useQuery(['hep_backend'], async () => {
-    const response = await fetch('http://localhost:3001')
-    const data = await response.json()
-    return data
-  })
+  const { data } = useQuery(['hep_backend'], fetchBackend)
 
   return (
       <ChakraProvider theme={theme}>
@@ -31,7 +33,7 @@ function App() {
             
           <Grid minH="100vh" p={3}>
             <ColorModeSwitcher justifySelf="flex-end" />
-            <Heading>{query.data.hep_backend}</Heading>
+            <Heading>{data.hep_backend}</Heading>
             <VStack spacing={8}>
               <Logo h="40vmin" pointerEvents="none" />
               <Text>
