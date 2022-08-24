@@ -3,6 +3,7 @@ import {
   ChakraProvider,
   Box,
   Text,
+  Heading,
   Link,
   VStack,
   Code,
@@ -24,9 +25,13 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
+        
         <Box textAlign="center" fontSize="xl">
+      
+            
           <Grid minH="100vh" p={3}>
             <ColorModeSwitcher justifySelf="flex-end" />
+            <Heading>{query.data.hep_backend}</Heading>
             <VStack spacing={8}>
               <Logo h="40vmin" pointerEvents="none" />
               <Text>
@@ -42,9 +47,6 @@ function App() {
                 Learn Chakra
               </Link>
             </VStack>
-            <Box>
-              <Text>{query.data.hep_backend}</Text>
-            </Box> 
           </Grid>
 
         </Box>
