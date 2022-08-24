@@ -1,17 +1,31 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+
+const queryClient = new QueryClient()
+
+Sentry.init({
+  dsn: "https://ef4490b6aff1440b9b9ae1ee41afa685@o1372411.ingest.sentry.io/6677638",
+  integrations: [new BrowserTracing()],
+  tracesSampleRate: 1.0,
+});
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <ColorModeScript />
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <ColorModeScript />
+      <App />
+    </QueryClientProvider>
   </StrictMode>
 );
 
