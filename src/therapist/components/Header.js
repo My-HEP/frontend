@@ -1,16 +1,24 @@
 import React from "react";
 import {
-   
-    Heading,
-   
-    
+  Box,
+  Flex,
+  Heading,
+    Image
   } from '@chakra-ui/react';
 
 function Header () {
     return (
-         
-        <Heading>Hello there!</Heading>
-        
+      <Box >
+        <Flex justify="end" align="center" fontSize="xl">
+      
+            <Image
+              boxSize='100px'
+              objectFit='cover' 
+              src="my-hep-logo.svg" alt="dumbell inside house"/>
+            <Heading>My HEP</Heading>
+      
+        </Flex>
+      </Box>
     );
   }
   

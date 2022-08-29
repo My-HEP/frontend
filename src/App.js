@@ -3,7 +3,6 @@ import {
   ChakraProvider,
   Box,
   Text,
-  Heading,
   Link,
   VStack,
   Code,
@@ -14,6 +13,7 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import Header from './therapist/components/Header.js'
 import TherapistHome from './therapist/pages/TherapistHome';
  
 const fetchBackend = async () => {
@@ -28,32 +28,8 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
-        
-        <Box textAlign="center" fontSize="xl">
-      
-            
-          <Grid minH="100vh" p={3}>
-            <ColorModeSwitcher justifySelf="flex-end" />
-            <Heading>{data?.hep_backend}</Heading>
-            <TherapistHome />
-            <VStack spacing={8}>
-              <Logo h="40vmin" pointerEvents="none" />
-              <Text>
-                Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-              </Text>
-              <Link
-                color="teal.500"
-                href="https://chakra-ui.com"
-                fontSize="2xl"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn Chakra
-              </Link>
-            </VStack>
-          </Grid>
-
-        </Box>
+        <Header /> 
+       
       </ChakraProvider>
   );
 }
