@@ -14,7 +14,7 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import TherapistHome from './therapist/pages/therapistHome';
+import TherapistHome from './therapist/pages/TherapistHome';
  
 const fetchBackend = async () => {
     const {data} = await axios.get('http://localhost:3001')
