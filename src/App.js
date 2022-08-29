@@ -33,7 +33,7 @@ function App() {
             
           <Grid minH="100vh" p={3}>
             <ColorModeSwitcher justifySelf="flex-end" />
-            <Heading>{data.hep_backend}</Heading>
+            <Heading>{data?.hep_backend}</Heading>
             <VStack spacing={8}>
               <Logo h="40vmin" pointerEvents="none" />
               <Text>
