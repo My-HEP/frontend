@@ -1,16 +1,10 @@
 import React from 'react';
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Header from './therapist/components/Header.js'
