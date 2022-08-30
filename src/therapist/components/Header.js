@@ -10,10 +10,8 @@ function Header () {
     return (
       <Box >
         <Flex justify="end" align="center" fontSize="xl">
-      
             <Image
-              boxSize='100px'
-              objectFit='cover' 
+              boxSize='5rem'
               src="my-hep-logo.svg" alt="dumbell inside house"/>
             <Heading>My HEP</Heading>
       
