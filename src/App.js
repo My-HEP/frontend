@@ -8,8 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Outlet, Link } from "react-router-dom";
 import Header from './therapist/components/Header.js'
-
-
+import SelectPatient from './therapist/pages/selectPatient';
  
 const fetchBackend = async () => {
     const {data} = await axios.get('http://localhost:3001')
