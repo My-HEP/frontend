@@ -4,11 +4,11 @@ import {
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Header from './therapist/components/Header.js'
-import TherapistHome from './therapist/pages/TherapistHome';
+
+
  
 const fetchBackend = async () => {
     const {data} = await axios.get('http://localhost:3001')

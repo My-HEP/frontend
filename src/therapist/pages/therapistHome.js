@@ -9,7 +9,7 @@ import {
 function TherapistHome () {
     return (
          
-       <Heading>Hello there!</Heading>
+       <Heading>Therapist Home</Heading>
         
     );
   }
