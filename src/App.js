@@ -23,8 +23,10 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
+        <Link to="/therapisthome">
           <Header /> 
-          <Outlet />
+        </Link>
+        <Outlet />
       </ChakraProvider>
   );
 }
