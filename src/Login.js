@@ -6,12 +6,12 @@ import {
     
   } from '@chakra-ui/react';
 
-function TherapistHome () {
+function Login () {
     return (
          
-       <Heading>Therapist Home</Heading>
+       <Heading>Welcome to My HEP</Heading>
         
     );
   }
   
-  export default TherapistHome;
+  export default Login;
