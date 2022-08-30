@@ -14,7 +14,8 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import TherapistHome from './therapist/pages/TherapistHome';
+import TherapistHome from './therapist/pages/therapistHome';
+import SelectPatient from './therapist/pages/selectPatient';
  
 const fetchBackend = async () => {
     const {data} = await axios.get('http://localhost:3001')
@@ -36,6 +37,7 @@ function App() {
             <ColorModeSwitcher justifySelf="flex-end" />
             <Heading>{data?.hep_backend}</Heading>
             <TherapistHome />
+            <SelectPatient />
             <VStack spacing={8}>
               <Logo h="40vmin" pointerEvents="none" />
               <Text>
