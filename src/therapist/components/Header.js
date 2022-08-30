@@ -10,13 +10,13 @@ import {
 function Header () {
     return (
       <Box display="flex" justifyContent="end">
-          <Flex justify="end" alignItems="end" fontSize="xl" padding='1rem' minWidth="250px">
+          <Flex flexDirection="column" alignItems="center" padding='1rem' minWidth="175px">
               <Image
-                boxSize='5rem'
+                boxSize='4.5rem'
                 src="my-hep-logo.svg" alt="dumbell inside house"
               />
-              <Spacer />
-              {/* <Heading minWidth="130px">My HEP</Heading> */}
+              <Spacer /> 
+               <Heading size="md">My HEP</Heading>
           </Flex>
         </Box>
       
