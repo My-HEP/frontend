@@ -6,6 +6,7 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { Outlet, Link } from "react-router-dom";
 import Header from './therapist/components/Header.js'
 
 
@@ -22,8 +23,8 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
-        <Header /> 
-       
+          <Header /> 
+          <Outlet />
       </ChakraProvider>
   );
 }

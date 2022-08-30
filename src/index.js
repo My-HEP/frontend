@@ -7,13 +7,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Login from './Login.js';
 import TherapistHome from './therapist/pages/TherapistHome';
 import Patients from './therapist/pages/Patients';
 import PatientPlan from './therapist/pages/PatientPlan';
 import HEPs from './therapist/pages/HEPs';
-
 const queryClient = new QueryClient();
 
 
@@ -31,18 +30,17 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <ColorModeScript />
       <ChakraProvider theme={theme}>
-        <App />
         <BrowserRouter>
           <Routes>
-              <Route index path="/" element={<Login />} />
+            <Route path="/" element={<App />}>
+              <Route index element={<Login />} />
               <Route path="therapisthome" element={<TherapistHome />} />
-              <Route path="patients" element={<Patients />} >
-                <Route path=":patient" element={<PatientPlan />} />
-              </Route>
+              <Route path="patients" element={<Patients />} />
               <Route path="heps" element={<HEPs />} />
-            </Routes>
-          </BrowserRouter>
-        </ChakraProvider>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ChakraProvider>
     </QueryClientProvider>
   </StrictMode>
 );
