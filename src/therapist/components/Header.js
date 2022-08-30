@@ -16,7 +16,7 @@ function Header () {
                 src="my-hep-logo.svg" alt="dumbell inside house"
               />
               <Spacer />
-              <Heading minWidth="130px">My HEP</Heading>
+              {/* <Heading minWidth="130px">My HEP</Heading> */}
           </Flex>
         </Box>
       
