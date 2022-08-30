@@ -7,7 +7,9 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Outlet, Link } from "react-router-dom";
-import Header from './therapist/components/Header.js'
+import Header from './therapist/components/Header.js';
+import SideNav from './therapist/components/SideNav.js';
+
 import SelectPatient from './therapist/pages/selectPatient';
  
 const fetchBackend = async () => {
@@ -22,6 +24,7 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
+        <SideNav />
         <Link to="/therapisthome">
           <Header /> 
         </Link>
