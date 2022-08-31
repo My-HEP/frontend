@@ -1,16 +1,5 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Container,
-  Flex,
-  VStack,
-  IconButton,
-  useBreakpointValue,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, VStack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { FiMenu } from 'react-icons/fi';
 import { IconHome, IconUsers, IconBarbell } from '@tabler/icons';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
@@ -49,30 +38,36 @@ import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
 const SideNav = () => {
   return (
-    <Box as="section" position="absolute" height="100vh" left="0">
-      <Box as="nav" height="100%" bg="#2C7A7B">
-        <Flex direction="column" height="100%" justify="center">
-          <VStack spacing="19" inInLine="true" align="center">
-            <Link to="/therapisthome">
-              <Button variant="ghost">
-                <IconHome size={35} />
-              </Button>
-            </Link>
-            <Link to="/patients">
-              <Button variant="ghost">
-                <IconUsers size={35} />
-              </Button>
-            </Link>
-            <Link to="/HEPs">
-              <Button variant="ghost">
-                <IconBarbell size={35} />
-              </Button>
-            </Link>
-            <ColorModeSwitcher />
-          </VStack>
-        </Flex>
-      </Box>
+    <Box
+      as="nav"
+      height="100%"
+      bg="#2C7A7B"
+      position="absolute"
+      left="0"
+      display={{ base: 'none', md: 'block' }}
+    >
+      <Flex direction="column" height="100%" justify="center">
+        <VStack spacing="19" inInLine="true" align="center">
+          <Link to="/therapisthome">
+            <Button variant="ghost">
+              <IconHome size={35} />
+            </Button>
+          </Link>
+          <Link to="/patients">
+            <Button variant="ghost">
+              <IconUsers size={35} />
+            </Button>
+          </Link>
+          <Link to="/HEPs">
+            <Button variant="ghost">
+              <IconBarbell size={35} />
+            </Button>
+          </Link>
+          <ColorModeSwitcher />
+        </VStack>
+      </Flex>
     </Box>
+    // </Box>
   );
 };
 
