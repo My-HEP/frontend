@@ -8,12 +8,9 @@ import {
     Button, 
     VStack,
     Avatar, 
-    Icon, 
-    Editable, 
-    EditableInput, 
-    EditablePreview
+    IconButton
   } from '@chakra-ui/react';
-import { IconPhone, IconMail,  IconLock, IconPencil, IconEdit } from "@tabler/icons";
+import { IconPencil } from "@tabler/icons";
 import InfoForm from '../sharedComponents/InfoForm';
 
 
@@ -26,39 +23,19 @@ function TherapistHome () {
             boxSize="8rem"></Image>
           <Heading marginBottom="1.75rem" marginLeft="2rem">Welcome to My HEP</Heading>
         </Flex>
-        <Flex>
-          <VStack spacing="3.5rem" align='center' padding="2rem" marginTop="2rem">
+        <Flex marginTop="2.5rem">
+          <VStack spacing="3.5rem" align='center' width='50%'>
             <Text as='b'>Currently serving 45 patients</Text>
             <Button colorScheme="teal" variant="outline">My Patients</Button>
             <Text as='b'>75 HEPs uploaded</Text>
             <Button colorScheme="teal" variant="outline">My HEPs</Button>
           </VStack>
-          <VStack>
-            <Flex align="end">
+          <VStack >
+            <Flex align='end'>
               <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
-              <Icon as={IconPencil} />
+              <IconButton size='xs' icon={<IconPencil />} aria-label='edit content' variant='ghost' colorScheme='teal' />
             </Flex>
             <InfoForm />
-            {/* <Editable defaultValue='Therapist Name'>
-              <EditablePreview />
-              <EditableInput />
-            </Editable>
-            <Text >Jane McTherapist</Text>
-            <Flex>
-              <Icon as={IconPhone} />
-            </Flex>
-            <Flex>
-              <Icon as={IconMail} />
-            
-            </Flex>
-            <Flex>
-              <Icon as={IconLock} />
-              
-            </Flex>
-            <Flex align="end">
-              <Icon as={IconEdit} />
-              <Text>Edit Information</Text>
-            </Flex> */}
           </VStack>
         </Flex>
       </Box>
