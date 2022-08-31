@@ -40,7 +40,7 @@ const SideNav = () => {
   return (
     <Box
       as="nav"
-      height="100%"
+      height="100vh"
       bg="#2C7A7B"
       position="absolute"
       left="0"
