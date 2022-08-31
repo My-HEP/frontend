@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
     Box,
     Flex,
@@ -24,13 +25,13 @@ function TherapistHome () {
           <Heading marginBottom="1.75rem" marginLeft="2rem">Welcome to My HEP</Heading>
         </Flex>
         <Flex marginTop="2.5rem">
-          <VStack spacing="3.5rem" align='center' width='50%'>
+          <VStack spacing="3.5rem" width='50%'>
             <Text as='b'>Currently serving 45 patients</Text>
-            <Button colorScheme="teal" variant="outline">My Patients</Button>
+            <Link to="/patients"><Button colorScheme="teal" variant="outline">My Patients</Button></Link>
             <Text as='b'>75 HEPs uploaded</Text>
-            <Button colorScheme="teal" variant="outline">My HEPs</Button>
+            <Link to="/heps"><Button colorScheme="teal" variant="outline">My HEPs</Button></Link>
           </VStack>
-          <VStack >
+          <VStack width='50%'>
             <Flex align='end'>
               <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
               <IconButton size='xs' icon={<IconPencil />} aria-label='edit content' variant='ghost' colorScheme='teal' />
