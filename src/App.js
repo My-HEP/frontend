@@ -22,9 +22,6 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
-
-        <Header /> 
-
         <SideNav />
         <Link to="/therapisthome">
           <Header /> 
