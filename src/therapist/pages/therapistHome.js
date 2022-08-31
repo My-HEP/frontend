@@ -7,8 +7,15 @@ import {
     Text, 
     Button, 
     VStack,
-    Avatar
+    Avatar, 
+    Icon, 
+    Editable, 
+    EditableInput, 
+    EditablePreview
   } from '@chakra-ui/react';
+import { IconPhone, IconMail,  IconLock, IconPencil, IconEdit } from "@tabler/icons";
+import InfoForm from '../sharedComponents/InfoForm';
+
 
 function TherapistHome () {
     return (
@@ -22,13 +29,36 @@ function TherapistHome () {
         <Flex>
           <VStack spacing="3.5rem" align='center' padding="2rem" marginTop="2rem">
             <Text as='b'>Currently serving 45 patients</Text>
-            <Button colorScheme="twitter" variant="outline">My Patients</Button>
+            <Button colorScheme="teal" variant="outline">My Patients</Button>
             <Text as='b'>75 HEPs uploaded</Text>
-            <Button colorScheme="twitter" variant="outline">My HEPs</Button>
+            <Button colorScheme="teal" variant="outline">My HEPs</Button>
           </VStack>
-          <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
           <VStack>
+            <Flex align="end">
+              <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
+              <Icon as={IconPencil} />
+            </Flex>
+            <InfoForm />
+            {/* <Editable defaultValue='Therapist Name'>
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
+            <Text >Jane McTherapist</Text>
+            <Flex>
+              <Icon as={IconPhone} />
+            </Flex>
+            <Flex>
+              <Icon as={IconMail} />
             
+            </Flex>
+            <Flex>
+              <Icon as={IconLock} />
+              
+            </Flex>
+            <Flex align="end">
+              <Icon as={IconEdit} />
+              <Text>Edit Information</Text>
+            </Flex> */}
           </VStack>
         </Flex>
       </Box>
