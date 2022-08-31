@@ -50,13 +50,13 @@ import {
 const SideNav = () => {
 
     return (
-      <Box as="section" position="fixed" height="100vh" left="0" >
-        <Box as="nav" height="100vh" bg="#2C7A7B">
+      <Box as="section" position="fixed" height="100%" left="0" >
+        <Box as="nav" height="100%" bg="#2C7A7B">
           <Flex direction="column" height="100%" justify="center">
-            <VStack spacing="10" inInLine="true" align="center">
-                    <Button variant="primary"><IconHome size={35}/></Button>
-                    <Button variant="primary"><IconUsers size={35} /></Button>
-                    <Button variant="primary"><IconBarbell size={35} /></Button>
+            <VStack spacing="19" inInLine="true" align="center">
+                    <Button variant="ghost"><IconHome size={35}/></Button>
+                    <Button variant="ghost"><IconUsers size={35} /></Button>
+                    <Button variant="ghost"><IconBarbell size={35} /></Button>
                     <ColorModeSwitcher />
             </VStack>
           </Flex>
