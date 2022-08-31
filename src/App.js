@@ -4,11 +4,11 @@ import {
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Header from './therapist/components/Header.js'
-import TherapistHome from './therapist/pages/TherapistHome';
+import { Outlet, Link } from "react-router-dom";
+import Header from './therapist/components/Header.js';
+import SideNav from './therapist/components/SideNav.js';
  
 const fetchBackend = async () => {
     const {data} = await axios.get('http://localhost:3001')
@@ -22,8 +22,14 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
+
         <Header /> 
-        <TherapistHome />
+
+        <SideNav />
+        <Link to="/therapisthome">
+          <Header /> 
+        </Link>
+        <Outlet />
       </ChakraProvider>
   );
 }
