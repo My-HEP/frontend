@@ -1,22 +1,23 @@
 import {
-  Container,
     Flex,
     Heading,
     InputGroup,
     Input,
-    InputLeftElement
+    InputLeftElement,
+    useColorModeValue
   } from '@chakra-ui/react';
-  import SideNav from '../components/SideNav';
   import {IconSearch} from '@tabler/icons'
 
 function Patients () {
-    return (
+  const searchIconColor = useColorModeValue('black', 'white')
+
+  return (
       <>
-        <Flex direction="column">
+        <Flex direction="column" align="center">
           <Heading>Select Existing Patient</Heading>
-          <InputGroup>
-            <InputLeftElement pointerEvents='none' children={<IconSearch color='gray.300' />} />
-            <Input variant="outline" placeholder='Search' />
+          <InputGroup maxW="80%" align="center">
+            <InputLeftElement pointerEvents='none' children={<IconSearch color={searchIconColor} />} />
+            <Input variant="outline" placeholder='Search'  />
           </InputGroup>
         </Flex>
       </>
