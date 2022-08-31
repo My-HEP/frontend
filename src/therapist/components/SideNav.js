@@ -9,7 +9,7 @@ import {
   useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react';
-import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
 import { IconHome, IconUsers, IconBarbell } from '@tabler/icons';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
@@ -53,15 +53,21 @@ const SideNav = () => {
       <Box as="nav" height="100%" bg="#2C7A7B">
         <Flex direction="column" height="100%" justify="center">
           <VStack spacing="19" inInLine="true" align="center">
-            <Button variant="ghost">
-              <IconHome size={35} />
-            </Button>
-            <Button variant="ghost">
-              <IconUsers size={35} />
-            </Button>
-            <Button variant="ghost">
-              <IconBarbell size={35} />
-            </Button>
+            <Link to="/therapisthome">
+              <Button variant="ghost">
+                <IconHome size={35} />
+              </Button>
+            </Link>
+            <Link to="/patients">
+              <Button variant="ghost">
+                <IconUsers size={35} />
+              </Button>
+            </Link>
+            <Link to="/HEPs">
+              <Button variant="ghost">
+                <IconBarbell size={35} />
+              </Button>
+            </Link>
             <ColorModeSwitcher />
           </VStack>
         </Flex>
