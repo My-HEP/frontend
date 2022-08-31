@@ -26,11 +26,9 @@ function TherapistHome () {
             <Text as='b'>75 HEPs uploaded</Text>
             <Button colorScheme="twitter" variant="outline">My HEPs</Button>
           </VStack>
-          <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl/>
-
-          
+          <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
           <VStack>
-
+            
           </VStack>
         </Flex>
       </Box>
