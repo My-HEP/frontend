@@ -3,12 +3,11 @@ import {
     Heading,
   } from '@chakra-ui/react';
 
-function TherapistHome () {
+function PatientPlan () {
     return (
-         
-       <Heading>Therapist Home</Heading>
+       <Heading>Patient Plan</Heading>
         
     );
   }
   
-  export default TherapistHome;
+  export default PatientPlan;

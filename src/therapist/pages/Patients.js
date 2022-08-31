@@ -20,7 +20,7 @@ function Patients () {
           </InputGroup>
         </Flex>
       </>
-    );
+    )
   }
   
   export default Patients;
