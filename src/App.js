@@ -15,7 +15,7 @@ import { Logo } from './Logo';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import TherapistHome from './therapist/pages/therapistHome';
-import SelectPatient from './therapist/pages/selectPatient';
+import Patients from './therapist/pages/Patients';
  
 const fetchBackend = async () => {
     const {data} = await axios.get('http://localhost:3001')
@@ -37,7 +37,7 @@ function App() {
             <ColorModeSwitcher justifySelf="flex-end" />
             <Heading>{data?.hep_backend}</Heading>
             <TherapistHome />
-            <SelectPatient />
+            <Patients />
             <VStack spacing={8}>
               <Logo h="40vmin" pointerEvents="none" />
               <Text>
