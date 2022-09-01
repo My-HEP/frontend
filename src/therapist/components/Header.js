@@ -3,18 +3,18 @@ import {
   Box,
   Flex,
   Spacer,
-  Heading,
-    Image
+  Heading, 
+  Icon
   } from '@chakra-ui/react';
+ import {logoIcon} from './LogoIcon';
+  
+ 
 
 function Header () {
     return (
       <Box display="flex" justifyContent="end">
           <Flex flexDirection="column" alignItems="center" padding='1rem' minWidth="175px">
-              <Image
-                boxSize='4.5rem'
-                src="my-hep-logo.svg" alt="dumbell inside house"
-              />
+              <Icon as={logoIcon} boxSize='4rem'/>
               <Spacer /> 
                <Heading size="md">My HEP</Heading>
           </Flex>
