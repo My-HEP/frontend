@@ -2,9 +2,9 @@ import React from "react";
 import {
   Box,
   Flex,
-  Spacer,
   Heading, 
-  Icon
+  Icon, 
+  Avatar
   } from '@chakra-ui/react';
  import {logoIcon} from './LogoIcon';
   
@@ -12,13 +12,20 @@ import {
 
 function Header () {
     return (
-      <Box display="flex" justifyContent="end">
-          <Flex flexDirection="column" alignItems="center" padding='1rem' minWidth="175px">
+      <Box  width='100%' justify="end" align='center'>
+        <Flex align='center' justify='space-between' p='1rem 0'>
+          <Avatar 
+            name='Dan Abrahmov' 
+            src='https://bit.ly/dan-abramov' 
+            size='xl' 
+            ml={[ '1rem', '1rem', '5rem' ]}
+          />
+          <Flex flexDirection="column" align="end"  mr='1rem'>
               <Icon as={logoIcon} boxSize='4rem'/>
-              <Spacer /> 
-               <Heading size="md">My HEP</Heading>
+              <Heading size="md">My HEP</Heading>
           </Flex>
-        </Box>
+        </Flex>
+      </Box>
       
     );
   }
