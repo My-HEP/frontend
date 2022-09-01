@@ -17,13 +17,21 @@ import {logoIcon} from '../components/LogoIcon';
 
 function TherapistHome () {
     return (
-      <Box width="80%" margin="5rem auto 0 auto">
-        <Flex justify="start" alignItems="end">
+      <Flex 
+        height="100%"
+        direction="column"
+        justify="flex-start"
+        marginLeft={['10', '10', '20%']}
+        marginRight={['10', '10', '20%']}
+        paddingTop="2rem"
+        paddingBottom="100px"
+      >
+        <Flex gap='5' align='center'>
           <Icon as={logoIcon} boxSize="8rem"/>
-          <Heading marginBottom="1.75rem" marginLeft="2rem">Welcome to My HEP</Heading>
+          <Heading marginTop='1.65rem'>Welcome to My HEP</Heading>
         </Flex>
-        <Flex marginTop="2.5rem">
-          <VStack spacing={5} width='50%'>
+        <Flex marginTop="4rem">
+          <VStack spacing={5}>
             <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
             <VStack spacing={5} align='start'>
               <Flex minWidth='175px' gap='2' justify='start'>
@@ -50,7 +58,7 @@ function TherapistHome () {
             <Link to="/heps"><Button colorScheme="teal" variant="outline" size='lg' minWidth='10rem'>My HEPs</Button></Link>
           </VStack>
         </Flex>
-      </Box>
+      </Flex>
      
     );
   }
