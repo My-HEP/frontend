@@ -14,12 +14,18 @@ import PatientTable from '../components/PatientTable';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 
 function Patients() {
   const searchIconColor = useColorModeValue('black', 'white');
 
   return (
     <>
+      <SideNav />
+      <BottomNav />
+      <Link to="/therapisthome">
+        <Header />
+      </Link>
       <Flex
         height="100%"
         direction="column"
