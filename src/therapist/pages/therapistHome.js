@@ -45,9 +45,9 @@ function TherapistHome () {
           </VStack>
           <VStack spacing={10} width='50%'>
             <Text as='b'>Currently serving 45 patients</Text>
-            <Link to="/patients"><Button colorScheme="teal" variant="outline" size='stretch'>My Patients</Button></Link>
+            <Link to="/patients"><Button colorScheme="teal" variant="outline" size='lg' minWidth='10rem'>My Patients</Button></Link>
             <Text as='b'>75 HEPs uploaded</Text>
-            <Link to="/heps"><Button colorScheme="teal" variant="outline" size=''>My HEPs</Button></Link>
+            <Link to="/heps"><Button colorScheme="teal" variant="outline" size='lg' minWidth='10rem'>My HEPs</Button></Link>
           </VStack>
         </Flex>
       </Box>
