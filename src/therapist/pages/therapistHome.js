@@ -26,11 +26,16 @@ function TherapistHome () {
         paddingTop="2rem"
         paddingBottom="100px"
       >
-        <Flex gap='5' align='center'>
+        <Flex gap='5' marginBottom='2rem' align='center'>
           <Icon as={logoIcon} boxSize="8rem"/>
           <Heading marginTop='1.65rem'>Welcome to My HEP</Heading>
         </Flex>
-        <Flex marginTop="4rem">
+        <Flex 
+          direction={['column', 'column', 'row']}
+          margin="2rem 0 2rem 0"
+          align='center'
+          justify='start'
+        >
           <VStack spacing={5}>
             <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
             <VStack spacing={5} align='start'>
