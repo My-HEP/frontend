@@ -10,11 +10,13 @@ import {
     Avatar, 
     Link as HyperLink,
   } from '@chakra-ui/react';
-import {  IconLogout, IconSettings, IconUsers, IconBarbell } from "@tabler/icons";
-import {logoIcon} from '../components/LogoIcon';
+import { IconSettings, IconUsers, IconBarbell } from "@tabler/icons";
+import {logoIcon, } from '../components/LogoIcon';
 
+import Confirmation from '../sharedComponents/Confirmation'
 
 function TherapistHome () {
+
     const variables = {
       userName: 'Jane McTherapist',
       patientNum: '35',
@@ -70,12 +72,7 @@ function TherapistHome () {
                   <Text>Edit information</Text>
                 </Flex>
               </HyperLink>
-              <HyperLink color='teal'>
-                <Flex minWidth='175px' gap='2'>
-                  <IconLogout /> 
-                  <Text>Log out</Text>
-                </Flex>
-              </HyperLink>
+              <Confirmation />
             </VStack>
           </VStack>
           <VStack 
