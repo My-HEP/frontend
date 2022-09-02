@@ -15,6 +15,12 @@ import {logoIcon} from '../components/LogoIcon';
 
 
 function TherapistHome () {
+    const variables = {
+      userName: 'Jane McTherapist',
+      patientNum: '35',
+      hepNum: '29'
+    }
+
     return (
       <Flex 
         height="100%"
@@ -50,7 +56,7 @@ function TherapistHome () {
              align='start'
             >
               <Flex minWidth='175px' gap='2' justify='start'>
-                <Text as='b' fontSize='2xl'>Therapist Name</Text>
+                <Text as='b' fontSize='2xl'>{variables.userName}</Text>
               </Flex>
               <HyperLink color='teal'>
                 <Flex minWidth='175px' gap='2'>
@@ -71,9 +77,9 @@ function TherapistHome () {
             width='50%'
             mt={['3rem', '3rem', 0]}
           >
-            <Text as='b'>Currently serving 45 patients</Text>
+            <Text as='b'>Currently serving {variables.patientNum} patients</Text>
             <Link to="/patients"><Button leftIcon={<IconUsers />} colorScheme="teal" variant="outline" size='lg' minWidth='12rem'>My Patients</Button></Link>
-            <Text as='b'>75 HEPs uploaded</Text>
+            <Text as='b'>{variables.hepNum} HEPs uploaded</Text>
             <Link to="/heps"><Button leftIcon={<IconBarbell />} colorScheme="teal" variant="outline" size='lg' minWidth='12rem'>My HEPs</Button></Link>
           </VStack>
         </Flex>
