@@ -51,7 +51,7 @@ function TherapistHome () {
         </Flex>
         <Flex 
           direction={['column', 'column', 'row']}
-          margin={['1rem 0', '1rem 0', '2rem 0']}
+          margin={['1rem 0', '0.5rem 0', '2rem 0']}
           align='center'
           justify='start'
         >
@@ -76,8 +76,8 @@ function TherapistHome () {
             </VStack>
           </VStack>
           <VStack 
-            spacing={[5, 5, 10]} 
-            width='50%'
+            spacing={[8, 7, 10]} 
+            width={['100%', '100%', '50%']}
             mt={['3rem', '3rem', 0]}
           >
             <Text as='b'>Currently serving {variables.patientNum} patients</Text>
