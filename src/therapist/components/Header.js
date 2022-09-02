@@ -4,9 +4,10 @@ import {
   Flex,
   Heading, 
   Icon, 
-  Avatar
+  Avatar, 
   } from '@chakra-ui/react';
  import {logoIcon} from './LogoIcon';
+ import { Link } from 'react-router-dom';
   
  
 
@@ -20,10 +21,12 @@ function Header () {
             size='xl' 
             ml={[ '1rem', '1rem', '5rem' ]}
           />
-          <Flex flexDirection="column" align="end"  mr='1rem'>
+          <Link to="/therapisthome">
+            <Flex flexDirection="column" align="end"  mr='1rem'>
               <Icon as={logoIcon} boxSize='4rem'/>
               <Heading size="md">My HEP</Heading>
-          </Flex>
+            </Flex>
+          </Link>
         </Flex>
       </Box>
       
