@@ -11,7 +11,7 @@ import {
     Link as HyperLink,
   } from '@chakra-ui/react';
 import { IconSettings, IconUsers, IconBarbell } from "@tabler/icons";
-import {logoIcon, } from '../components/LogoIcon';
+import {logoIcon } from '../sharedComponents/LogoIcon';
 
 import Confirmation from '../sharedComponents/Confirmation'
 

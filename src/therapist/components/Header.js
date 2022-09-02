@@ -6,7 +6,7 @@ import {
   Icon, 
   Avatar, 
   } from '@chakra-ui/react';
- import {logoIcon} from './LogoIcon';
+ import {logoIcon} from '../sharedComponents/LogoIcon';
  import { Link } from 'react-router-dom';
   
  
