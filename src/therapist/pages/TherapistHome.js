@@ -25,13 +25,14 @@ function TherapistHome () {
 
     return (
       <Flex 
-        height="100%"
-        direction="column"
-        justify="flex-start"
-        marginLeft={['10', '10', '20%']}
-        marginRight={['10', '10', '20%']}
-        paddingTop="2rem"
-        paddingBottom="100px"
+      height='100%'
+      direction='column'
+      justify='start'
+      align={['center', 'center', 'start']}
+      marginLeft={['10', '10', '20%']}
+      marginRight={['10', '10', '20%']}
+      paddingTop='2rem'
+      paddingBottom='100px'
       >
         <Flex 
           gap={['2', '5' ]}
@@ -39,21 +40,22 @@ function TherapistHome () {
           align='center' 
           justify={['center', 'center', 'start' ]}
           minWidth={['300px', '300px', '500px']}
-        >
+          >
           <Icon as={logoIcon} 
             boxSize={['5rem', '8rem']}
-          />
+            />
           <Heading 
             mt={['0.75rem','1.65rem']}
             textAlign={['center','left']}
-          >
+            >
             Welcome to My HEP</Heading>
         </Flex>
         <Flex 
+          width='100%'
           direction={['column', 'column', 'row']}
           margin={['1rem 0', '0.5rem 0', '2rem 0']}
           align='center'
-          justify='start'
+          justify='center'
         >
           <VStack 
             spacing={[3, 3, 5]}
@@ -61,7 +63,7 @@ function TherapistHome () {
             <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
             <VStack 
               spacing={5} 
-             align='start'
+            align='start'
             >
               <Flex minWidth='175px' gap='2' justify='start'>
                 <Text as='b' fontSize='2xl'>{variables.userName}</Text>
@@ -87,7 +89,6 @@ function TherapistHome () {
           </VStack>
         </Flex>
       </Flex>
-     
     );
   }
   
