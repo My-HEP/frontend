@@ -32,14 +32,20 @@ function TherapistHome () {
         paddingBottom="100px"
       >
         <Flex 
-          gap='5' 
-          mb={['0rem', '0rem', '2rem']} 
+          gap={['2', '5' ]}
+          mb={['1rem', '1rem', '2rem']} 
           align='center' 
           justify={['center', 'center', 'start' ]}
           minWidth={['300px', '300px', '500px']}
         >
-          <Icon as={logoIcon} boxSize="8rem"/>
-          <Heading marginTop='1.65rem'>Welcome to My HEP</Heading>
+          <Icon as={logoIcon} 
+            boxSize={['5rem', '8rem']}
+          />
+          <Heading 
+            mt={['0.75rem','1.65rem']}
+            textAlign={['center','left']}
+          >
+            Welcome to My HEP</Heading>
         </Flex>
         <Flex 
           direction={['column', 'column', 'row']}
