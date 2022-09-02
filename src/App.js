@@ -3,7 +3,7 @@ import { ChakraProvider, theme } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Header from './therapist/components/Header.js';
 import SideNav from './therapist/components/SideNav.js';
 import BottomNav from './therapist/components/BottomNav';
