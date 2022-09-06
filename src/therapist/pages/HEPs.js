@@ -12,6 +12,7 @@ import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
+import { IconPlus } from '@tabler/icons';
 
 function HEPs() {
   const HEPdata = [
@@ -50,49 +51,6 @@ function HEPs() {
         <Header />
       </Link>
 
-      {/* <Flex
-        height="100%"
-        direction="column"
-        justify="flex-start"
-        marginLeft={['10', '10', '20%']}
-        marginRight={['10', '10', '15%']}
-        paddingTop="2rem"
-        paddingBottom="100px"
-      >
-        <Heading marginBottom="3rem">HEPs</Heading>
-        <Flex
-          direction={['column', 'column', 'row', 'row']}
-          marginBottom="1.5rem"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Button
-            variant="outline"
-            size="lg"
-            maxWidth="350px"
-            bg="#2C7A7B"
-            marginBottom={['2rem', '2rem', '0', '0']}
-          >
-            Add New HEP
-          </Button>
-          <SearchBar marginLeft={['0', '0', '4rem']} />
-        </Flex>
-        <SimpleGrid minChildWidth="120px" spacing="40px">
-          {HEPdata.map(item => {
-            return (
-              <Box height="200px">
-                <Image
-                  boxSize="200px"
-                  objectFit="cover"
-                  src={item.handout}
-                  alt="HEP handout"
-                />
-              </Box>
-            );
-          })}
-        </SimpleGrid>
-      </Flex> */}
-
       <Flex
         height="100%"
         direction="column"
@@ -119,11 +77,12 @@ function HEPs() {
 
           <Button
             variant="outline"
+            leftIcon={<IconPlus />}
             size="lg"
             bg="#2C7A7B"
-            marginBottom={['2rem', '2rem', '0', '0']}
             marginLeft={['0', '0', '2rem']}
-            width={['80%', '80%', '15rem']}
+            padding="1rem 2rem 1rem 2rem"
+            // width={['80%', '80%', '15rem']}
           >
             Add New HEP
           </Button>

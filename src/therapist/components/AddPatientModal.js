@@ -13,6 +13,7 @@ import {
   Input,
   useDisclosure,
 } from '@chakra-ui/react';
+import { IconPlus } from '@tabler/icons';
 
 function AddPatientModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -25,9 +26,12 @@ function AddPatientModal() {
       <Button
         onClick={onOpen}
         variant="outline"
+        leftIcon={<IconPlus />}
         size="lg"
         maxWidth="350px"
+        minWidth="200px"
         bg="#2C7A7B"
+        marginLeft={['0', '0', '2rem']}
       >
         Add New Patient
       </Button>
