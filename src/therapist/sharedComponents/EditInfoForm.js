@@ -1,4 +1,18 @@
-import { EditablePreview, IconButton, Input, InputGroup, InputLeftElement, useEditableControls, ButtonGroup, Editable, Tooltip, EditableInput, Stack } from "@chakra-ui/react";
+import { 
+  EditablePreview, 
+  IconButton, 
+  Input, 
+  InputGroup, 
+  InputLeftElement, 
+  useEditableControls, 
+  ButtonGroup, 
+  Editable, 
+  Tooltip, 
+  EditableInput, 
+  Avatar,
+  Stack, 
+  VStack
+} from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { IconPhone, IconMail,  IconLock, IconPencil, IconUser } from "@tabler/icons";
 
@@ -25,9 +39,16 @@ const InfoForm = () => {
 
   return (
     <Stack spacing={4}>
+    
+        <Editable spacing={[3, 3, 5]} align='center' marginLeft='1.5rem'>
+          <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
+          <EditableControls justify='end'/> 
+        </Editable>
+   
+
       <Editable 
         defaultValue='therapist name'
-        isPreviewFocusable={false}
+        isPreviewFocusable={true}
         display='flex'
       >
         <InputGroup minWidth='250px'>
@@ -35,11 +56,11 @@ const InfoForm = () => {
           <InputLeftElement children={<IconUser />}/>
           <Input type='text' as={EditableInput} /> 
         </InputGroup>
-        <EditableControls /> 
+        {/* <EditableControls />  */}
       </Editable>
       <Editable 
         defaultValue='primary number'
-        isPreviewFocusable={false}
+        isPreviewFocusable={true}
         display='flex'
       >
         <InputGroup minWidth='250px'>
@@ -47,11 +68,11 @@ const InfoForm = () => {
           <InputLeftElement children={<IconPhone />}/>
           <Input type='tel' as={EditableInput} /> 
         </InputGroup>
-        <EditableControls /> 
+        {/* <EditableControls />  */}
       </Editable>
       <Editable 
           defaultValue='email'
-          isPreviewFocusable={false}
+          isPreviewFocusable={true}
           display='flex'
         >
           <InputGroup minWidth='250px'>
@@ -59,11 +80,11 @@ const InfoForm = () => {
             <InputLeftElement children={<IconMail />}/>
             <Input type='email' as={EditableInput} /> 
           </InputGroup>
-          <EditableControls /> 
+          {/* <EditableControls />  */}
         </Editable>
         <Editable 
           defaultValue='password'
-          isPreviewFocusable={false}
+          isPreviewFocusable={true}
           display='flex'
         >
           <InputGroup minWidth='250px'>
@@ -71,7 +92,7 @@ const InfoForm = () => {
             <InputLeftElement children={<IconLock />}/>
             <Input type='password' as={EditableInput}/> 
           </InputGroup>
-          <EditableControls /> 
+          {/* <EditableControls />  */}
         </Editable>
           
     </Stack>

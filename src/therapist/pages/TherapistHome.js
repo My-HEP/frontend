@@ -7,16 +7,15 @@ import {
     Text, 
     Button, 
     VStack,
-    Avatar, 
-    Link as HyperLink,
+    Avatar
   } from '@chakra-ui/react';
-import { IconSettings, IconUsers, IconBarbell } from "@tabler/icons";
+import { IconUsers, IconBarbell } from "@tabler/icons";
 import {logoIcon } from '../sharedComponents/LogoIcon';
-
 import Confirmation from '../sharedComponents/Confirmation'
+import EditModal from '../sharedComponents/Modal' 
 
 function TherapistHome () {
-
+    
     const variables = {
       userName: 'Jane McTherapist',
       patientNum: '35',
@@ -68,12 +67,7 @@ function TherapistHome () {
               <Flex minWidth='175px' gap='2' justify='start'>
                 <Text as='b' fontSize='2xl'>{variables.userName}</Text>
               </Flex>
-              <HyperLink color='teal'>
-                <Flex minWidth='175px' gap='2'>
-                  <IconSettings /> 
-                  <Text>Edit information</Text>
-                </Flex>
-              </HyperLink>
+              <EditModal /> 
               <Confirmation />
             </VStack>
           </VStack>
