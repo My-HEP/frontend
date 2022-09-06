@@ -52,13 +52,13 @@ function TherapistHome() {
         align="center"
         justify="center"
       >
-        <VStack spacing={[3, 3, 5]}>
+      <VStack spacing={[3, 3, 5]}>
           <Avatar
             name="Dan Abrahmov"
             src="https://bit.ly/dan-abramov"
             size="2xl"
           />
-        </VStack>
+       
           <VStack spacing={5} align="start">
             <Flex minWidth="175px" gap="2" justify="start">
               <Text as="b" fontSize="2xl">
@@ -68,6 +68,7 @@ function TherapistHome() {
               <EditModal /> 
               <Confirmation />
             </VStack>
+        </VStack>
         <VStack
           spacing={[8, 7, 10]}
           width={['100%', '100%', '50%']}
