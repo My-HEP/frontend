@@ -36,6 +36,7 @@ root.render(
               <Route index element={<Login />} />
               <Route path="therapisthome" element={<TherapistHome />} />
               <Route path="patients" element={<Patients />} />
+              <Route path="patient-plan" element={<PatientPlan />} />
               <Route path="heps" element={<HEPs />} />
             </Route>
           </Routes>
