@@ -7,12 +7,11 @@ import {
   Text,
   Button,
   VStack,
-  Avatar,
-  Link as HyperLink,
+  Avatar
   } from '@chakra-ui/react';
 import Confirmation from '../sharedComponents/Confirmation'
 import EditModal from '../sharedComponents/Modal' 
-import { IconSettings, IconUsers, IconBarbell } from '@tabler/icons';
+import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../sharedComponents/LogoIcon';
 
 function TherapistHome() {
@@ -26,10 +25,11 @@ function TherapistHome() {
     <Flex
       height="100%"
       direction="column"
-      justify="start"
+      justify="center"
       align={['center', 'center', 'start']}
       marginLeft={['10', '10', '20%']}
       marginRight={['10', '10', '20%']}
+      marginTop={['20', '20', '40']}
       paddingTop="2rem"
       paddingBottom="100px"
     >
