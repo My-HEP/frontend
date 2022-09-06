@@ -13,6 +13,7 @@ import Header from '../components/Header';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import { IconPlus } from '@tabler/icons';
+import AddHEPModal from '../components/AddHEPModal';
 
 function HEPs() {
   const HEPdata = [
@@ -75,17 +76,7 @@ function HEPs() {
             Home Exercise Programs
           </Heading>
 
-          <Button
-            variant="outline"
-            leftIcon={<IconPlus />}
-            size="lg"
-            bg="#2C7A7B"
-            marginLeft={['0', '0', '2rem']}
-            padding="1rem 2rem 1rem 2rem"
-            // width={['80%', '80%', '15rem']}
-          >
-            Add New HEP
-          </Button>
+          <AddHEPModal />
         </Flex>
         <Flex justifyContent={['center', 'center', 'left']}>
           <SearchBar />
