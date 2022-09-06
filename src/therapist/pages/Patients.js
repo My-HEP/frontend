@@ -1,22 +1,13 @@
-import {
-  Flex,
-  Heading,
-  InputGroup,
-  Input,
-  InputLeftElement,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { IconSearch } from '@tabler/icons';
+import { Flex, Heading } from '@chakra-ui/react';
 import PatientTable from '../components/PatientTable';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AddPatientModal from '../components/AddPatientModal';
 import { Link } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
 
 function Patients() {
-  const searchIconColor = useColorModeValue('black', 'white');
-
   return (
     <>
       <SideNav />
@@ -51,13 +42,7 @@ function Patients() {
           <AddPatientModal />
         </Flex>
         <Flex justifyContent={['center', 'center', 'left']}>
-          <InputGroup maxW="450px" marginBottom="2rem">
-            <InputLeftElement
-              pointerEvents="none"
-              children={<IconSearch color={searchIconColor} />}
-            />
-            <Input variant="outline" placeholder="Search" />
-          </InputGroup>
+          <SearchBar />
         </Flex>
         <PatientTable />
       </Flex>

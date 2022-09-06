@@ -1,5 +1,12 @@
 import React from 'react';
-import { Flex, Heading, SimpleGrid, Box, Image } from '@chakra-ui/react';
+import {
+  Flex,
+  Heading,
+  SimpleGrid,
+  Box,
+  Image,
+  Button,
+} from '@chakra-ui/react';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
@@ -51,7 +58,12 @@ function HEPs() {
         paddingTop="2rem"
         paddingBottom="100px"
       >
-        <Heading>HEPs</Heading>
+        <Heading marginBottom="3rem">HEPs</Heading>
+        <Flex>
+          <Button variant="outline" size="lg" maxWidth="350px" bg="#2C7A7B">
+            Add New HEP
+          </Button>
+        </Flex>
         <SimpleGrid minChildWidth="120px" spacing="40px">
           {HEPdata.map(item => {
             return (
