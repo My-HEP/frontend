@@ -4,9 +4,6 @@ import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Outlet } from 'react-router-dom';
-import Header from './therapist/components/Header.js';
-import SideNav from './therapist/components/SideNav.js';
-import BottomNav from './therapist/components/BottomNav';
 
 const fetchBackend = async () => {
   const { data } = await axios.get('http://localhost:3001');
@@ -19,11 +16,6 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <SideNav />
-      <BottomNav />
-      
-      <Header />
-      
       <Outlet />
     </ChakraProvider>
   );
