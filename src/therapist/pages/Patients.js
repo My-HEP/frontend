@@ -20,7 +20,7 @@ function Patients() {
         direction="column"
         justify="flex-start"
         marginLeft={['10', '10', '20%']}
-        marginRight={['10', '10', '20%']}
+        marginRight={['10', '10', '15%']}
         paddingTop="2rem"
         paddingBottom="100px"
       >

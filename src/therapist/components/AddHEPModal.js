@@ -31,7 +31,7 @@ function AddHEPModal() {
         bg="#2C7A7B"
         marginLeft={['0', '0', '2rem']}
         padding="1rem 2rem 1rem 2rem"
-        // width={['80%', '80%', '15rem']}
+        minWidth="12rem"
       >
         Add New HEP
       </Button>
