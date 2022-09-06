@@ -6,11 +6,11 @@ import {
 } from '@chakra-ui/react';
 import { IconSearch } from '@tabler/icons';
 
-function SearchBar() {
+function SearchBar(props) {
   const searchIconColor = useColorModeValue('black', 'white');
 
   return (
-    <InputGroup maxW="450px" marginBottom="2rem">
+    <InputGroup maxW="450px" marginBottom="2rem" marginLeft={props.marginLeft}>
       <InputLeftElement
         pointerEvents="none"
         children={<IconSearch color={searchIconColor} />}

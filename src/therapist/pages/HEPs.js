@@ -11,6 +11,7 @@ import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
 
 function HEPs() {
   const HEPdata = [
@@ -52,17 +53,30 @@ function HEPs() {
       <Flex
         height="100%"
         direction="column"
-        justify="flex-start"
+        // justify="flex-start"
         marginLeft={['10', '10', '20%']}
-        marginRight={['10', '10', '20%']}
+        marginRight={['10', '10', '15%']}
         paddingTop="2rem"
         paddingBottom="100px"
       >
         <Heading marginBottom="3rem">HEPs</Heading>
-        <Flex>
-          <Button variant="outline" size="lg" maxWidth="350px" bg="#2C7A7B">
+        <Flex
+          direction={['column', 'column', 'row', 'row']}
+          // align={['center', 'center']}
+          marginBottom="1.5rem"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Button
+            variant="outline"
+            size="lg"
+            maxWidth="350px"
+            bg="#2C7A7B"
+            marginBottom={['2rem', '2rem', '0', '0']}
+          >
             Add New HEP
           </Button>
+          <SearchBar marginLeft={['0', '0', '4rem']} />
         </Flex>
         <SimpleGrid minChildWidth="120px" spacing="40px">
           {HEPdata.map(item => {
