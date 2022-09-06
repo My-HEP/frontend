@@ -11,47 +11,61 @@ import {
 } from '@chakra-ui/react';
 import { IconSearch } from '@tabler/icons';
 import PatientTable from '../components/PatientTable';
+import SideNav from '../components/SideNav';
+import BottomNav from '../components/BottomNav';
+import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 
 function Patients() {
   const searchIconColor = useColorModeValue('black', 'white');
 
   return (
-    <Flex
-      height="100%"
-      direction="column"
-      justify="flex-start"
-      marginLeft={['10', '10', '20%']}
-      marginRight={['10', '10', '20%']}
-      paddingTop="2rem"
-      paddingBottom="100px"
-    >
+    <>
+      <SideNav />
+      <BottomNav />
+      <Link to="/therapisthome">
+        <Header />
+      </Link>
       <Flex
-        direction={['column', 'column', 'row', 'row']}
-        justifyContent="space-between"
-        maxWidth="800px"
-        marginBottom="4rem"
+        height="100%"
+        direction="column"
+        justify="flex-start"
+        marginLeft={['10', '10', '20%']}
+        marginRight={['10', '10', '20%']}
+        paddingTop="2rem"
+        paddingBottom="100px"
       >
-        <Heading
-          paddingBottom={['2rem', '2rem', '0', '0']}
-          width={{ base: '100%' }}
+        <Flex
+          direction={['column', 'column', 'row', 'row']}
+          align={['center', 'center', 'left']}
+          justifyContent="space-between"
+          maxWidth="800px"
+          marginBottom="4rem"
         >
-          Select Existing Patient
-        </Heading>
+          <Heading
+            paddingBottom={['2rem', '2rem', '0', '0']}
+            width={{ base: '100%' }}
+            textAlign={['center', 'center', 'left']}
+          >
+            Select Existing Patient
+          </Heading>
 
-        <Button variant="outline" size="lg" maxWidth="350px" bg="#2C7A7B">
-          Add New Patient
-        </Button>
+          <Button variant="outline" size="lg" maxWidth="350px" bg="#2C7A7B">
+            Add New Patient
+          </Button>
+        </Flex>
+        <Flex justifyContent={['center', 'center', 'left']}>
+          <InputGroup maxW="450px" marginBottom="2rem">
+            <InputLeftElement
+              pointerEvents="none"
+              children={<IconSearch color={searchIconColor} />}
+            />
+            <Input variant="outline" placeholder="Search" />
+          </InputGroup>
+        </Flex>
+        <PatientTable />
       </Flex>
-      <InputGroup maxW="450px" align="center" marginBottom="2rem">
-        <InputLeftElement
-          pointerEvents="none"
-          children={<IconSearch color={searchIconColor} />}
-        />
-        <Input variant="outline" placeholder="Search" />
-      </InputGroup>
-      <PatientTable />
-    </Flex>
-
+    </>
     //   <Grid
     //     templateAreas={`"nav header"
     //                 "nav main"
