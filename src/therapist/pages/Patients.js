@@ -5,15 +5,13 @@ import {
   Input,
   InputLeftElement,
   useColorModeValue,
-  Button,
-  // Grid,
-  // GridItem,
 } from '@chakra-ui/react';
 import { IconSearch } from '@tabler/icons';
 import PatientTable from '../components/PatientTable';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
+import AddPatientModal from '../components/AddPatientModal';
 import { Link } from 'react-router-dom';
 
 function Patients() {
@@ -50,9 +48,7 @@ function Patients() {
             Select Existing Patient
           </Heading>
 
-          <Button variant="outline" size="lg" maxWidth="350px" bg="#2C7A7B">
-            Add New Patient
-          </Button>
+          <AddPatientModal />
         </Flex>
         <Flex justifyContent={['center', 'center', 'left']}>
           <InputGroup maxW="450px" marginBottom="2rem">
@@ -66,25 +62,6 @@ function Patients() {
         <PatientTable />
       </Flex>
     </>
-    //   <Grid
-    //     templateAreas={`"nav header"
-    //                 "nav main"
-    //                 "nav main"`}
-    //     gridTemplateRows={'100px 1fr 30px'}
-    //     gridTemplateColumns={'75px 1fr'}
-    //     h="100vh"
-    //     gap="1"
-    //   >
-    //     <GridItem pl="2" area={'header'}>
-    //       <Header />
-    //     </GridItem>
-    //     <GridItem pl="2" area={'nav'}>
-    //       <SideNav />
-    //     </GridItem>
-    //     <GridItem pl="2" area={'main'}>
-    //       <PatientTable />
-    //     </GridItem>
-    //   </Grid>
   );
 }
 
