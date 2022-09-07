@@ -4,7 +4,6 @@ import {
   Flex,
   Heading, 
   Icon, 
-  Avatar, 
   } from '@chakra-ui/react';
  import {logoIcon} from '../sharedComponents/LogoIcon';
  import { Link } from 'react-router-dom';
@@ -14,13 +13,7 @@ import {
 function Header () {
     return (
       <Box  width='100%' justify="end" align='center'>
-        <Flex align='center' justify='space-between' p='1rem 0'>
-          <Avatar 
-            name='Dan Abrahmov' 
-            src='https://bit.ly/dan-abramov' 
-            size='xl' 
-            ml={[ '1rem', '1rem', '5rem' ]}
-          />
+        <Flex align='center' justify='end' p='1rem 0.5rem 1rem 0'>
           <Link to="/therapisthome">
             <Flex flexDirection="column" align="end"  mr='1rem'>
               <Icon as={logoIcon} boxSize='4rem'/>
