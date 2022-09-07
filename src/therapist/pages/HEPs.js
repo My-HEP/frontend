@@ -1,18 +1,11 @@
 import React from 'react';
-import {
-  Flex,
-  Heading,
-  SimpleGrid,
-  Box,
-  Image,
-  Button,
-} from '@chakra-ui/react';
+import { Flex, Heading, SimpleGrid, Box, Image } from '@chakra-ui/react';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
-import { IconPlus } from '@tabler/icons';
+
 import AddHEPModal from '../components/AddHEPModal';
 
 function HEPs() {

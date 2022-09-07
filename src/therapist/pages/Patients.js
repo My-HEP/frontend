@@ -5,7 +5,6 @@ import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AddPatientModal from '../components/AddPatientModal';
 import { Link } from 'react-router-dom';
-import SearchBar from '../components/SearchBar';
 
 function Patients() {
   return (
@@ -40,9 +39,6 @@ function Patients() {
           </Heading>
 
           <AddPatientModal />
-        </Flex>
-        <Flex justifyContent={['center', 'center', 'left']}>
-          <SearchBar />
         </Flex>
         <PatientTable />
       </Flex>
