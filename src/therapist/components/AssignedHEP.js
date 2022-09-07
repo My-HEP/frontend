@@ -23,7 +23,10 @@ const AssignedHEP = () => {
         justify="start"
         padding='1.5rem'
         gap='2'
+        rounded='md'
         border='1px'
+        borderColor='gray.300'
+        boxShadow='xl'
     >
         <VStack 
         align='start'
