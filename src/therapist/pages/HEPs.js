@@ -84,6 +84,7 @@ function HEPs() {
                   src={item.handout}
                   alt="HEP handout"
                 />
+                <label>{item.title}</label>
               </Box>
             );
           })}
