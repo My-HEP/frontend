@@ -12,7 +12,7 @@ import { IconMail, IconPhone, IconSettings, IconPlus, IconEye } from '@tabler/ic
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
-// import AssignedHEP from '../components/AssignedHEP';
+import AssignedHEP from '../components/AssignedHEP';
 import { Link } from 'react-router-dom';
 
 function PatientPlan () {
