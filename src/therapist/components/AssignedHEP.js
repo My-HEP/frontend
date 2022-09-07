@@ -5,7 +5,6 @@ import {
   Heading,
   Image,
   Text, 
-  Link as Hyperlink,
   } from '@chakra-ui/react';
 import { IconEdit } from '@tabler/icons';
 
