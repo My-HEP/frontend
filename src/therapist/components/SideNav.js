@@ -40,14 +40,14 @@ const SideNav = () => {
   return (
     <Box
       as="nav"
-      height="100vh"
+      height="100%"
       bg="#2C7A7B"
-      position="absolute"
+      position="fixed"
       left="0"
       display={{ base: 'none', md: 'block' }}
     >
       <Flex direction="column" height="100%" justify="center">
-        <VStack spacing="19" inInLine="true" align="center">
+        <VStack spacing="10" inInLine="true" align="center">
           <Link to="/therapisthome">
             <Button variant="ghost">
               <IconHome size={35} />
@@ -63,8 +63,11 @@ const SideNav = () => {
               <IconBarbell size={35} />
             </Button>
           </Link>
-          <ColorModeSwitcher />
+          {/* <ColorModeSwitcher /> */}
         </VStack>
+        <Box position="absolute" bottom="30px" align="center">
+          <ColorModeSwitcher />
+        </Box>
       </Flex>
     </Box>
     // </Box>
