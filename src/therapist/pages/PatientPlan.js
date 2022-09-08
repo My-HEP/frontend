@@ -33,8 +33,8 @@ function PatientPlan () {
         height="100%"
         direction="column"
         justify="flex-start"
-        marginLeft={['10', '10', '20%']}
-        marginRight={['10', '10', '10%']}
+        marginLeft={['4', '10', '20%']}
+        marginRight={['4', '10', '10%']}
         paddingTop="2rem"
         paddingBottom="100px"
         gap='70'
