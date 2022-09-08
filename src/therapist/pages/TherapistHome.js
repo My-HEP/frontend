@@ -7,13 +7,12 @@ import {
   Text,
   Button,
   VStack,
-  Avatar,
-  Link as HyperLink,
-} from '@chakra-ui/react';
-import { IconSettings, IconUsers, IconBarbell } from '@tabler/icons';
+  Avatar
+  } from '@chakra-ui/react';
+import Confirmation from '../sharedComponents/Confirmation'
+import EditModal from '../sharedComponents/Modal' 
+import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../sharedComponents/LogoIcon';
-
-import Confirmation from '../sharedComponents/Confirmation';
 
 function TherapistHome() {
   const variables = {
@@ -26,10 +25,11 @@ function TherapistHome() {
     <Flex
       height="100%"
       direction="column"
-      justify="start"
+      justify="center"
       align={['center', 'center', 'start']}
       marginLeft={['10', '10', '20%']}
       marginRight={['10', '10', '20%']}
+      marginTop={['20', '20', '40']}
       paddingTop="2rem"
       paddingBottom="100px"
     >
@@ -52,26 +52,22 @@ function TherapistHome() {
         align="center"
         justify="center"
       >
-        <VStack spacing={[3, 3, 5]}>
+      <VStack spacing={[3, 3, 5]}>
           <Avatar
             name="Dan Abrahmov"
             src="https://bit.ly/dan-abramov"
             size="2xl"
           />
+       
           <VStack spacing={5} align="start">
             <Flex minWidth="175px" gap="2" justify="start">
               <Text as="b" fontSize="2xl">
                 {variables.userName}
               </Text>
             </Flex>
-            <HyperLink color="teal">
-              <Flex minWidth="175px" gap="2">
-                <IconSettings />
-                <Text>Edit information</Text>
-              </Flex>
-            </HyperLink>
-            <Confirmation />
-          </VStack>
+              <EditModal /> 
+              <Confirmation />
+            </VStack>
         </VStack>
         <VStack
           spacing={[8, 7, 10]}
