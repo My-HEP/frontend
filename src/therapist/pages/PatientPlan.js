@@ -37,34 +37,44 @@ function PatientPlan () {
         marginRight={['10', '10', '20%']}
         paddingTop="2rem"
         paddingBottom="100px"
-        gap='55'
+        gap='70'
       >
         <Flex  
-          justify='start'
+          flexDirection={['column', 'row', 'row']}
+          justify={['center', 'center', 'space-between']}
           align='center'
           gap='3'
+          margin={['0 auto', '0 0', '0 0 2rem 0']}
         >
           <Avatar
               name="Patty Patient"
               src="https://bit.ly/3eoXqDz"
               size="2xl"
-              marginRight='3rem'
+              marginRight={['0','3rem','3rem']}
             />
           <VStack
+            justify='center'
             align='start'
             spacing={5}
-            width='100%'
           >
             <Heading as='h1' size='xl'>{variables.patientName}</Heading>
             <Flex 
-              width='50%'
+              width='100%'
               justify='space-between'
+              flexDirection={['column', 'column', 'row']}
+              gap='3'
+              flexWrap='wrap'
             >
-              <Flex gap='2'>
+              <Flex 
+              gap='2'
+              minWidth='200px'
+              >
                 <IconPhone />
                 <Text>{variables.patientPhone}</Text>
               </Flex>
-              <Flex gap='2'>
+              <Flex 
+              gap='2'
+              minWidth='200px'>
                 <IconMail />
                 <Text>{variables.patientEmail}</Text>
               </Flex>
@@ -80,9 +90,11 @@ function PatientPlan () {
           </VStack>
         </Flex>
         <Flex 
-          width='75%'
-          justify='space-between'
+          width={['100%', '100%', '75%']}
+          justify={['center', 'space-between','space-between']}
           align='center'
+          flexDirection={['column', 'row', 'row']}
+          gap={['8', '8', '0']}
         >
           <Heading as='h2' fontSize='24px'>Home Exercise Programs</Heading>
           <Button 
@@ -90,6 +102,7 @@ function PatientPlan () {
             variant='solid' 
             colorScheme='teal' 
             size='lg'
+            minWidth='220px'
           >
             Assign New HEP  
           </Button>
@@ -101,9 +114,11 @@ function PatientPlan () {
           colorScheme='teal' 
           size='lg'
           width='250px'
+          zIndex='-1'
         >
           Patient View
         </Button>
+      
       </Flex>
       </>
     );
