@@ -113,8 +113,9 @@ function PatientPlan () {
           variant='solid' 
           colorScheme='teal' 
           size='lg'
-          width='250px'
+          width='220px'
           zIndex='-1'
+          margin={['0 auto', '0 0', '0 0']}
         >
           Patient View
         </Button>
