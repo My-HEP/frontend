@@ -34,10 +34,11 @@ function PatientPlan () {
         direction="column"
         justify="flex-start"
         marginLeft={['10', '10', '20%']}
-        marginRight={['10', '10', '20%']}
+        marginRight={['10', '10', '10%']}
         paddingTop="2rem"
         paddingBottom="100px"
         gap='70'
+        maxWidth='800px'
       >
         <Flex  
           flexDirection={['column', 'row', 'row']}
@@ -45,6 +46,7 @@ function PatientPlan () {
           align='center'
           gap='3'
           margin={['0 auto', '0 0', '0 0 2rem 0']}
+          maxWidth='800px'
         >
           <Avatar
               name="Patty Patient"
@@ -90,11 +92,11 @@ function PatientPlan () {
           </VStack>
         </Flex>
         <Flex 
-          width={['100%', '100%', '75%']}
+          width='100%'
           justify={['center', 'space-between','space-between']}
           align='center'
           flexDirection={['column', 'row', 'row']}
-          gap={['8', '8', '0']}
+          gap={['8', '8', '4']}
         >
           <Heading as='h2' fontSize='24px'>Home Exercise Programs</Heading>
           <Button 

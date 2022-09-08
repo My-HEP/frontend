@@ -19,7 +19,8 @@ const AssignedHEP = () => {
 
     return (
     <Flex
-        width='75%'
+        width='100%'
+        maxWidth='800px'
         justify="start"
         padding='1.5rem'
         gap='2'
