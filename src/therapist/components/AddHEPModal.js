@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { IconPlus } from '@tabler/icons';
 
-function AddPatientModal() {
+function AddHEPModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
@@ -28,12 +28,12 @@ function AddPatientModal() {
         variant="outline"
         leftIcon={<IconPlus />}
         size="lg"
-        maxWidth="350px"
-        minWidth="12rem"
         bg="#2C7A7B"
         marginLeft={['0', '0', '2rem']}
+        padding="1rem 2rem 1rem 2rem"
+        minWidth="12rem"
       >
-        Add New Patient
+        Add New HEP
       </Button>
 
       <Modal
@@ -44,28 +44,17 @@ function AddPatientModal() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add a new patient</ModalHeader>
+          <ModalHeader>Upload a new HEP</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <FormLabel>Email address</FormLabel>
-              <Input placeholder="Email address" />
+              {/* <FormLabel>Choose a file to upload</FormLabel> */}
+              <Input type="file" placeholder="File" />
             </FormControl>
           </ModalBody>
-
           <ModalFooter>
             <Button colorScheme="blue" mr={3}>
-              Save
+              Upload
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
@@ -75,4 +64,4 @@ function AddPatientModal() {
   );
 }
 
-export default AddPatientModal;
+export default AddHEPModal;
