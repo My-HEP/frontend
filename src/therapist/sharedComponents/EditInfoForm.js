@@ -1,6 +1,7 @@
 import { 
   EditablePreview, 
   IconButton, 
+  Icon,
   Input, 
   InputGroup, 
   InputLeftElement, 
@@ -11,12 +12,14 @@ import {
   Stack, 
   VStack,
   Flex, 
-  useColorModeValue
+  useColorModeValue, 
+  Link as Hyperlink
 } from "@chakra-ui/react";
 import { IconPhone, IconMail,  IconLock, IconPencil, IconUser } from "@tabler/icons";
 
-const InfoForm = ( ) => {
-  
+
+const InfoForm = ({type}) => {
+ 
   return (
     <VStack margin="1rem auto">
       <Stack spacing={4} width={['80%', '60%', '50%']}>
@@ -27,7 +30,7 @@ const InfoForm = ( ) => {
           </Flex>
         </Editable>
         <Editable 
-          defaultValue='therapist name'
+          defaultValue={type === 'therapist' ? 'patient name' : 'therapist name'}
           isPreviewFocusable={true}
           display='flex'
         >
@@ -39,7 +42,8 @@ const InfoForm = ( ) => {
                 px={4}
                 _hover={{
                   background: useColorModeValue("gray.100", "gray.700")
-                }}/>
+                }}
+                />
             </Tooltip>
             <InputLeftElement children={<IconUser />}/>
             <Input type='text' as={EditableInput}/> 
@@ -58,7 +62,8 @@ const InfoForm = ( ) => {
                 px={4}
                 _hover={{
                   background: useColorModeValue("gray.100", "gray.700")
-                }}/>
+                }}
+               />
             </Tooltip>
             <InputLeftElement children={<IconPhone />}/>
             <Input type='tel' as={EditableInput} /> 
@@ -77,13 +82,15 @@ const InfoForm = ( ) => {
                   px={4}
                   _hover={{
                     background: useColorModeValue("gray.100", "gray.700")
-                  }}/>
+                  }}
+                  />
               </Tooltip>
               <InputLeftElement children={<IconMail />}/>
               <Input type='email' as={EditableInput} /> 
             </InputGroup>
             {/* <EditableControls />  */}
             </Editable>
+        {type === 'self' ?
         <Editable 
           defaultValue='password'
           isPreviewFocusable={true}
@@ -95,17 +102,26 @@ const InfoForm = ( ) => {
                 marginLeft='2.5rem'
                 py={2}
                 px={4}
-                _hover={{
-                  background: useColorModeValue("gray.100", "gray.700")
-                }}/>
+                // _hover={{
+                //   background: useColorModeValue("gray.100", "gray.700")
+                // }}
+                />
             </Tooltip>
             <InputLeftElement children={<IconLock />}/>
             <Input type='password' as={EditableInput}/> 
           </InputGroup>
-        </Editable>
+        </Editable> : 
+        <Flex justify='space-between'>
+          <IconLock color='teal'/>
+          <Hyperlink color='teal'>
+            Reset Patient Password
+          </Hyperlink>
+        </Flex>
+        }
       </Stack>
     </VStack>
   )
+  
 }
   
  
