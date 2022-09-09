@@ -110,7 +110,7 @@ function PatientPlan() {
             as='h2'
             fontSize='24px'
           >
-            Home Exercise Programs
+            Home Exercise Program
           </Heading>
           <Button
             leftIcon={<IconPlus />}
