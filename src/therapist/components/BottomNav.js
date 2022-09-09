@@ -8,6 +8,7 @@ const BottomNav = () => {
     <Box
       as="nav"
       position="fixed"
+      zIndex="10"
       bg="#2C7A7B"
       height="85px"
       width="100%"
