@@ -15,11 +15,11 @@ import {
 } from "@chakra-ui/react";
 import { IconPhone, IconMail,  IconLock, IconPencil, IconUser } from "@tabler/icons";
 
-const InfoForm = () => {
+const InfoForm = ( ) => {
   
   return (
     <VStack margin="1rem auto">
-      <Stack spacing={4} width='50%'>
+      <Stack spacing={4} width={['80%', '60%', '50%']}>
         <Editable spacing={[3, 3, 5]} marginLeft='2rem'>
           <Flex justify='center' align='end'>
             <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='2xl'/>
