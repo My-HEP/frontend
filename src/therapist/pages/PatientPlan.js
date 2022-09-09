@@ -119,7 +119,7 @@ function PatientPlan() {
             size='lg'
             minWidth='220px'
           >
-            Assign New HEP
+            Assign New Exercise
           </Button>
         </Flex>
         <AssignedHEP />
