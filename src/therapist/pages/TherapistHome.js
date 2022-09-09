@@ -65,7 +65,7 @@ function TherapistHome() {
                 {variables.userName}
               </Text>
             </Flex>
-              <EditModal /> 
+              <EditModal text={'Edit Information'} heading={'Edit Your Information'}/> 
               <Confirmation />
             </VStack>
         </VStack>
