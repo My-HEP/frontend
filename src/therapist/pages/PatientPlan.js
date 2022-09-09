@@ -95,8 +95,7 @@ function PatientPlan() {
               </Flex>
             </Flex>
             <EditModal
-              text={'Edit Patient Plan'}
-              heading={'Edit Patient Information'}
+              type={'therapist'}
             />
           </VStack>
         </Flex>

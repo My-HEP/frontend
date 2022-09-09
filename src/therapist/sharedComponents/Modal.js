@@ -17,7 +17,16 @@ import {
 import { IconSettings } from "@tabler/icons";
 import InfoForm from "./EditInfoForm";
 
-  const EditModal = ({ text, heading }) => {
+  const EditModal = ({ type }) => {
+    let text, heading;
+    if(type === 'therapist'){
+      text = 'Edit Patient Information'
+      heading = 'Edit Patient Information'
+    } else {
+      text= 'Edit Information'
+      heading = 'Edit Your Information'
+    }
+
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
