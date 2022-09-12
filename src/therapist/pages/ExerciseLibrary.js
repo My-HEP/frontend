@@ -8,7 +8,7 @@ import SearchBar from '../components/SearchBar';
 
 import AddHEPModal from '../components/AddHEPModal';
 
-function HEPs() {
+function ExerciseLibrary() {
   const HEPdata = [
     {
       title: 'Tendon Glides',
@@ -66,7 +66,7 @@ function HEPs() {
             width={{ base: '100%' }}
             textAlign={['center', 'center', 'left']}
           >
-            Home Exercise Programs
+            Home Exercise Library
           </Heading>
 
           <AddHEPModal />
@@ -94,4 +94,4 @@ function HEPs() {
   );
 }
 
-export default HEPs;
+export default ExerciseLibrary;
