@@ -17,7 +17,7 @@ import {
 import { IconSettings } from "@tabler/icons";
 import InfoForm from "./EditInfoForm";
 
-  const EditModal = ({ type }) => {
+const EditModal = ({ type }) => {
     let text, heading;
     if(type === 'therapist'){
       text = 'Edit Patient Information'
