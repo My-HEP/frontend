@@ -5,9 +5,10 @@ import { IconEdit } from '@tabler/icons';
 const AssignedHEP = () => {
   const variables = {
     hepTitle: 'Tendon Glides',
-    frequencyByDay: '1 time/day',
-    frequencyByWeek: '2 days/week',
-    duration: '4 reps',
+    frequencyByDay: '1',
+    frequencyByWeek: '2',
+    durationValue: '4',
+    durationUnits: 'mins',
     notes:
       "Do your best to get to 4 reps but if you need to start with 2 and work your way up, that's fine",
     therapist: 'You (Jane McTherapist)',
@@ -45,13 +46,13 @@ const AssignedHEP = () => {
         <Flex width='100%' justify="space-between">
           <Text>Frequency:</Text>
           <VStack spacing={0.5} align='end'>
-            <Text>{variables.frequencyByDay}</Text>
-            <Text>{variables.frequencyByWeek}</Text>
+            <Text>{variables.frequencyByDay} time/day</Text>
+            <Text>{variables.frequencyByWeek} {variables.frequencyByWeek === 1 ? 'day/week' : 'days/week'}</Text>
           </VStack>
         </Flex>
         <Flex width="100%" justify="space-between">
           <Text>Duration:</Text>
-          <Text>{variables.duration}</Text>
+          <Text>{variables.durationValue} {variables.durationUnits}</Text>
         </Flex>
         <Flex width="100%" justify="space-between" gap="5">
           <Text>Assigned by:</Text>
