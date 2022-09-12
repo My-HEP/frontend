@@ -26,7 +26,7 @@ const SideNav = () => {
               <IconUsers size={35} />
             </Button>
           </Link>
-          <Link to="/HEPs">
+          <Link to="/exerciselibrary">
             <Button variant="ghost">
               <IconBarbell size={35} />
             </Button>

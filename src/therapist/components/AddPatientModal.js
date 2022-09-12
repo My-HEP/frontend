@@ -25,12 +25,12 @@ function AddPatientModal() {
     <>
       <Button
         onClick={onOpen}
-        variant="outline"
+        variant="solid"
         leftIcon={<IconPlus />}
         size="lg"
         maxWidth="350px"
         minWidth="12rem"
-        bg="#2C7A7B"
+        colorScheme="teal"
         marginLeft={['0', '0', '2rem']}
       >
         Add New Patient

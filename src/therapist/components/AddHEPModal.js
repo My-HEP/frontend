@@ -9,7 +9,6 @@ import {
   ModalBody,
   ModalCloseButton,
   FormControl,
-  FormLabel,
   Input,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -25,10 +24,10 @@ function AddHEPModal() {
     <>
       <Button
         onClick={onOpen}
-        variant="outline"
+        variant="solid"
         leftIcon={<IconPlus />}
         size="lg"
-        bg="#2C7A7B"
+        colorScheme="teal"
         marginLeft={['0', '0', '2rem']}
         padding="1rem 2rem 1rem 2rem"
         minWidth="12rem"

@@ -1,23 +1,22 @@
 import { ColorModeScript, ChakraProvider, theme } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login.js';
 import TherapistHome from './therapist/pages/TherapistHome';
 import Patients from './therapist/pages/Patients';
 import PatientPlan from './therapist/pages/PatientPlan';
-import HEPs from './therapist/pages/HEPs';
+import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
 const queryClient = new QueryClient();
 
-
 Sentry.init({
-  dsn: "https://ef4490b6aff1440b9b9ae1ee41afa685@o1372411.ingest.sentry.io/6677638",
+  dsn: 'https://ef4490b6aff1440b9b9ae1ee41afa685@o1372411.ingest.sentry.io/6677638',
   integrations: [new BrowserTracing()],
   tracesSampleRate: 1.0,
 });
@@ -36,8 +35,8 @@ root.render(
               <Route index element={<Login />} />
               <Route path="therapisthome" element={<TherapistHome />} />
               <Route path="patients" element={<Patients />} />
-              <Route path="patientplan" element={<PatientPlan />} />
-              <Route path="heps" element={<HEPs />} />
+              <Route path="hep" element={<PatientPlan />} />
+              <Route path="exerciselibrary" element={<ExerciseLibrary />} />
             </Route>
           </Routes>
         </BrowserRouter>
