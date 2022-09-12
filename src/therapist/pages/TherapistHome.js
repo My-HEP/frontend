@@ -10,7 +10,7 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import Confirmation from '../sharedComponents/Confirmation';
-import EditModal from '../sharedComponents/EditModal';
+import EditModal from '../sharedComponents/Modal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../sharedComponents/LogoIcon';
 

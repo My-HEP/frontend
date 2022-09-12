@@ -2,7 +2,5 @@
   "arrowParens": "avoid",
   "trailingComma": "es5",
   "singleQuote": true,
-  "jsxSingleQuote": true,
-  "singleAttributePerLine": true,
   "semi": true
 }
