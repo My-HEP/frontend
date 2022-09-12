@@ -42,7 +42,7 @@ import InfoForm from "./EditInfoForm";
             <ModalHeader>{ heading }</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                <InfoForm heading={heading} />
+                <InfoForm type={type} />
             </ModalBody>
   
             <ModalFooter>
