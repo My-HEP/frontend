@@ -5,7 +5,8 @@ import { IconEdit } from '@tabler/icons';
 const AssignedHEP = () => {
   const variables = {
     hepTitle: 'Tendon Glides',
-    frequency: '1 time/day',
+    frequencyByDay: '1 time/day',
+    frequencyByWeek: '2 days/week',
     duration: '4 reps',
     notes:
       "Do your best to get to 4 reps but if you need to start with 2 and work your way up, that's fine",
@@ -43,7 +44,10 @@ const AssignedHEP = () => {
       <VStack align="start" justify="center" spacing={3}>
         <Flex width='100%' justify="space-between">
           <Text>Frequency:</Text>
-          <Text>{variables.frequency}</Text>
+          <VStack spacing={0.5} align='end'>
+            <Text>{variables.frequencyByDay}</Text>
+            <Text>{variables.frequencyByWeek}</Text>
+          </VStack>
         </Flex>
         <Flex width="100%" justify="space-between">
           <Text>Duration:</Text>
