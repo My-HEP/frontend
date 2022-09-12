@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login.js';
 import TherapistHome from './therapist/pages/TherapistHome';
 import Patients from './therapist/pages/Patients';
-import PatientPlan from './therapist/pages/PatientPlan';
+import HEP from './therapist/pages/HEP';
 import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
 const queryClient = new QueryClient();
 
@@ -35,7 +35,7 @@ root.render(
               <Route index element={<Login />} />
               <Route path="therapisthome" element={<TherapistHome />} />
               <Route path="patients" element={<Patients />} />
-              <Route path="hep" element={<PatientPlan />} />
+              <Route path="hep" element={<HEP />} />
               <Route path="exerciselibrary" element={<ExerciseLibrary />} />
             </Route>
           </Routes>

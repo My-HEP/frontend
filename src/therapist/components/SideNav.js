@@ -31,7 +31,6 @@ const SideNav = () => {
               <IconBarbell size={35} />
             </Button>
           </Link>
-          {/* <ColorModeSwitcher /> */}
         </VStack>
         <Box position="absolute" bottom="30px" align="center">
           <ColorModeSwitcher />
