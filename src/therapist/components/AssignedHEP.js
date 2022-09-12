@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, VStack, Heading, Image, Text, Icon } from '@chakra-ui/react';
-import { IconEdit } from '@tabler/icons';
+
+import AssignmentModal from './AssignmentModal';
 
 const AssignedHEP = () => {
   const variables = {
@@ -30,7 +31,7 @@ const AssignedHEP = () => {
       <Flex 
         justify="end" 
         order={['0', '0', '3']}>
-        <Icon as={IconEdit} color="teal" cursor="pointer" />
+        <AssignmentModal type='edit' />
       </Flex>
       <VStack
         align={['center', 'center', 'start']}
