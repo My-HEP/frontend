@@ -5,14 +5,11 @@ import {
   Avatar,
   Heading,
   Text,
-  Link as Hyperlink,
   Button,
 } from '@chakra-ui/react';
 import {
   IconMail,
   IconPhone,
-  IconSettings,
-  IconPlus,
   IconEye,
 } from '@tabler/icons';
 import SideNav from '../components/SideNav';
@@ -20,6 +17,7 @@ import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AssignedHEP from '../components/AssignedHEP';
 import EditModal from '../sharedComponents/EditModal';
+import AssignmentModal from '../components/AssignmentModal';
 import { Link } from 'react-router-dom';
 
 function PatientPlan() {
@@ -112,15 +110,7 @@ function PatientPlan() {
           >
             Home Exercise Program
           </Heading>
-          <Button
-            leftIcon={<IconPlus />}
-            variant='solid'
-            colorScheme='teal'
-            size='lg'
-            minWidth='220px'
-          >
-            Assign New Exercise
-          </Button>
+          <AssignmentModal type='new' />
         </Flex>
         <AssignedHEP />
         <Button
