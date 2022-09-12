@@ -44,16 +44,18 @@ const InfoForm = ({ type }) => {
               src='https://bit.ly/dan-abramov'
               size='2xl'
             />
-            <FormLabel htmlFor='upload'  >
-              <Input type='file' id='upload' hidden />
-              <IconButton
-                as={IconPencil}
-                size='xs'
-                aria-label='edit content'
-                variant='ghost'
-                colorScheme='teal'
-               />
-            </FormLabel>
+            <Tooltip label='Upload avatar'>
+              <FormLabel htmlFor='upload'  >
+                <Input type='file' id='upload' hidden />
+                <IconButton
+                  as={IconPencil}
+                  size='xs'
+                  aria-label='edit content'
+                  variant='ghost'
+                  colorScheme='teal'
+                />
+              </FormLabel>
+            </Tooltip>
           </Flex>
         </Editable>
         <Editable
