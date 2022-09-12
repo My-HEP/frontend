@@ -19,7 +19,7 @@ import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AssignedHEP from '../components/AssignedHEP';
-import EditModal from '../sharedComponents/Modal';
+import EditModal from '../sharedComponents/EditModal';
 import { Link } from 'react-router-dom';
 
 function PatientPlan() {
