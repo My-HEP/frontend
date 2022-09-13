@@ -75,7 +75,7 @@ const AssignmentModal = ({ type }) => {
       )}
 
       <Modal
-        size='4xl'
+        size={['sm', 'lg', '4xl']}
         isOpen={isOpen}
         onClose={onClose}
       >
@@ -85,12 +85,13 @@ const AssignmentModal = ({ type }) => {
           <ModalCloseButton />
           <ModalBody>
             <Flex
+              flexDir={['column', 'column', 'row']}
               justify='space-between'
-              align='start'
+              align={['center', 'center', 'start']}
               paddingBottom='1rem'
             >
               <VStack
-                width='48%'
+                width={['100%', '100%', '48%']}
                 align='start'
                 spacing={5}
               >
@@ -159,12 +160,13 @@ const AssignmentModal = ({ type }) => {
               </VStack>
               <VStack
                 align='start'
-                width='48%'
+                width={['100%', '100%', '48%']}
                 spacing={5}
               >
                 <Heading
                   as='h2'
                   size='sm'
+                  marginTop={['1.5rem', '1.5rem', '0']}
                 >
                   Set Exercise Parameters
                 </Heading>
