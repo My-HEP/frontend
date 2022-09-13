@@ -18,7 +18,7 @@ function TherapistHome() {
   const variables = {
     userName: 'Jane McTherapist',
     patientNum: '35',
-    hepNum: '29',
+    exerciseNum: '29',
   };
 
   return (
@@ -86,8 +86,8 @@ function TherapistHome() {
               My Patients
             </Button>
           </Link>
-          <Text as="b">{variables.hepNum} HEPs uploaded</Text>
-          <Link to="/heps">
+          <Text as="b">{variables.exerciseNum} Exercises uploaded</Text>
+          <Link to="/exerciselibrary">
             <Button
               leftIcon={<IconBarbell />}
               colorScheme="teal"
@@ -95,7 +95,7 @@ function TherapistHome() {
               size="lg"
               minWidth="12rem"
             >
-              My HEPs
+              Exercise Library
             </Button>
           </Link>
         </VStack>
