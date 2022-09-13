@@ -1,24 +1,12 @@
 import React from 'react';
-import {
-  Flex,
-  VStack,
-  Avatar,
-  Heading,
-  Text,
-  Link as Hyperlink,
-  Button,
-} from '@chakra-ui/react';
-import {
-  IconMail,
-  IconPhone,
-  IconSettings,
-  IconPlus,
-  IconEye,
-} from '@tabler/icons';
+import { Flex, VStack, Avatar, Heading, Text, Button } from '@chakra-ui/react';
+import { IconMail, IconPhone, IconEye } from '@tabler/icons';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AssignedHEP from '../components/AssignedHEP';
+import EditModal from '../sharedComponents/EditModal';
+import AssignmentModal from '../components/AssignmentModal';
 import { Link } from 'react-router-dom';
 
 function HEP() {
@@ -80,12 +68,7 @@ function HEP() {
                 <Text>{variables.patientEmail}</Text>
               </Flex>
             </Flex>
-            <Hyperlink color="teal">
-              <Flex gap="2">
-                <IconSettings color="teal" />
-                Edit Patient Information
-              </Flex>
-            </Hyperlink>
+            <EditModal type={'therapist'} />
           </VStack>
         </Flex>
         <Flex
@@ -96,17 +79,9 @@ function HEP() {
           gap={['8', '8', '4']}
         >
           <Heading as="h2" fontSize="24px">
-            Home Exercise Programs
+            Home Exercise Program
           </Heading>
-          <Button
-            leftIcon={<IconPlus />}
-            variant="solid"
-            colorScheme="teal"
-            size="lg"
-            minWidth="220px"
-          >
-            Assign New HEP
-          </Button>
+          <AssignmentModal type="new" />
         </Flex>
         <AssignedHEP />
         <Button
@@ -115,7 +90,6 @@ function HEP() {
           colorScheme="teal"
           size="lg"
           width="220px"
-          zIndex="-1"
           margin={['0 auto', '0 0', '0 0']}
         >
           Patient View
