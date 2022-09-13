@@ -10,7 +10,7 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import Confirmation from '../sharedComponents/Confirmation';
-import EditModal from '../sharedComponents/Modal';
+import EditModal from '../sharedComponents/EditModal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../sharedComponents/LogoIcon';
 
@@ -65,7 +65,7 @@ function TherapistHome() {
                 {variables.userName}
               </Text>
             </Flex>
-            <EditModal />
+            <EditModal type={'self'} />
             <Confirmation />
           </VStack>
         </VStack>
@@ -87,7 +87,7 @@ function TherapistHome() {
             </Button>
           </Link>
           <Text as="b">{variables.hepNum} HEPs uploaded</Text>
-          <Link to="/exerciselibrary">
+          <Link to="/heps">
             <Button
               leftIcon={<IconBarbell />}
               colorScheme="teal"
