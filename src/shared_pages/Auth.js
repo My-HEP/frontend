@@ -10,8 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { logoIcon } from '../therapist/sharedComponents/LogoIcon';
 import { IconMail, IconLock } from '@tabler/icons';
+import { useState } from 'react';
+import { createAccount } from '../authSignupPassword';
 
 function Auth() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   return (
     <Flex
       direction="column"
@@ -42,12 +47,22 @@ function Auth() {
         <Stack spacing={10} maxWidth="23rem" paddingBottom="3rem">
           <InputGroup>
             <InputLeftElement children={<IconMail />} />
-            <Input type="email" placeholder="Email" />
+            <Input
+              type="email"
+              placeholder="Email"
+              onChange={event => setEmail(event.target.value)}
+              value={email}
+            />
           </InputGroup>
 
           <InputGroup>
             <InputLeftElement children={<IconLock />} />
-            <Input type="password" placeholder="Password" />
+            <Input
+              type="password"
+              placeholder="Password"
+              onChange={event => setPassword(event.target.value)}
+              value={password}
+            />
           </InputGroup>
           <Stack
             direction={['column', 'column', 'row']}
@@ -56,7 +71,11 @@ function Auth() {
             <Button colorScheme="teal" variant="solid">
               Sign in
             </Button>
-            <Button colorScheme="teal" variant="outline">
+            <Button
+              colorScheme="teal"
+              variant="outline"
+              onClick={() => createAccount(email, password)}
+            >
               Create an account
             </Button>
           </Stack>
