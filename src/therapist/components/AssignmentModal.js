@@ -16,12 +16,29 @@ import {
   Text,
   Input,
   Textarea,
+  Select,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  TableCaption,
+  TableContainer,
 } from '@chakra-ui/react';
 
 import { IconPlus, IconEdit } from '@tabler/icons';
 import SearchBar from './SearchBar';
 
 const AssignmentModal = ({ type }) => {
+  const exercises = [
+    { title: 'Tendon Glides' },
+    { title: 'Carpal Tunnel' },
+    { title: 'Leg Lifts' },
+  ];
   let text, heading;
   if (type === 'new') {
     heading = 'Assign New Exercise';
@@ -64,10 +81,15 @@ const AssignmentModal = ({ type }) => {
           <ModalHeader>{heading}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Flex justify='space-between'>
+            <Flex
+              justify='space-between'
+              align='start'
+              paddingBottom='1rem'
+            >
               <VStack
                 width='48%'
                 align='start'
+                spacing={5}
               >
                 <Heading
                   as='h2'
@@ -76,6 +98,25 @@ const AssignmentModal = ({ type }) => {
                   Select Existing Exercise
                 </Heading>
                 <SearchBar />
+                <TableContainer
+                  width='100%'
+                  maxWidth='700px'
+                  border='1px'
+                  borderRadius='7'
+                  borderColor='lightgray'
+                >
+                  <Table variant='simple'>
+                    <Tbody>
+                      {exercises.map(exercise => {
+                        return (
+                          <Tr>
+                            <Td>{exercise.title}</Td>
+                          </Tr>
+                        );
+                      })}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
                 <Heading
                   as='h2'
                   size='sm'
@@ -87,7 +128,7 @@ const AssignmentModal = ({ type }) => {
               <VStack
                 align='start'
                 width='48%'
-                border='2px'
+                spacing={5}
               >
                 <Heading
                   as='h2'
@@ -98,57 +139,99 @@ const AssignmentModal = ({ type }) => {
                 <Flex
                   flexDir='column'
                   width='100%'
+                  gap='5'
+                  padding='2rem 0'
                 >
-                  <Heading
-                    as='h3'
-                    size='xs'
-                  >
-                    Frequency
-                  </Heading>
-                  <Flex
-                    flexDir='column'
-                    align='end'
-                    border='2px'
-                  >
-                    <Flex
-                      align='center'
-                      justify='end'
+                  <Flex justify='space-between'>
+                    <Heading
+                      as='h3'
+                      size='sm'
                     >
-                      <Input
-                        type='number'
-                        min='0'
-                        max='100'
-                      />
-                      <Text>times/day</Text>
-                    </Flex>
+                      Frequency
+                    </Heading>
                     <Flex
-                      align='center'
-                      justify='end'
+                      flexDir='column'
+                      align='end'
+                      gap='2'
+                      width='50%'
                     >
-                      <Input
-                        type='number'
-                        min='0'
-                        max='7'
-                      />
-                      <Text>days/week</Text>
+                      <Flex
+                        width='100%'
+                        justify='start'
+                        align='center'
+                        gap='5'
+                      >
+                        <NumberInput
+                          width='5rem'
+                          min={1}
+                          max={100}
+                        >
+                          <NumberInputField />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                        <Text>times/day</Text>
+                      </Flex>
+                      <Flex
+                        width='100%'
+                        align='center'
+                        justify='start'
+                        gap='5'
+                      >
+                        <NumberInput
+                          width='5rem'
+                          min={1}
+                          max={7}
+                        >
+                          <NumberInputField />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                        <Text>days/week</Text>
+                      </Flex>
                     </Flex>
                   </Flex>
-                  <Heading
-                    as='h3'
-                    size='xs'
-                  >
-                    Duration
-                  </Heading>
-                  <Flex
-                    flexDir='column'
-                    align='end'
-                  >
-                    <Flex flexDir='column'>
-                      <Input
-                        type='number'
-                        min='0'
-                        max='100'
-                      />
+                  <Flex justify='space-between'>
+                    <Heading
+                      as='h3'
+                      size='sm'
+                    >
+                      Duration
+                    </Heading>
+                    <Flex
+                      flexDir='column'
+                      width='50%'
+                    >
+                      <Flex
+                        flexDir='row'
+                        gap='5'
+                        width='100%'
+                        justify='start'
+                      >
+                        <NumberInput
+                          width='5rem'
+                          min={1}
+                          max={100}
+                        >
+                          <NumberInputField />
+                          <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                          </NumberInputStepper>
+                        </NumberInput>
+                        <Select
+                          placeholder='units'
+                          width='6rem'
+                        >
+                          <option value='option1'>reps</option>
+                          <option value='option2'>seconds</option>
+                          <option value='option3'>minutes</option>
+                        </Select>
+                      </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
