@@ -10,6 +10,7 @@ import {
   useDisclosure,
   Button,
   Icon,
+  IconButton,
   Flex,
   VStack,
   Heading,
@@ -26,11 +27,13 @@ import {
   Tbody,
   Tr,
   Td,
-  TableCaption,
   TableContainer,
+  Tooltip,
+  FormLabel,
+  Box,
 } from '@chakra-ui/react';
 
-import { IconPlus, IconEdit } from '@tabler/icons';
+import { IconPlus, IconEdit, IconFileUpload } from '@tabler/icons';
 import SearchBar from './SearchBar';
 
 const AssignmentModal = ({ type }) => {
@@ -123,7 +126,36 @@ const AssignmentModal = ({ type }) => {
                 >
                   Upload New Exercise
                 </Heading>
-                <Input type='file' />
+                <Flex
+                  align='center'
+                  justify='center'
+                  width='100%'
+                  border='1px'
+                  borderRadius='7'
+                  borderColor='lightgray'
+                >
+                  <Tooltip label='Upload new exercise'>
+                    <FormLabel
+                      htmlFor='fild-upload'
+                      margin='auto auto'
+                      padding='2rem'
+                    >
+                      <Input
+                        type='file'
+                        id='file-upload'
+                        hidden
+                      />
+                      <IconButton
+                        as={IconFileUpload}
+                        height='100px'
+                        width='100px'
+                        aria-label='upload new exercise'
+                        variant='ghost'
+                        colorScheme='teal'
+                      />
+                    </FormLabel>
+                  </Tooltip>
+                </Flex>
               </VStack>
               <VStack
                 align='start'
