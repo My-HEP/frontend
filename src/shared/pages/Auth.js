@@ -8,11 +8,11 @@ import {
   Button,
   Icon,
 } from '@chakra-ui/react';
-import { logoIcon } from '../therapist/sharedComponents/LogoIcon';
+import { logoIcon } from '../../therapist/sharedComponents/LogoIcon';
 import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
-import { createAccount } from '../authCreateAccount';
-import { signIn } from '../authSignIn';
+import { createAccount } from '../../authCreateAccount';
+import { signIn } from '../../authSignIn';
 
 function Auth() {
   const [email, setEmail] = useState();
