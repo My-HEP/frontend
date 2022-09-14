@@ -12,6 +12,7 @@ import {
   FormLabel,
   Input,
   useDisclosure,
+  Stack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { createAccount } from '../../authCreateAccount';
@@ -47,7 +48,7 @@ function CreateAccountModal() {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent padding="1.5rem">
           <ModalHeader>Create a new account</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
@@ -83,14 +84,20 @@ function CreateAccountModal() {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              colorScheme="teal"
-              variant="outline"
-              onClick={() => createAccountHandler(email, password)}
+            <Stack
+              direction={['column', 'column', 'row']}
+              justify="space-between"
+              width="100%"
             >
-              Create an account
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
+              <Button
+                colorScheme="teal"
+                variant="outline"
+                onClick={() => createAccountHandler(email, password)}
+              >
+                Create an account
+              </Button>
+              <Button onClick={onClose}>Cancel</Button>
+            </Stack>
           </ModalFooter>
         </ModalContent>
       </Modal>

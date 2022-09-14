@@ -85,13 +85,6 @@ function Auth() {
             >
               Sign in
             </Button>
-            {/* <Button
-              colorScheme="teal"
-              variant="outline"
-              onClick={() => createAccount(email, password)}
-            >
-              Create an account
-            </Button> */}
             <CreateAccountModal email={email} password={password} />
           </Stack>
         </Stack>
