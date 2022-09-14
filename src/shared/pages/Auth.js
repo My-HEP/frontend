@@ -11,7 +11,7 @@ import {
 import { logoIcon } from '../../therapist/sharedComponents/LogoIcon';
 import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
-import { createAccount } from '../../authCreateAccount';
+import CreateAccountModal from '../components/CreateAccountModal';
 import { signIn } from '../../authSignIn';
 
 function Auth() {
@@ -76,13 +76,14 @@ function Auth() {
             >
               Sign in
             </Button>
-            <Button
+            {/* <Button
               colorScheme="teal"
               variant="outline"
               onClick={() => createAccount(email, password)}
             >
               Create an account
-            </Button>
+            </Button> */}
+            <CreateAccountModal email={email} password={password} />
           </Stack>
         </Stack>
       </Flex>

@@ -47,7 +47,6 @@ function AddHEPModal() {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              {/* <FormLabel>Choose a file to upload</FormLabel> */}
               <Input type="file" placeholder="File" />
             </FormControl>
           </ModalBody>

@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Auth from './shared_pages/Auth';
+import Auth from './shared/pages/Auth';
 import TherapistHome from './therapist/pages/TherapistHome';
 import Patients from './therapist/pages/Patients';
 import HEP from './therapist/pages/HEP';
