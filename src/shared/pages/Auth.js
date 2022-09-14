@@ -13,10 +13,19 @@ import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
 import CreateAccountModal from '../components/CreateAccountModal';
 import { signIn } from '../../authSignIn';
+import { useNavigate } from 'react-router-dom';
 
 function Auth() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  const signInHandler = async (email, password) => {
+    let res = await signIn(email, password);
+    console.log(res.user.email);
+    navigate('/therapisthome');
+  };
 
   return (
     <Flex
@@ -72,7 +81,7 @@ function Auth() {
             <Button
               colorScheme="teal"
               variant="solid"
-              onClick={() => signIn(email, password)}
+              onClick={() => signInHandler(email, password)}
             >
               Sign in
             </Button>

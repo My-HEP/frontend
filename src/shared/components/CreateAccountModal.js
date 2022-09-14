@@ -15,15 +15,24 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { createAccount } from '../../authCreateAccount';
+import { useNavigate } from 'react-router-dom';
 
 function CreateAccountModal() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
+  const navigate = useNavigate();
+
+  const createAccountHandler = async (email, password) => {
+    let res = await createAccount(email, password);
+    console.log(res.user.email);
+    navigate('/therapisthome');
+  };
 
   return (
     <>
@@ -77,7 +86,7 @@ function CreateAccountModal() {
             <Button
               colorScheme="teal"
               variant="outline"
-              onClick={() => createAccount(email, password)}
+              onClick={() => createAccountHandler(email, password)}
             >
               Create an account
             </Button>
