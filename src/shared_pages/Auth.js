@@ -11,7 +11,8 @@ import {
 import { logoIcon } from '../therapist/sharedComponents/LogoIcon';
 import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
-import { createAccount } from '../authSignupPassword';
+import { createAccount } from '../authCreateAccount';
+import { signIn } from '../authSignIn';
 
 function Auth() {
   const [email, setEmail] = useState();
@@ -68,7 +69,11 @@ function Auth() {
             direction={['column', 'column', 'row']}
             justify="space-between"
           >
-            <Button colorScheme="teal" variant="solid">
+            <Button
+              colorScheme="teal"
+              variant="solid"
+              onClick={() => signIn(email, password)}
+            >
               Sign in
             </Button>
             <Button
