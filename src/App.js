@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Outlet } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { firebaseConfig } from './firebase.js';
+import { firebaseConfig } from '../src/utils/firebase';
 
 // const fetchBackend = async () => {
 //   const { data } = await axios.get('http://localhost:3001');
