@@ -25,6 +25,7 @@ function Auth() {
     let res = await signIn(email, password);
     console.log(res.user.email);
     navigate('/therapisthome');
+    console.log(res);
   };
 
   return (
@@ -33,11 +34,22 @@ function Auth() {
       width="100%"
       height="100vh"
       align="center"
+      justify="center"
       padding="3rem"
     >
-      <Flex width="100%" maxWidth="30rem" marginBottom="3rem">
-        <Icon as={logoIcon} boxSize="3.75rem" />
-        <Heading marginLeft="2rem" alignSelf="flex-end">
+      <Flex
+        width="100%"
+        maxWidth="30rem"
+        marginBottom="2rem"
+        marginLeft="-1rem"
+      >
+        <Icon as={logoIcon} boxSize="5rem" />
+        <Heading
+          marginLeft="1rem"
+          alignSelf="flex-end"
+          marginBottom="0.75rem"
+          size="xl"
+        >
           Welcome to My HEP
         </Heading>
       </Flex>
@@ -45,13 +57,8 @@ function Auth() {
         direction="column"
         width="100%"
         maxWidth={['none', 'none', '30rem']}
-        padding={['none', 'none', '4rem']}
-        rounded="md"
-        border={['none', 'none', '1px']}
-        borderColor="gray.300"
-        boxShadow="xl"
       >
-        <Heading marginTop="1.5rem" marginBottom="2rem">
+        <Heading marginTop="1.5rem" marginBottom="2rem" fontSize="1.5rem">
           Sign in
         </Heading>
         <Stack spacing={10} maxWidth="23rem" paddingBottom="3rem">
@@ -81,6 +88,7 @@ function Auth() {
             <Button
               colorScheme="teal"
               variant="solid"
+              size="lg"
               onClick={() => signInHandler(email, password)}
             >
               Sign in

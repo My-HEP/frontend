@@ -96,7 +96,9 @@ function CreateAccountModal() {
               >
                 Create an account
               </Button>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button colorScheme="teal" onClick={onClose}>
+                Cancel
+              </Button>
             </Stack>
           </ModalFooter>
         </ModalContent>
