@@ -81,7 +81,7 @@ function TherapistHome() {
               colorScheme="teal"
               variant="outline"
               size="lg"
-              minWidth="12rem"
+              minWidth="13.5rem"
             >
               My Patients
             </Button>
@@ -93,7 +93,7 @@ function TherapistHome() {
               colorScheme="teal"
               variant="outline"
               size="lg"
-              minWidth="12rem"
+              minWidth="13.5rem"
             >
               Exercise Library
             </Button>
