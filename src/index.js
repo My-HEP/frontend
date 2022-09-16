@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login.js';
-import TherapistHome from './therapist/pages/TherapistHome';
+import TherapistHome from './therapist/pages/Home';
 import Patients from './therapist/pages/Patients';
 import HEP from './therapist/pages/HEP';
 import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
@@ -33,7 +33,7 @@ root.render(
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<Login />} />
-              <Route path="therapisthome" element={<TherapistHome />} />
+              <Route path="home" element={<TherapistHome />} />
               <Route path="patients" element={<Patients />} />
               <Route path="hep" element={<HEP />} />
               <Route path="exerciselibrary" element={<ExerciseLibrary />} />

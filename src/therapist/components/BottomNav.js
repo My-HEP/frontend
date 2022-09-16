@@ -17,7 +17,7 @@ const BottomNav = () => {
     >
       <Flex direction="row" bottom="0" height="100%" justify="center">
         <HStack spacing="19" align="center">
-          <Link to="/therapisthome">
+          <Link to="/home">
             <Button variant="ghost">
               <IconHome size={35} />
             </Button>
