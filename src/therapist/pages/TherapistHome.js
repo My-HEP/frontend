@@ -9,7 +9,7 @@ import {
   VStack,
   Avatar,
 } from '@chakra-ui/react';
-import Confirmation from '../sharedComponents/LogoutConfirmation';
+import Confirmation from '../components/LogoutConfirmation';
 import EditModal from '../sharedComponents/Modal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../sharedComponents/LogoIcon';
