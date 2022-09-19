@@ -8,8 +8,8 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Auth from './shared/pages/Auth';
-import TherapistHome from './therapist/pages/TherapistHome';
+import Login from './Login.js';
+import TherapistHome from './therapist/pages/Home';
 import Patients from './therapist/pages/Patients';
 import HEP from './therapist/pages/HEP';
 import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
@@ -32,8 +32,8 @@ root.render(
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />}>
-              <Route index element={<Auth />} />
-              <Route path="therapisthome" element={<TherapistHome />} />
+              <Route index element={<Login />} />
+              <Route path="home" element={<TherapistHome />} />
               <Route path="patients" element={<Patients />} />
               <Route path="hep" element={<HEP />} />
               <Route path="exerciselibrary" element={<ExerciseLibrary />} />

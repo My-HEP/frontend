@@ -16,7 +16,7 @@ const SideNav = () => {
     >
       <Flex direction="column" height="100%" justify="center">
         <VStack spacing="10" inInLine="true" align="center">
-          <Link to="/therapisthome">
+          <Link to="/home">
             <Button variant="ghost">
               <IconHome size={35} />
             </Button>

@@ -9,8 +9,13 @@ import {
   VStack,
   Avatar,
 } from '@chakra-ui/react';
+<<<<<<< HEAD:src/therapist/pages/TherapistHome.js
 import Confirmation from '../components/LogoutConfirmation';
 import EditModal from '../sharedComponents/Modal';
+=======
+import Confirmation from '../sharedComponents/Confirmation';
+import EditModal from '../sharedComponents/EditModal';
+>>>>>>> development:src/therapist/pages/Home.js
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../sharedComponents/LogoIcon';
 
@@ -18,7 +23,7 @@ function TherapistHome() {
   const variables = {
     userName: 'Jane McTherapist',
     patientNum: '35',
-    hepNum: '29',
+    exerciseNum: '29',
   };
 
   return (
@@ -65,7 +70,7 @@ function TherapistHome() {
                 {variables.userName}
               </Text>
             </Flex>
-            <EditModal />
+            <EditModal type={'self'} />
             <Confirmation />
           </VStack>
         </VStack>
@@ -81,21 +86,21 @@ function TherapistHome() {
               colorScheme="teal"
               variant="outline"
               size="lg"
-              minWidth="12rem"
+              minWidth="13.5rem"
             >
               My Patients
             </Button>
           </Link>
-          <Text as="b">{variables.hepNum} HEPs uploaded</Text>
+          <Text as="b">{variables.exerciseNum} Exercises uploaded</Text>
           <Link to="/exerciselibrary">
             <Button
               leftIcon={<IconBarbell />}
               colorScheme="teal"
               variant="outline"
               size="lg"
-              minWidth="12rem"
+              minWidth="13.5rem"
             >
-              My HEPs
+              Exercise Library
             </Button>
           </Link>
         </VStack>
