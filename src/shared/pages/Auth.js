@@ -41,7 +41,6 @@ function Auth() {
       <Flex
         direction="column"
         width="100%"
-        marginLeft="10%"
         maxWidth={['none', 'none', '30rem']}
       >
         <Flex
