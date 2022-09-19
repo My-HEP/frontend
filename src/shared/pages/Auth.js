@@ -36,12 +36,12 @@ function Auth() {
       align="center"
       justify="center"
       padding="3rem"
-      border="2px"
     >
       <Flex
         direction="column"
         width="100%"
         maxWidth={['none', 'none', '30rem']}
+        marginLeft={['10%', '10%', '6%']}
       >
         <Flex
           width="100%"
