@@ -36,28 +36,31 @@ function Auth() {
       align="center"
       justify="center"
       padding="3rem"
+      border="2px"
     >
-      <Flex
-        width="100%"
-        maxWidth="30rem"
-        marginBottom="2rem"
-        marginLeft="-1rem"
-      >
-        <Icon as={logoIcon} boxSize="5rem" />
-        <Heading
-          marginLeft="1rem"
-          alignSelf="flex-end"
-          marginBottom="0.75rem"
-          size="xl"
-        >
-          Welcome to My HEP
-        </Heading>
-      </Flex>
       <Flex
         direction="column"
         width="100%"
+        marginLeft="10%"
         maxWidth={['none', 'none', '30rem']}
       >
+        <Flex
+          width="100%"
+          maxWidth="30rem"
+          marginBottom="2rem"
+          marginLeft="-0.4rem"
+        >
+          <Icon as={logoIcon} boxSize="5rem" />
+          <Heading
+            marginLeft="1rem"
+            alignSelf="flex-end"
+            marginBottom="0.75rem"
+            size="xl"
+          >
+            Welcome to My HEP
+          </Heading>
+        </Flex>
+
         <Heading marginTop="1.5rem" marginBottom="2rem" fontSize="1.5rem">
           Sign in
         </Heading>
