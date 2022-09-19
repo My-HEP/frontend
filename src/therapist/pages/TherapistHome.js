@@ -10,9 +10,9 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import Confirmation from '../components/LogoutConfirmation';
-import EditModal from '../sharedComponents/Modal';
+import EditModal from '../../shared/components/Modal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
-import { logoIcon } from '../sharedComponents/LogoIcon';
+import { logoIcon } from '../../shared/components/LogoIcon';
 
 function TherapistHome() {
   const variables = {
