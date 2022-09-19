@@ -31,8 +31,28 @@ function CreateAccountModal() {
 
   const createAccountHandler = async (email, password) => {
     let res = await createAccount(email, password);
+    console.log(res);
+    fetch('http://localhost:3001/user', {
+      method: 'POST',
+      headers: {
+        ContentType: 'application/json',
+      },
+      body: JSON.stringify(res.user),
+    });
+
     console.log(res.user.email);
     navigate('/therapisthome');
+  };
+
+  const testApi = () => {
+    console.log('firing!');
+    fetch('http://localhost:3001/user', {
+      method: 'POST',
+      headers: {
+        ContentType: 'application/json',
+      },
+      body: JSON.stringify({ hello: 'hello' }),
+    });
   };
 
   return (
@@ -96,7 +116,7 @@ function CreateAccountModal() {
               >
                 Create an account
               </Button>
-              <Button colorScheme="teal" onClick={onClose}>
+              <Button colorScheme="teal" onClick={testApi}>
                 Cancel
               </Button>
             </Stack>
