@@ -5,7 +5,7 @@ import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AssignedHEP from '../components/AssignedHEP';
-import EditModal from '../sharedComponents/EditModal';
+import EditModal from '../../shared/components/Modal';
 import AssignmentModal from '../components/AssignmentModal';
 import { Link } from 'react-router-dom';
 

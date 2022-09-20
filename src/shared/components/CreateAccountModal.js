@@ -35,13 +35,13 @@ function CreateAccountModal() {
     fetch('http://localhost:3001/user', {
       method: 'POST',
       headers: {
-        ContentType: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(res.user),
     });
 
     console.log(res.user.email);
-    navigate('/therapisthome');
+    navigate('/home');
   };
 
   const testApi = () => {
@@ -49,7 +49,7 @@ function CreateAccountModal() {
     fetch('http://localhost:3001/user', {
       method: 'POST',
       headers: {
-        ContentType: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ hello: 'hello' }),
     });

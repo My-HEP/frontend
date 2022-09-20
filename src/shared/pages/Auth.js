@@ -24,7 +24,7 @@ function Auth() {
   const signInHandler = async (email, password) => {
     let res = await signIn(email, password);
     console.log(res.user.email);
-    navigate('/therapisthome');
+    navigate('/home');
     console.log(res);
   };
 

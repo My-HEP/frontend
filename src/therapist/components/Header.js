@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex, Heading, Icon } from '@chakra-ui/react';
-import { logoIcon } from '../sharedComponents/LogoIcon';
+import { logoIcon } from '../../shared/components/LogoIcon';
 import { Link } from 'react-router-dom';
 
 function Header() {
