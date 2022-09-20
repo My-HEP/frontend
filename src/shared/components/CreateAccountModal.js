@@ -21,6 +21,8 @@ import { useNavigate } from 'react-router-dom';
 function CreateAccountModal() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -29,30 +31,28 @@ function CreateAccountModal() {
 
   const navigate = useNavigate();
 
-  const createAccountHandler = async (email, password) => {
+  const createAccountHandler = async (email, password, firstName, lastName) => {
     let res = await createAccount(email, password);
-    console.log(res);
+    const uid = res.user.uid;
+    console.log(uid);
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password,
+      uid,
+    };
+    console.log(user);
     fetch('http://localhost:3001/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(res.user),
+      body: JSON.stringify(user),
     });
 
     console.log(res.user.email);
     navigate('/home');
-  };
-
-  const testApi = () => {
-    console.log('firing!');
-    fetch('http://localhost:3001/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ hello: 'hello' }),
-    });
   };
 
   return (
@@ -74,12 +74,21 @@ function CreateAccountModal() {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
+              <Input
+                ref={initialRef}
+                placeholder="First name"
+                onChange={event => setFirstName(event.target.value)}
+                value={firstName}
+              />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
+              <Input
+                placeholder="Last name"
+                onChange={event => setLastName(event.target.value)}
+                value={lastName}
+              />
             </FormControl>
 
             <FormControl mt={4}>
@@ -112,11 +121,13 @@ function CreateAccountModal() {
               <Button
                 colorScheme="teal"
                 variant="outline"
-                onClick={() => createAccountHandler(email, password)}
+                onClick={() =>
+                  createAccountHandler(email, password, firstName, lastName)
+                }
               >
                 Create an account
               </Button>
-              <Button colorScheme="teal" onClick={testApi}>
+              <Button colorScheme="teal" onClick={onClose}>
                 Cancel
               </Button>
             </Stack>
