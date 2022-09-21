@@ -52,13 +52,17 @@ function Auth() {
         <Flex
           direction="column"
           width="auto"
-          height="auto"
           maxWidth={['none', 'none', '30rem']}
           minWidth={['none', 'none', '400px']}
           margin="1rem"
           // marginLeft={['6%', '6%', '6%']}
         >
-          <Flex width="auto" maxWidth="30rem" marginBottom="2rem">
+          <Flex
+            width="auto"
+            maxWidth="30rem"
+            direction="column"
+            marginBottom="2rem"
+          >
             {/* <Icon as={logoIcon} boxSize="5rem" /> */}
             {/* <Heading
               // marginLeft="1rem"
@@ -79,7 +83,20 @@ function Auth() {
               fontSize="6xl"
               fontWeight="extrabold"
             >
-              Welcome to My HEP
+              Welcome to
+            </Text>
+            <Text
+              bgGradient={[
+                'linear(to-l, cyan.600, green.500)',
+                'linear(to-l, cyan.600, green.500)',
+                'linear(to-l, cyan.600, green.500)',
+                'linear(to-l, teal.700, teal.900)',
+              ]}
+              bgClip="text"
+              fontSize="6xl"
+              fontWeight="extrabold"
+            >
+              MyHEP
             </Text>
           </Flex>
 
@@ -108,12 +125,10 @@ function Auth() {
                 value={password}
               />
             </InputGroup>
-            <Stack
-              direction={['column', 'column', 'row']}
-              justify="space-between"
-            >
+            <Stack direction="column" justify="space-between">
               <Button
                 colorScheme="teal"
+                width="100%"
                 variant="solid"
                 size="lg"
                 onClick={() => signInHandler(email, password)}
