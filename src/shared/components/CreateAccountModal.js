@@ -66,7 +66,17 @@ function CreateAccountModal() {
 
   return (
     <>
-      <Button onClick={onOpen} variant="outline" size="lg" colorScheme="teal">
+      <Button
+        onClick={onOpen}
+        variant="outline"
+        size="lg"
+        colorScheme="teal"
+        _hover={{
+          transition: 'ease',
+          bgGradient: 'linear(to-l, cyan.700, green.500)',
+          color: 'white',
+        }}
+      >
         Create an account
       </Button>
 
