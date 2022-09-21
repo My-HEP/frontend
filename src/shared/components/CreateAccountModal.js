@@ -12,6 +12,7 @@ import {
   FormLabel,
   Input,
   useDisclosure,
+  useToast,
   Stack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -30,8 +31,16 @@ function CreateAccountModal() {
   const finalRef = React.useRef(null);
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const createAccountHandler = async (email, password, firstName, lastName) => {
+    if (!firstName || !email || !password || !lastName) {
+      toast({
+        title: 'Please include all fields.',
+        status: 'error',
+      });
+      return;
+    }
     let res = await createAccount(email, password);
     const uid = res.user.uid;
     console.log(uid);
