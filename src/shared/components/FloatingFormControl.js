@@ -1,10 +1,6 @@
 import {
   ChakraProvider,
   FormControl,
-  FormErrorMessage,
-  FormHelperText,
-  FormLabel,
-  Input,
   extendTheme,
   Box,
 } from '@chakra-ui/react';
@@ -12,6 +8,7 @@ import {
 const activeLabelStyles = {
   transform: 'scale(0.85) translateY(-24px)',
 };
+
 export const theme = extendTheme({
   components: {
     Form: {
@@ -32,7 +29,7 @@ export const theme = extendTheme({
               left: 0,
               zIndex: 2,
               position: 'absolute',
-              backgroundColor: 'white',
+              backgroundColor: { useSystemColorMode: true },
               pointerEvents: 'none',
               mx: 3,
               px: 1,
