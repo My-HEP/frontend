@@ -98,6 +98,7 @@ function CreateAccountModal() {
                 ref={initialRef}
                 placeholder=" "
                 type="text"
+                focusBorderColor="teal.600"
                 onChange={event => setFirstName(event.target.value)}
                 value={firstName}
               />
@@ -108,6 +109,7 @@ function CreateAccountModal() {
               <Input
                 placeholder=" "
                 type="text"
+                focusBorderColor="teal.600"
                 onChange={event => setLastName(event.target.value)}
                 value={lastName}
               />
@@ -118,6 +120,7 @@ function CreateAccountModal() {
               <Input
                 type="tel"
                 placeholder=" "
+                focusBorderColor="teal.600"
                 onChange={event => setPhoneNumber(event.target.value)}
                 value={phoneNumber}
               />
@@ -128,6 +131,7 @@ function CreateAccountModal() {
               <Input
                 type="email"
                 placeholder=" "
+                focusBorderColor="teal.600"
                 onChange={event => setEmail(event.target.value)}
                 value={email}
               />
@@ -138,6 +142,7 @@ function CreateAccountModal() {
               <Input
                 type="password"
                 placeholder=" "
+                focusBorderColor="teal.600"
                 onChange={event => setPassword(event.target.value)}
                 value={password}
               />
