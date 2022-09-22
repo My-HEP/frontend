@@ -9,6 +9,7 @@ import {
   Icon,
   Text,
   Image,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { logoIcon } from '../../shared/components/LogoIcon';
 import { IconMail, IconLock } from '@tabler/icons';
@@ -22,6 +23,15 @@ function Auth() {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+
+  const headingColorMobile = useColorModeValue(
+    'linear(to-l, cyan.600, green.500)',
+    'linear(to-l, cyan.200, green.200)'
+  );
+  const headingColorDesktop = useColorModeValue(
+    'linear(to-l, teal.700, teal.900)',
+    'linear(to-l, gray.100, gray.50)'
+  );
 
   const signInHandler = async (email, password) => {
     let res = await signIn(email, password);
@@ -38,14 +48,12 @@ function Auth() {
       align="center"
       justify="center"
       overflow="hidden"
-      // padding="3rem"
     >
       <Flex
         direction="column"
         width={['auto', 'auto', '45%']}
         height="100vh"
         align="center"
-        // justify="center"
         padding={['.5rem', '.5rem', '3rem']}
         marginTop="6rem"
       >
@@ -55,7 +63,6 @@ function Auth() {
           maxWidth={['none', 'none', '30rem']}
           minWidth={['none', 'none', '400px']}
           margin="1rem"
-          // marginLeft={['6%', '6%', '6%']}
         >
           <Flex
             width="auto"
@@ -63,21 +70,12 @@ function Auth() {
             direction="column"
             marginBottom="2rem"
           >
-            {/* <Icon as={logoIcon} boxSize="5rem" /> */}
-            {/* <Heading
-              // marginLeft="1rem"
-              alignSelf="flex-end"
-              marginBottom="0.75rem"
-              size="xl"
-            >
-              Welcome to My HEP
-            </Heading> */}
             <Text
               bgGradient={[
-                'linear(to-l, cyan.600, green.500)',
-                'linear(to-l, cyan.600, green.500)',
-                'linear(to-l, cyan.600, green.500)',
-                'linear(to-l, teal.700, teal.900)',
+                headingColorMobile,
+                headingColorMobile,
+                headingColorMobile,
+                headingColorDesktop,
               ]}
               bgClip="text"
               fontSize="6xl"
@@ -87,10 +85,10 @@ function Auth() {
             </Text>
             <Text
               bgGradient={[
-                'linear(to-l, cyan.600, green.500)',
-                'linear(to-l, cyan.600, green.500)',
-                'linear(to-l, cyan.600, green.500)',
-                'linear(to-l, teal.700, teal.900)',
+                headingColorMobile,
+                headingColorMobile,
+                headingColorMobile,
+                headingColorDesktop,
               ]}
               bgClip="text"
               fontSize="6xl"
@@ -152,7 +150,6 @@ function Auth() {
           objectFit="cover"
           opacity="0.4"
           minWidth="50rem"
-          // overflow="hidden"
           position="relative"
           top="0"
           right="0"
