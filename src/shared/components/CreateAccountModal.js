@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { createAccount } from '../../authCreateAccount';
+import FloatingFormControl from './FloatingFormControl';
 import { useNavigate } from 'react-router-dom';
 
 function CreateAccountModal() {
@@ -89,57 +90,59 @@ function CreateAccountModal() {
       >
         <ModalOverlay />
         <ModalContent padding="1.5rem">
-          <ModalHeader>Create a new account</ModalHeader>
+          <ModalHeader>Sign up with your email</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
+            <FloatingFormControl>
               <Input
                 ref={initialRef}
-                placeholder="First name"
+                placeholder=" "
+                type="text"
                 onChange={event => setFirstName(event.target.value)}
                 value={firstName}
               />
-            </FormControl>
+              <FormLabel>First name</FormLabel>
+            </FloatingFormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
+            <FloatingFormControl>
               <Input
-                placeholder="Last name"
+                placeholder=" "
+                type="text"
                 onChange={event => setLastName(event.target.value)}
                 value={lastName}
               />
-            </FormControl>
+              <FormLabel>Last name</FormLabel>
+            </FloatingFormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Phone number</FormLabel>
+            <FloatingFormControl>
               <Input
                 type="tel"
-                placeholder="Phone number"
+                placeholder=" "
                 onChange={event => setPhoneNumber(event.target.value)}
                 value={phoneNumber}
               />
-            </FormControl>
+              <FormLabel>Phone number</FormLabel>
+            </FloatingFormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Email address</FormLabel>
+            <FloatingFormControl>
               <Input
                 type="email"
-                placeholder="Email address"
+                placeholder=" "
                 onChange={event => setEmail(event.target.value)}
                 value={email}
               />
-            </FormControl>
+              <FormLabel>Email address</FormLabel>
+            </FloatingFormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Password</FormLabel>
+            <FloatingFormControl>
               <Input
                 type="password"
-                placeholder="Password"
+                placeholder=" "
                 onChange={event => setPassword(event.target.value)}
                 value={password}
               />
-            </FormControl>
+              <FormLabel>Password</FormLabel>
+            </FloatingFormControl>
           </ModalBody>
 
           <ModalFooter>
