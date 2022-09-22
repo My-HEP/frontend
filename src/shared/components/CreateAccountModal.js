@@ -24,6 +24,7 @@ function CreateAccountModal() {
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -107,6 +108,16 @@ function CreateAccountModal() {
                 placeholder="Last name"
                 onChange={event => setLastName(event.target.value)}
                 value={lastName}
+              />
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Phone number</FormLabel>
+              <Input
+                type="tel"
+                placeholder="Phone number"
+                onChange={event => setPhoneNumber(event.target.value)}
+                value={phoneNumber}
               />
             </FormControl>
 
