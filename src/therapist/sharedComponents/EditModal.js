@@ -46,13 +46,8 @@ const EditModal = ({ type }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              variant="outline"
-              colorScheme="teal"
-              mr={3}
-              onClick={onClose}
-            >
-              Close
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
             </Button>
             <Button colorScheme="teal">Save Updates</Button>
           </ModalFooter>
