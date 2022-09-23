@@ -6,12 +6,10 @@ import {
   Flex,
   Heading,
   Button,
-  Icon,
   Text,
   Image,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { logoIcon } from '../../shared/components/LogoIcon';
 import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
 import CreateAccountModal from '../components/CreateAccountModal';

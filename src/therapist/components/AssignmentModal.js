@@ -30,7 +30,6 @@ import {
   TableContainer,
   Tooltip,
   FormLabel,
-  Box,
 } from '@chakra-ui/react';
 
 import { IconPlus, IconEdit, IconFileUpload } from '@tabler/icons';
@@ -57,28 +56,19 @@ const AssignmentModal = ({ type }) => {
       {type === 'new' ? (
         <Button
           leftIcon={<IconPlus />}
-          variant='solid'
-          colorScheme='teal'
-          size='lg'
-          minWidth='220px'
+          variant="solid"
+          colorScheme="teal"
+          size="lg"
+          minWidth="220px"
           onClick={onOpen}
         >
           Assign New Exercise
         </Button>
       ) : (
-        <Icon
-          as={IconEdit}
-          color='teal'
-          cursor='pointer'
-          onClick={onOpen}
-        />
+        <Icon as={IconEdit} color="teal" cursor="pointer" onClick={onOpen} />
       )}
 
-      <Modal
-        size={['sm', 'lg', '4xl']}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
+      <Modal size={['sm', 'lg', '4xl']} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{heading}</ModalHeader>
@@ -86,30 +76,23 @@ const AssignmentModal = ({ type }) => {
           <ModalBody>
             <Flex
               flexDir={['column', 'column', 'row']}
-              justify='space-between'
+              justify="space-between"
               align={['center', 'center', 'start']}
-              paddingBottom='1rem'
+              paddingBottom="1rem"
             >
-              <VStack
-                width={['100%', '100%', '48%']}
-                align='start'
-                spacing={5}
-              >
-                <Heading
-                  as='h2'
-                  size='sm'
-                >
+              <VStack width={['100%', '100%', '48%']} align="start" spacing={5}>
+                <Heading as="h2" size="sm">
                   Select Existing Exercise
                 </Heading>
                 <SearchBar />
                 <TableContainer
-                  width='100%'
-                  maxWidth='700px'
-                  border='1px'
-                  borderRadius='7'
-                  borderColor='lightgray'
+                  width="100%"
+                  maxWidth="700px"
+                  border="1px"
+                  borderRadius="7"
+                  borderColor="lightgray"
                 >
-                  <Table variant='simple'>
+                  <Table variant="simple">
                     <Tbody>
                       {exercises.map(exercise => {
                         return (
@@ -121,85 +104,52 @@ const AssignmentModal = ({ type }) => {
                     </Tbody>
                   </Table>
                 </TableContainer>
-                <Heading
-                  as='h2'
-                  size='sm'
-                >
+                <Heading as="h2" size="sm">
                   Upload New Exercise
                 </Heading>
                 <Flex
-                  align='center'
-                  justify='center'
-                  width='100%'
-                  border='1px'
-                  borderRadius='7'
-                  borderColor='lightgray'
+                  align="center"
+                  justify="center"
+                  width="100%"
+                  border="1px"
+                  borderRadius="7"
+                  borderColor="lightgray"
                 >
-                  <Tooltip label='Upload new exercise'>
+                  <Tooltip label="Upload new exercise">
                     <FormLabel
-                      htmlFor='fild-upload'
-                      margin='auto auto'
-                      padding='2rem'
+                      htmlFor="fild-upload"
+                      margin="auto auto"
+                      padding="2rem"
                     >
-                      <Input
-                        type='file'
-                        id='file-upload'
-                        hidden
-                      />
+                      <Input type="file" id="file-upload" hidden />
                       <IconButton
                         as={IconFileUpload}
-                        height='100px'
-                        width='100px'
-                        aria-label='upload new exercise'
-                        variant='ghost'
-                        colorScheme='teal'
+                        height="100px"
+                        width="100px"
+                        aria-label="upload new exercise"
+                        variant="ghost"
+                        colorScheme="teal"
                       />
                     </FormLabel>
                   </Tooltip>
                 </Flex>
               </VStack>
-              <VStack
-                align='start'
-                width={['100%', '100%', '48%']}
-                spacing={5}
-              >
+              <VStack align="start" width={['100%', '100%', '48%']} spacing={5}>
                 <Heading
-                  as='h2'
-                  size='sm'
+                  as="h2"
+                  size="sm"
                   marginTop={['1.5rem', '1.5rem', '0']}
                 >
                   Set Exercise Parameters
                 </Heading>
-                <Flex
-                  flexDir='column'
-                  width='100%'
-                  gap='5'
-                  padding='2rem 0'
-                >
-                  <Flex justify='space-between'>
-                    <Heading
-                      as='h3'
-                      size='sm'
-                    >
+                <Flex flexDir="column" width="100%" gap="5" padding="2rem 0">
+                  <Flex justify="space-between">
+                    <Heading as="h3" size="sm">
                       Frequency
                     </Heading>
-                    <Flex
-                      flexDir='column'
-                      align='end'
-                      gap='2'
-                      width='50%'
-                    >
-                      <Flex
-                        width='100%'
-                        justify='start'
-                        align='center'
-                        gap='5'
-                      >
-                        <NumberInput
-                          width='5rem'
-                          min={1}
-                          max={100}
-                        >
+                    <Flex flexDir="column" align="end" gap="2" width="50%">
+                      <Flex width="100%" justify="start" align="center" gap="5">
+                        <NumberInput width="5rem" min={1} max={100}>
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -208,17 +158,8 @@ const AssignmentModal = ({ type }) => {
                         </NumberInput>
                         <Text>times/day</Text>
                       </Flex>
-                      <Flex
-                        width='100%'
-                        align='center'
-                        justify='start'
-                        gap='5'
-                      >
-                        <NumberInput
-                          width='5rem'
-                          min={1}
-                          max={7}
-                        >
+                      <Flex width="100%" align="center" justify="start" gap="5">
+                        <NumberInput width="5rem" min={1} max={7}>
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -229,66 +170,41 @@ const AssignmentModal = ({ type }) => {
                       </Flex>
                     </Flex>
                   </Flex>
-                  <Flex justify='space-between'>
-                    <Heading
-                      as='h3'
-                      size='sm'
-                    >
+                  <Flex justify="space-between">
+                    <Heading as="h3" size="sm">
                       Duration
                     </Heading>
-                    <Flex
-                      flexDir='column'
-                      width='50%'
-                    >
-                      <Flex
-                        flexDir='row'
-                        gap='5'
-                        width='100%'
-                        justify='start'
-                      >
-                        <NumberInput
-                          width='5rem'
-                          min={1}
-                          max={100}
-                        >
+                    <Flex flexDir="column" width="50%">
+                      <Flex flexDir="row" gap="5" width="100%" justify="start">
+                        <NumberInput width="5rem" min={1} max={100}>
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
                           </NumberInputStepper>
                         </NumberInput>
-                        <Select
-                          placeholder='units'
-                          width='6rem'
-                        >
-                          <option value='option1'>reps</option>
-                          <option value='option2'>seconds</option>
-                          <option value='option3'>minutes</option>
+                        <Select placeholder="units" width="6rem">
+                          <option value="option1">reps</option>
+                          <option value="option2">seconds</option>
+                          <option value="option3">minutes</option>
                         </Select>
                       </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
-                <Heading
-                  as='h2'
-                  size='sm'
-                >
+                <Heading as="h2" size="sm">
                   Add Additional Notes
                 </Heading>
-                <Textarea placeholder='Provide additional instructions here.' />
+                <Textarea placeholder="Provide additional instructions here." />
               </VStack>
             </Flex>
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              colorScheme='teal'
-              mr={3}
-              onClick={onClose}
-            >
+            <Button colorScheme="teal" mr={3} onClick={onClose}>
               Discard
             </Button>
-            <Button variant='outline'>{text}</Button>
+            <Button variant="outline">{text}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

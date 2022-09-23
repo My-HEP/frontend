@@ -7,6 +7,7 @@ import {
 
 const activeLabelStyles = {
   transform: 'scale(0.85) translateY(-24px)',
+  zIndex: 2,
 };
 
 export const theme = extendTheme({
@@ -27,7 +28,8 @@ export const theme = extendTheme({
             label: {
               top: 0,
               left: 0,
-              zIndex: 2,
+              zIndex: '2',
+              opacity: 1,
               position: 'absolute',
               backgroundColor: { useSystemColorMode: true },
               pointerEvents: 'none',

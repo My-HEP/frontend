@@ -12,6 +12,7 @@ import {
   Input,
   useDisclosure,
   useToast,
+  useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
@@ -28,6 +29,7 @@ function CreateAccountModal() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const labelColor = useColorModeValue('white', 'gray.700');
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
@@ -53,7 +55,6 @@ function CreateAccountModal() {
       password,
       uid,
     };
-    console.log(user);
     fetch('http://localhost:3001/user', {
       method: 'POST',
       headers: {
@@ -62,7 +63,7 @@ function CreateAccountModal() {
       body: JSON.stringify(user),
     });
 
-    console.log(res.user.email);
+    console.log(res);
     navigate('/home');
   };
 
@@ -102,7 +103,7 @@ function CreateAccountModal() {
                 onChange={event => setFirstName(event.target.value)}
                 value={firstName}
               />
-              <FormLabel>First name</FormLabel>
+              <FormLabel backgroundColor={labelColor}>First name</FormLabel>
             </FloatingFormControl>
 
             <FloatingFormControl>
@@ -113,7 +114,7 @@ function CreateAccountModal() {
                 onChange={event => setLastName(event.target.value)}
                 value={lastName}
               />
-              <FormLabel>Last name</FormLabel>
+              <FormLabel backgroundColor={labelColor}>Last name</FormLabel>
             </FloatingFormControl>
 
             <FloatingFormControl>
@@ -124,7 +125,7 @@ function CreateAccountModal() {
                 onChange={event => setPhoneNumber(event.target.value)}
                 value={phoneNumber}
               />
-              <FormLabel>Phone number</FormLabel>
+              <FormLabel backgroundColor={labelColor}>Phone number</FormLabel>
             </FloatingFormControl>
 
             <FloatingFormControl>
@@ -135,7 +136,7 @@ function CreateAccountModal() {
                 onChange={event => setEmail(event.target.value)}
                 value={email}
               />
-              <FormLabel>Email address</FormLabel>
+              <FormLabel backgroundColor={labelColor}>Email address</FormLabel>
             </FloatingFormControl>
 
             <FloatingFormControl>
@@ -146,7 +147,7 @@ function CreateAccountModal() {
                 onChange={event => setPassword(event.target.value)}
                 value={password}
               />
-              <FormLabel>Password</FormLabel>
+              <FormLabel backgroundColor={labelColor}>Password</FormLabel>
             </FloatingFormControl>
           </ModalBody>
 
