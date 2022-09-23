@@ -224,10 +224,10 @@ const AssignmentModal = ({ type }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="teal" mr={3} onClick={onClose}>
+            <Button mr={3} variant="outline" onClick={onClose}>
               Discard
             </Button>
-            <Button variant="outline">{text}</Button>
+            <Button colorScheme="teal">{text}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
