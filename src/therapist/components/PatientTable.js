@@ -52,6 +52,7 @@ function PatientTable(props) {
             variant="outline"
             placeholder="Search"
             onChange={handleSearch}
+            focusBorderColor="teal.500"
           />
         </InputGroup>
       </Flex>
