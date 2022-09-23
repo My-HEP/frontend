@@ -48,6 +48,7 @@ function CreateAccountModal() {
     const user = {
       firstName,
       lastName,
+      phoneNumber,
       email,
       password,
       uid,
