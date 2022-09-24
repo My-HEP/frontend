@@ -96,7 +96,11 @@ function PatientTable(props) {
           <Tbody>
             {searchData.map(user => {
               return (
-                <Tr onClick={user => onRowClickHandler(user)} key={user.id}>
+                <Tr
+                  onClick={user => onRowClickHandler(user)}
+                  cursor="pointer"
+                  key={user.id}
+                >
                   <Td>{user.firstName}</Td>
                   <Td>{user.lastName}</Td>
                   <Td>{user.email}</Td>
