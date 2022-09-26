@@ -16,29 +16,48 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { IconSearch } from '@tabler/icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function PatientTable(props) {
-  const patientData = [
-    { firstName: 'Adam', lastName: 'Aardvark', email: 'adam@gmail.com' },
-    { firstName: 'Bertram', lastName: 'Beasley', email: 'bertram@gmail.com' },
-    { firstName: 'Catherine', lastName: 'Combs', email: 'cath@gmail.com' },
-    { firstName: 'Dylan', lastName: 'Daniels', email: 'dylpickle@gmail.com' },
-    {
-      firstName: 'Elizabeth',
-      lastName: 'Ellingsly',
-      email: 'elizardbeth@gmail.com',
-    },
-  ];
-
+  // const patientData = [
+  //   { firstName: 'Adam', lastName: 'Aardvark', email: 'adam@gmail.com' },
+  //   { firstName: 'Bertram', lastName: 'Beasley', email: 'bertram@gmail.com' },
+  //   { firstName: 'Catherine', lastName: 'Combs', email: 'cath@gmail.com' },
+  //   { firstName: 'Dylan', lastName: 'Daniels', email: 'dylpickle@gmail.com' },
+  //   {
+  //     firstName: 'Elizabeth',
+  //     lastName: 'Ellingsly',
+  //     email: 'elizardbeth@gmail.com',
+  //   },
+  // ];
   const [search, setSearch] = useState('');
+  const [data, setData] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:3001/therapist/patients');
+      const patients = await response.json();
+      setData(patients);
+    };
+    fetchData();
+  }, []);
+
+  console.log(data);
+
   const handleSearch = event => {
     setSearch(event.target.value);
   };
   const searchIconColor = useColorModeValue('black', 'white');
-  const data = patientData.filter(item =>
+  const searchData = data.filter(item =>
     item.lastName.toLowerCase().includes(search.toLowerCase())
   );
+
+  const onRowClickHandler = () => {
+    navigate('/hep/:id');
+  };
 
   return (
     <>
@@ -76,12 +95,16 @@ function PatientTable(props) {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map(row => {
+            {searchData.map(user => {
               return (
-                <Tr>
-                  <Td>{row.firstName}</Td>
-                  <Td>{row.lastName}</Td>
-                  <Td>{row.email}</Td>
+                <Tr
+                  onClick={user => onRowClickHandler(user)}
+                  cursor="pointer"
+                  key={user.id}
+                >
+                  <Td>{user.firstName}</Td>
+                  <Td>{user.lastName}</Td>
+                  <Td>{user.email}</Td>
                 </Tr>
               );
             })}

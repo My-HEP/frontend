@@ -9,10 +9,10 @@ import {
   VStack,
   Avatar,
 } from '@chakra-ui/react';
-import Confirmation from '../sharedComponents/Confirmation';
-import EditModal from '../sharedComponents/EditModal';
+import Confirmation from '../components/LogoutConfirmation';
+import EditModal from '../../shared/components/Modal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
-import { logoIcon } from '../sharedComponents/LogoIcon';
+import { logoIcon } from '../../shared/components/LogoIcon';
 
 function TherapistHome() {
   const variables = {

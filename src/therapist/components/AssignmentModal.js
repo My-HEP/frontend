@@ -30,7 +30,6 @@ import {
   TableContainer,
   Tooltip,
   FormLabel,
-  Box,
 } from '@chakra-ui/react';
 
 import { IconPlus, IconEdit, IconFileUpload } from '@tabler/icons';
