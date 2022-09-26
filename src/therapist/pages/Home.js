@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -16,14 +16,28 @@ import { logoIcon } from '../../shared/components/LogoIcon';
 import { getAuth } from 'firebase/auth';
 
 function TherapistHome() {
+  // const [data, setData] = useState([]);
+  const auth = getAuth();
+  const uid = auth.currentUser.uid;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      fetch('http://localhost:3001/user/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(uid),
+      });
+    };
+    fetchData();
+  }, []);
+
   const variables = {
     userName: 'Jane McTherapist',
     patientNum: '35',
     exerciseNum: '29',
   };
-
-  const auth = getAuth();
-  console.log(auth.currentUser);
 
   return (
     <Flex
