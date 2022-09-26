@@ -13,6 +13,7 @@ import Confirmation from '../components/LogoutConfirmation';
 import EditModal from '../../shared/components/Modal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../../shared/components/LogoIcon';
+import { useAuth } from '../../shared/components/contexts/AuthContext';
 
 function TherapistHome() {
   const variables = {
@@ -20,6 +21,9 @@ function TherapistHome() {
     patientNum: '35',
     exerciseNum: '29',
   };
+
+  const { currentUser } = useAuth();
+  console.log(currentUser);
 
   return (
     <Flex

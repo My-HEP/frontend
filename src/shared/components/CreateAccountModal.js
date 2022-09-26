@@ -16,9 +16,10 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { createAccount } from '../../authCreateAccount';
+// import { createAccount } from '../../authCreateAccount';
 import FloatingFormControl from './FloatingFormControl';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../components/contexts/AuthContext';
 
 function CreateAccountModal() {
   const [email, setEmail] = useState('');
@@ -36,6 +37,8 @@ function CreateAccountModal() {
   const navigate = useNavigate();
   const toast = useToast();
 
+  const { createAccount } = useAuth();
+
   const createAccountHandler = async (email, password, firstName, lastName) => {
     if (!firstName || !email || !password || !lastName) {
       toast({
@@ -46,7 +49,6 @@ function CreateAccountModal() {
     }
     let res = await createAccount(email, password);
     const uid = res.user.uid;
-    console.log(uid);
     const user = {
       firstName,
       lastName,
@@ -62,8 +64,6 @@ function CreateAccountModal() {
       },
       body: JSON.stringify(user),
     });
-
-    console.log(res);
     navigate('/home');
   };
 
