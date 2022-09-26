@@ -8,11 +8,13 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormControl,
   Input,
   useDisclosure,
+  Tooltip,
+  FormLabel,
+  IconButton,
 } from '@chakra-ui/react';
-import { IconPlus } from '@tabler/icons';
+import { IconPlus, IconFileUpload } from '@tabler/icons';
 
 function AddHEPModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,16 +45,34 @@ function AddHEPModal() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Upload a new HEP</ModalHeader>
+          <ModalHeader>Add New Exercise to Library</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <Input type="file" placeholder="File" />
-            </FormControl>
+          <ModalBody>
+            <Tooltip label="Select exercise to upload">
+              <FormLabel
+                display="flex"
+                justifyContent="center"
+                htmlFor="add-exercise"
+                padding="3rem 2rem"
+                border="1px"
+                borderColor="lightgray"
+                borderRadius="7"
+              >
+                <Input type="file" id="add-exercise" hidden />
+                <IconButton
+                  as={IconFileUpload}
+                  height="100px"
+                  width="100px"
+                  aria-label="upload new exercise"
+                  variant="ghost"
+                  colorScheme="teal"
+                />
+              </FormLabel>
+            </Tooltip>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Upload
+            <Button colorScheme="teal" mr={3}>
+              Add to Library
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>

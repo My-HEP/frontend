@@ -15,7 +15,11 @@ function SearchBar() {
         pointerEvents="none"
         children={<IconSearch color={searchIconColor} />}
       />
-      <Input variant="outline" placeholder="Search" />
+      <Input
+        variant="outline"
+        placeholder="Search"
+        focusBorderColor="teal.500"
+      />
     </InputGroup>
   );
 }

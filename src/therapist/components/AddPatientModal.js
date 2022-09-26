@@ -44,28 +44,32 @@ function AddPatientModal() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add a new patient</ModalHeader>
+          <ModalHeader>Add a New Patient</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
+              <Input
+                ref={initialRef}
+                placeholder="First name"
+                focusBorderColor="teal.500"
+              />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
+              <Input placeholder="Last name" focusBorderColor="teal.500" />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Email address</FormLabel>
-              <Input placeholder="Email address" />
+              <Input placeholder="Email address" focusBorderColor="teal.500" />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
+            <Button colorScheme="teal" mr={3}>
+              Add Patient
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>

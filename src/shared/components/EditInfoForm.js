@@ -27,44 +27,29 @@ import {
 } from '@tabler/icons';
 
 const InfoForm = ({ type }) => {
-  const { getDisclosureProps, getButtonProps} = useDisclosure()
+  const { getDisclosureProps, getButtonProps } = useDisclosure();
   const resetPassword = getButtonProps();
   const alert = getDisclosureProps();
 
- 
-
   return (
-    <VStack margin='1rem auto'>
-      <Stack
-        spacing={4}
-        width={['80%', '80%', '80%']}
-      >
-        <Editable
-          spacing={[3, 3, 5]}
-          marginLeft='2.5rem'
-        >
-          <Flex
-            justify='center'
-            align='end'
-          >
+    <VStack margin="1rem auto">
+      <Stack spacing={4} width={['80%', '80%', '80%']}>
+        <Editable spacing={[3, 3, 5]} marginLeft="2.5rem">
+          <Flex justify="center" align="end">
             <Avatar
-              name='Dan Abrahmov'
-              src='https://bit.ly/dan-abramov'
-              size='2xl'
+              name="Dan Abrahmov"
+              src="https://bit.ly/dan-abramov"
+              size="2xl"
             />
-            <Tooltip label='Upload avatar'>
-              <FormLabel htmlFor='upload'>
-                <Input
-                  type='file'
-                  id='upload'
-                  hidden
-                />
+            <Tooltip label="Upload avatar">
+              <FormLabel htmlFor="upload">
+                <Input type="file" id="upload" hidden />
                 <IconButton
                   as={IconPencil}
-                  size='xs'
-                  aria-label='edit content'
-                  variant='ghost'
-                  colorScheme='teal'
+                  size="xs"
+                  aria-label="edit content"
+                  variant="ghost"
+                  colorScheme="teal"
                 />
               </FormLabel>
             </Tooltip>
@@ -75,12 +60,12 @@ const InfoForm = ({ type }) => {
             type === 'therapist' ? 'patient name' : 'therapist name'
           }
           isPreviewFocusable={true}
-          display='flex'
+          display="flex"
         >
           <InputGroup>
-            <Tooltip label='Click to edit'>
+            <Tooltip label="Click to edit">
               <EditablePreview
-                marginLeft='2.5rem'
+                marginLeft="2.5rem"
                 py={2}
                 px={4}
                 _hover={{
@@ -89,21 +74,18 @@ const InfoForm = ({ type }) => {
               />
             </Tooltip>
             <InputLeftElement children={<IconUser />} />
-            <Input
-              type='text'
-              as={EditableInput}
-            />
+            <Input type="text" as={EditableInput} focusBorderColor="teal.500" />
           </InputGroup>
         </Editable>
         <Editable
-          defaultValue='primary number'
+          defaultValue="primary number"
           isPreviewFocusable={true}
-          display='flex'
+          display="flex"
         >
           <InputGroup>
-            <Tooltip label='Click to edit'>
+            <Tooltip label="Click to edit">
               <EditablePreview
-                marginLeft='2.5rem'
+                marginLeft="2.5rem"
                 py={2}
                 px={4}
                 _hover={{
@@ -112,21 +94,14 @@ const InfoForm = ({ type }) => {
               />
             </Tooltip>
             <InputLeftElement children={<IconPhone />} />
-            <Input
-              type='tel'
-              as={EditableInput}
-            />
+            <Input type="tel" as={EditableInput} focusBorderColor="teal.500" />
           </InputGroup>
         </Editable>
-        <Editable
-          defaultValue='email'
-          isPreviewFocusable={true}
-          display='flex'
-        >
+        <Editable defaultValue="email" isPreviewFocusable={true} display="flex">
           <InputGroup>
-            <Tooltip label='Click to edit'>
+            <Tooltip label="Click to edit">
               <EditablePreview
-                marginLeft='2.5rem'
+                marginLeft="2.5rem"
                 py={2}
                 px={4}
                 _hover={{
@@ -136,21 +111,22 @@ const InfoForm = ({ type }) => {
             </Tooltip>
             <InputLeftElement children={<IconMail />} />
             <Input
-              type='email'
+              type="email"
               as={EditableInput}
+              focusBorderColor="teal.500"
             />
           </InputGroup>
         </Editable>
         {type === 'self' ? (
           <Editable
-            defaultValue='password'
+            defaultValue="password"
             isPreviewFocusable={true}
-            display='flex'
+            display="flex"
           >
             <InputGroup>
-              <Tooltip label='Click to edit'>
+              <Tooltip label="Click to edit">
                 <EditablePreview
-                  marginLeft='2.5rem'
+                  marginLeft="2.5rem"
                   py={2}
                   px={4}
                   // _hover={{
@@ -160,25 +136,23 @@ const InfoForm = ({ type }) => {
               </Tooltip>
               <InputLeftElement children={<IconLock />} />
               <Input
-                type='password'
+                type="password"
                 as={EditableInput}
+                focusBorderColor="teal.500"
               />
             </InputGroup>
           </Editable>
         ) : (
-          <VStack
-            align='start'
-            paddingLeft='0.6rem'
-            spacing={3}
-          >
-            <Tooltip label='Click to send password reset'>
-                <Flex>
-                  <IconLock color='teal'/>
-                  <Hyperlink marginLeft='1.5rem' color='teal' {...resetPassword}>
-                  Reset Patient Password</Hyperlink>
-                </Flex>
+          <VStack align="start" paddingLeft="0.6rem" spacing={3}>
+            <Tooltip label="Click to send password reset">
+              <Flex>
+                <IconLock color="teal" />
+                <Hyperlink marginLeft="1.5rem" color="teal" {...resetPassword}>
+                  Reset Patient Password
+                </Hyperlink>
+              </Flex>
             </Tooltip>
-            <Alert status='success' colorScheme='teal' {...alert}>
+            <Alert status="success" colorScheme="teal" {...alert}>
               <AlertIcon />
               Password reset email sent.
             </Alert>

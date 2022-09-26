@@ -149,7 +149,12 @@ const AssignmentModal = ({ type }) => {
                     </Heading>
                     <Flex flexDir="column" align="end" gap="2" width="50%">
                       <Flex width="100%" justify="start" align="center" gap="5">
-                        <NumberInput width="5rem" min={1} max={100}>
+                        <NumberInput
+                          width="5rem"
+                          min={1}
+                          max={100}
+                          focusBorderColor="teal.500"
+                        >
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -159,7 +164,12 @@ const AssignmentModal = ({ type }) => {
                         <Text>times/day</Text>
                       </Flex>
                       <Flex width="100%" align="center" justify="start" gap="5">
-                        <NumberInput width="5rem" min={1} max={7}>
+                        <NumberInput
+                          width="5rem"
+                          min={1}
+                          max={7}
+                          focusBorderColor="teal.500"
+                        >
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
@@ -176,14 +186,23 @@ const AssignmentModal = ({ type }) => {
                     </Heading>
                     <Flex flexDir="column" width="50%">
                       <Flex flexDir="row" gap="5" width="100%" justify="start">
-                        <NumberInput width="5rem" min={1} max={100}>
+                        <NumberInput
+                          width="5rem"
+                          min={1}
+                          max={100}
+                          focusBorderColor="teal.500"
+                        >
                           <NumberInputField />
                           <NumberInputStepper>
                             <NumberIncrementStepper />
                             <NumberDecrementStepper />
                           </NumberInputStepper>
                         </NumberInput>
-                        <Select placeholder="units" width="6rem">
+                        <Select
+                          placeholder="units"
+                          width="6rem"
+                          focusBorderColor="teal.500"
+                        >
                           <option value="option1">reps</option>
                           <option value="option2">seconds</option>
                           <option value="option3">minutes</option>
@@ -195,7 +214,10 @@ const AssignmentModal = ({ type }) => {
                 <Heading as="h2" size="sm">
                   Add Additional Notes
                 </Heading>
-                <Textarea placeholder="Provide additional instructions here." />
+                <Textarea
+                  focusBorderColor="teal.500"
+                  placeholder="Provide additional instructions here."
+                />
               </VStack>
             </Flex>
           </ModalBody>
