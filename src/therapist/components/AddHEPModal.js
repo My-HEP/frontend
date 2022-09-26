@@ -32,9 +32,9 @@ function AddHEPModal() {
         colorScheme="teal"
         marginLeft={['0', '0', '2rem']}
         padding="1rem 2rem 1rem 2rem"
-        minWidth="12rem"
+        minWidth="13rem"
       >
-        Add New HEP
+        Add New Exercise
       </Button>
 
       <Modal
@@ -71,10 +71,12 @@ function AddHEPModal() {
             </Tooltip>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="teal" mr={3}>
+            <Button onClick={onClose} variant="outline">
+              Cancel
+            </Button>
+            <Button colorScheme="teal" ml={3}>
               Add to Library
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

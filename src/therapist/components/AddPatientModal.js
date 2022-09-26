@@ -68,10 +68,12 @@ function AddPatientModal() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="teal" mr={3}>
+            <Button onClick={onClose} variant="outline">
+              Cancel
+            </Button>
+            <Button colorScheme="teal" ml={3}>
               Add Patient
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
