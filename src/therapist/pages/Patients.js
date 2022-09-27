@@ -4,16 +4,13 @@ import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AddPatientModal from '../components/AddPatientModal';
-import { Link } from 'react-router-dom';
 
 function Patients() {
   return (
     <>
       <SideNav />
       <BottomNav />
-      <Link to="/therapisthome">
-        <Header />
-      </Link>
+      <Header />
       <Flex
         height="100%"
         direction="column"
