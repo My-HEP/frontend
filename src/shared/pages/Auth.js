@@ -16,7 +16,6 @@ import { useState } from 'react';
 import CreateAccountModal from '../components/CreateAccountModal';
 import { signIn } from '../../authSignIn';
 import { useNavigate } from 'react-router-dom';
-import { withSentryRouting } from '@sentry/react';
 
 function Auth() {
   const [email, setEmail] = useState('');
