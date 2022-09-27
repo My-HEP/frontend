@@ -32,10 +32,8 @@ function Auth() {
   );
 
   const signInHandler = async (email, password) => {
-    let res = await signIn(email, password);
-    console.log(res.user.email);
+    await signIn(email, password);
     navigate('/home');
-    console.log(res);
   };
 
   return (

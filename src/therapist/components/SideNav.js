@@ -15,7 +15,7 @@ const SideNav = () => {
       display={{ base: 'none', md: 'block' }}
     >
       <Flex direction="column" height="100%" justify="center">
-        <VStack spacing="10" inInLine="true" align="center">
+        <VStack spacing="10" align="center">
           <Link to="/home">
             <Button variant="ghost">
               <IconHome size={35} />

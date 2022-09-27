@@ -3,7 +3,6 @@ import { Flex, Heading, SimpleGrid, Box, Image } from '@chakra-ui/react';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 
 import AddHEPModal from '../components/AddHEPModal';
@@ -41,9 +40,7 @@ function ExerciseLibrary() {
     <>
       <SideNav />
       <BottomNav />
-      <Link to="/therapisthome">
-        <Header />
-      </Link>
+      <Header />
 
       <Flex
         height="100%"
@@ -77,7 +74,7 @@ function ExerciseLibrary() {
         <SimpleGrid minChildWidth="120px" spacing="40px">
           {HEPdata.map(item => {
             return (
-              <Box height="200px">
+              <Box key={item.title} height="200px">
                 <Image
                   boxSize="200px"
                   objectFit="cover"

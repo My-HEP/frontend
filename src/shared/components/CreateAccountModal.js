@@ -46,7 +46,6 @@ function CreateAccountModal() {
     }
     let res = await createAccount(email, password);
     const uid = res.user.uid;
-    console.log(uid);
     const user = {
       firstName,
       lastName,
@@ -62,8 +61,6 @@ function CreateAccountModal() {
       },
       body: JSON.stringify(user),
     });
-
-    console.log(res);
     navigate('/home');
   };
 

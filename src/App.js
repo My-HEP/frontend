@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { firebaseConfig } from '../src/utils/firebase';
+import { getAuth } from 'firebase/auth';
 
 // const fetchBackend = async () => {
 //   const { data } = await axios.get('http://localhost:3001');
@@ -19,6 +20,7 @@ function App() {
 
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const auth = getAuth(app);
 
   return (
     <ChakraProvider theme={theme}>
