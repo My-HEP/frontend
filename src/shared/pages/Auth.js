@@ -60,6 +60,8 @@ function Auth() {
       toast({
         title: errorMessage,
         status: 'error',
+        isClosable: true,
+        position: 'bottom-left',
       });
       return;
     }
