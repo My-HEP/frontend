@@ -44,34 +44,22 @@ function CreateAccountModal() {
   const finalRef = React.useRef(null);
 
   const navigate = useNavigate();
+  const emailRegex = /^[a-zA-Z0-9.!#$%&�*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
+  const phoneRegex =  /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 
   // Validate fields
   const validateFormValues = (formValues) => {
-    console.log(formValues)
-    if(email === ""){
-      setEmailError(true)
-    }
-    if ( firstName === ""){
-      setFirstNameError(true)
-    }
-    if (lastName === ""){
-      setLastNameError(true)
-    }
-    if (phoneNumber === ""){
-      setPhoneNumberError(true)
-    }
-    if (password === ""){
+    email === "" ? setEmailError(true) : setEmailError(false);
+    email.match(emailRegex) ? setEmailError(false) : setEmailError(true);
+    firstName === "" ? setFirstNameError(true) : setFirstNameError(false);
+    lastName === "" ? setLastNameError(true) : setLastNameError(false);
+    phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
+    phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
+    if(password === "") { 
       setPasswordError(true)
-      setVerifyPasswordError(true)
-    }
-    if (phoneNumber === ""){
-      setPhoneNumberError(true)
-    } else {
-      if(password !== verifyPassword) {
-        setVerifyPasswordError(true);
-       } 
-    }
-
+      setVerifyPasswordError(true) 
+    } 
+    password === verifyPassword ? setVerifyPasswordError(false) : setVerifyPasswordError(true);
   }
 
 
@@ -168,7 +156,7 @@ function CreateAccountModal() {
                   value={phoneNumber}
                 />
                 <FormLabel backgroundColor={labelColor}>Phone number</FormLabel>
-              {!phoneNumberError ? <></> : <FormErrorMessage>Phone number is required.</FormErrorMessage>}
+              {!phoneNumberError ? <></> : <FormErrorMessage>A valid phone number is required.</FormErrorMessage>}
               </FormControl>
             </FloatingFormControl>
 
@@ -182,7 +170,7 @@ function CreateAccountModal() {
                   value={email}
                 />
                 <FormLabel backgroundColor={labelColor}>Email address</FormLabel>
-              {!emailError ? <></> : <FormErrorMessage>Email is required.</FormErrorMessage>}
+              {!emailError ? <></> : <FormErrorMessage>A valid email is required.</FormErrorMessage>}
               </FormControl>
             </FloatingFormControl>
 
