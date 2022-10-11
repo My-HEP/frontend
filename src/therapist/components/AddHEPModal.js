@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Modal,
@@ -9,6 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Input,
+  InputGroup,
   useDisclosure,
   Tooltip,
   FormLabel,
@@ -17,10 +18,36 @@ import {
 import { IconPlus, IconFileUpload } from '@tabler/icons';
 
 function AddHEPModal() {
+  const [title, setTitle] = useState('');
+  const [tagsStr, setTagsStr] = useState(['']);
+  const [url, setUrl] = useState('');
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
+  const addExerciseHandler = async (url, title, tagsStr) => {
+    try {
+      const tagsArr = tagsStr.split(', ');
+      const tags = tagsArr.map(tag => ({ id: parseInt(tag) }));
+      const exercise = { url, title, tags };
+      console.log(exercise);
+      const response = await fetch(
+        'http://localhost:3001/therapist/addExercise',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(exercise),
+        }
+      );
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -69,12 +96,43 @@ function AddHEPModal() {
                 />
               </FormLabel>
             </Tooltip>
+            <InputGroup maxW="450px" marginBottom="2rem">
+              <Input
+                variant="outline"
+                placeholder="Exercise URL"
+                focusBorderColor="teal.500"
+                value={url}
+                onChange={event => setUrl(event.target.value)}
+              />
+              <Input
+                variant="outline"
+                placeholder="Exercise Title"
+                focusBorderColor="teal.500"
+                value={title}
+                onChange={event => setTitle(event.target.value)}
+              />
+              <Input
+                variant="outline"
+                placeholder="Tags"
+                focusBorderColor="teal.500"
+                value={tagsStr}
+                onChange={event => setTagsStr(event.target.value)}
+              />
+            </InputGroup>
+            {
+              // @TODO add dropdown select for tags //
+              // @TODO tags added as chakra-ui Tag component
+            }
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose} variant="outline">
               Cancel
             </Button>
-            <Button colorScheme="teal" ml={3}>
+            <Button
+              onClick={() => addExerciseHandler(url, title, tagsStr)}
+              colorScheme="teal"
+              ml={3}
+            >
               Add to Library
             </Button>
           </ModalFooter>
