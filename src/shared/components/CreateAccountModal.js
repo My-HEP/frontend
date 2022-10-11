@@ -16,6 +16,7 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  useToast
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { createAccount } from '../../authCreateAccount';
@@ -101,30 +102,52 @@ function CreateAccountModal() {
       }
     }
   }
+
+  const toast = useToast();
+  
   const createAccountHandler = async ({...formValues}) => {
     validateFormValues(formValues)
    
     // Save user to database
     let res = await createAccount(email, password);
-    const uid = res.user.uid;
-    console.log(uid);
-    const user = {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      uid,
-    };
-    fetch('http://localhost:3001/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
+    let authCode = res.code;
+    let errorMessage;
+    if (authCode === 'auth/invalid-email') {
+     errorMessage = 'Please provide a valid email';
+    } else if (authCode === 'auth/email-already-in-use') {
+      errorMessage = 'This email is already in use. Please log in instead.';
+    }
 
-    console.log(res);
-    navigate('/home');
+    if (!authCode) {
+      const uid = res.user.uid;
+      console.log(uid);
+      const user = {
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        uid,
+      };
+      fetch('http://localhost:3001/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      navigate('/home');
+      return;
+    } else {
+      console.log(authCode);
+      toast({
+        title: errorMessage,
+        status: 'error',
+        isClosable: true,
+        position: 'bottom-center',
+      });
+      return;
+    }
+    
   };
   
 
