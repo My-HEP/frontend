@@ -55,14 +55,52 @@ function CreateAccountModal() {
     lastName === "" ? setLastNameError(true) : setLastNameError(false);
     phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
     phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
+    password.length > 0 && password !== verifyPassword ? setVerifyPasswordError(true) : setVerifyPasswordError(false);
     if(password === "") { 
       setPasswordError(true)
       setVerifyPasswordError(true) 
     } 
-    password === verifyPassword ? setVerifyPasswordError(false) : setVerifyPasswordError(true);
+   
   }
 
-
+  const handleInput = (e) => {
+    if(e.target.name === 'firstName'){
+      setFirstName(e.target.value)
+      if(firstNameError){
+        setFirstNameError(false)
+      }
+    }
+    if(e.target.name === 'lastName'){
+      setLastName(e.target.value)
+      if(lastNameError){
+        setLastNameError(false)
+      }
+    }
+    if(e.target.name === 'phoneNumber'){
+      setPhoneNumber(e.target.value)
+      if(phoneNumberError){
+        setPhoneNumberError(false)
+      }
+    }
+    if(e.target.name === 'email'){
+      setEmail(e.target.value)
+      if(emailError){
+        setEmailError(false)
+      }
+    }
+    if(e.target.name === 'password'){
+      setPassword(e.target.value)
+      if(passwordError){
+        setPassword(false)
+      }
+    }
+    if(e.target.name === 'verifyPassword'){
+      setVerifyPassword(e.target.value)
+      if(verifyPasswordError){
+        setVerifyPasswordError(false)
+      }
+    }
+  }
   const createAccountHandler = async ({...formValues}) => {
     validateFormValues(formValues)
    
@@ -124,7 +162,8 @@ function CreateAccountModal() {
                 placeholder=" "
                 type="text"
                 focusBorderColor="teal.600"
-                onChange={event => setFirstName(event.target.value)}
+                name="firstName"
+                onChange={handleInput}
                 value={firstName}
               />
               <FormLabel backgroundColor={labelColor}>First name</FormLabel>
@@ -138,7 +177,8 @@ function CreateAccountModal() {
                   placeholder=" "
                   type="text"
                   focusBorderColor="teal.600"
-                  onChange={event => setLastName(event.target.value)}
+                  name="lastName"
+                  onChange={handleInput}
                   value={lastName}
                 />
                 <FormLabel backgroundColor={labelColor}>Last name</FormLabel>
@@ -152,7 +192,8 @@ function CreateAccountModal() {
                   type="tel"
                   placeholder=" "
                   focusBorderColor="teal.600"
-                  onChange={event => setPhoneNumber(event.target.value)}
+                  name="phoneNumber"
+                  onChange={handleInput}
                   value={phoneNumber}
                 />
                 <FormLabel backgroundColor={labelColor}>Phone number</FormLabel>
@@ -166,7 +207,8 @@ function CreateAccountModal() {
                   type="email"
                   placeholder=" "
                   focusBorderColor="teal.600"
-                  onChange={event => setEmail(event.target.value)}
+                  name="email"
+                  onChange={handleInput}
                   value={email}
                 />
                 <FormLabel backgroundColor={labelColor}>Email address</FormLabel>
@@ -180,7 +222,8 @@ function CreateAccountModal() {
                   type="password"
                   placeholder=" "
                   focusBorderColor="teal.600"
-                  onChange={event => setPassword(event.target.value)}
+                  name="password"
+                  onChange={handleInput}
                   value={password}
                 />
                 <FormLabel backgroundColor={labelColor}>Password</FormLabel>
@@ -194,7 +237,8 @@ function CreateAccountModal() {
                   type="password"
                   placeholder=" "
                   focusBorderColor="teal.600"
-                  onChange={event => setVerifyPassword(event.target.value)}
+                  name="verifyPassword"
+                  onChange={handleInput}
                   value={verifyPassword}
                 />
                 <FormLabel backgroundColor={labelColor}>Confirm Password</FormLabel>
