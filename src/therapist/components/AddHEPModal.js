@@ -24,9 +24,6 @@ function AddHEPModal() {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
-
   const addExerciseHandler = async (url, title, tagsStr) => {
     try {
       const tagsArr = tagsStr.split(', ');
@@ -64,12 +61,7 @@ function AddHEPModal() {
         Add New Exercise
       </Button>
 
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add New Exercise to Library</ModalHeader>
