@@ -6,7 +6,6 @@ import {
   Box,
   Image,
   Tag,
-  HStack,
   TagLabel,
 } from '@chakra-ui/react';
 import SideNav from '../components/SideNav';
@@ -54,7 +53,7 @@ function ExerciseLibrary() {
       setData(exercises);
     };
     fetchData();
-  }, [data]);
+  }, [data.length]);
 
   return (
     <>
