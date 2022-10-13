@@ -82,17 +82,21 @@ function ExerciseLibrary() {
         <Flex justifyContent={['center', 'center', 'left']}>
           <SearchBar />
         </Flex>
-        <SimpleGrid minChildWidth="120px" spacing="40px">
+        <SimpleGrid minChildWidth="200px" spacingX="20px" spacingY="20px">
           {data.map(item => {
             return (
-              <Box key={item.id} height="200px">
+              <Box key={item.id} height="300px" margin="1rem" minWidth="200px">
                 <Image
-                  boxSize="200px"
+                  boxSize="250px"
                   objectFit="cover"
                   src={item.url}
                   alt="HEP handout"
+                  borderRadius="7px"
                 />
                 <label>{item.title}</label>
+                {
+                  //@TODO add UI for tags
+                }
               </Box>
             );
           })}
