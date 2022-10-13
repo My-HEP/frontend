@@ -20,7 +20,7 @@ import { createAccount } from '../../authCreateAccount';
 import FloatingFormControl from './FloatingFormControl';
 import { useNavigate } from 'react-router-dom';
 
-function CreateAccountModal() {
+function CreateAccountModal(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -36,7 +36,13 @@ function CreateAccountModal() {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const createAccountHandler = async (email, password, firstName, lastName) => {
+  const createAccountHandler = async (
+    email,
+    password,
+    firstName,
+    lastName,
+    phoneNumber
+  ) => {
     if (!firstName || !email || !password || !lastName) {
       toast({
         title: 'Please include all fields.',
@@ -51,10 +57,9 @@ function CreateAccountModal() {
       lastName,
       phoneNumber,
       email,
-      password,
       uid,
     };
-    fetch('http://localhost:3001/user', {
+    fetch('http://localhost:3001/user/createUserAccount', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +82,7 @@ function CreateAccountModal() {
           color: 'white',
         }}
       >
-        Create an account
+        {props.button}
       </Button>
 
       <Modal
@@ -88,7 +93,7 @@ function CreateAccountModal() {
       >
         <ModalOverlay />
         <ModalContent padding="1.5rem">
-          <ModalHeader>Sign up with your email</ModalHeader>
+          <ModalHeader>{props.heading}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FloatingFormControl>
@@ -158,10 +163,16 @@ function CreateAccountModal() {
                 colorScheme="teal"
                 variant="outline"
                 onClick={() =>
-                  createAccountHandler(email, password, firstName, lastName)
+                  createAccountHandler(
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                    phoneNumber
+                  )
                 }
               >
-                Create an account
+                {props.formButton}
               </Button>
               <Button colorScheme="teal" onClick={onClose}>
                 Cancel

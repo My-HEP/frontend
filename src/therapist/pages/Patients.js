@@ -4,6 +4,7 @@ import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AddPatientModal from '../components/AddPatientModal';
+import CreateAccountModal from '../../shared/components/CreateAccountModal';
 
 function Patients() {
   return (
@@ -35,7 +36,11 @@ function Patients() {
             Select Existing Patient
           </Heading>
 
-          <AddPatientModal />
+          <CreateAccountModal
+            button={'Add New Patient'}
+            heading={'Create a new patient account'}
+            formButton={'Add patient'}
+          />
         </Flex>
         <PatientTable />
       </Flex>

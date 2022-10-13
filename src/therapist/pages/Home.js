@@ -18,7 +18,7 @@ import { getAuth } from 'firebase/auth';
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
   const auth = getAuth();
-  const uid = auth.currentUser.uid;
+  const uid = auth.currentUser?.uid;
 
   useEffect(() => {
     const fetchData = async (req, res) => {
@@ -36,7 +36,7 @@ function TherapistHome() {
   }, [uid]);
 
   const variables = {
-    userName: userData.firstName + ' ' + userData.lastName,
+    userName: userData?.firstName + ' ' + userData?.lastName,
     patientNum: '35',
     exerciseNum: '29',
   };
@@ -82,7 +82,7 @@ function TherapistHome() {
           <VStack spacing={5} align="start">
             <Flex minWidth="175px" gap="2" justify="start">
               <Text as="b" fontSize="2xl">
-                {variables.userName}
+                {uid ? variables.userName : 'Therapist'}
               </Text>
             </Flex>
             <EditModal type={'self'} />

@@ -123,7 +123,7 @@ function ExerciseLibrary() {
                         margin=".2rem"
                         borderRadius="full"
                       >
-                        <TagLabel fontSize=".6rem">
+                        <TagLabel fontSize=".7rem">
                           {tag.title.toUpperCase()}
                         </TagLabel>
                       </Tag>
