@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Flex, Heading, SimpleGrid, Box, Image } from '@chakra-ui/react';
+import {
+  Flex,
+  Heading,
+  SimpleGrid,
+  Box,
+  Image,
+  Tag,
+  HStack,
+  TagLabel,
+} from '@chakra-ui/react';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
@@ -85,7 +94,12 @@ function ExerciseLibrary() {
         <SimpleGrid minChildWidth="200px" spacingX="20px" spacingY="20px">
           {data.map(item => {
             return (
-              <Box key={item.id} height="300px" margin="1rem" minWidth="200px">
+              <Box
+                key={item.id}
+                height="fit-content"
+                margin="1rem"
+                minWidth="200px"
+              >
                 <Image
                   boxSize="250px"
                   objectFit="cover"
@@ -94,9 +108,29 @@ function ExerciseLibrary() {
                   borderRadius="7px"
                 />
                 <label>{item.title}</label>
-                {
-                  //@TODO add UI for tags
-                }
+                <Flex
+                  justify="space-between"
+                  flexWrap="wrap
+                "
+                >
+                  {item.tags.map(tag => {
+                    return (
+                      <Tag
+                        key={tag.title}
+                        size="sm"
+                        variant="subtle"
+                        colorScheme="gray"
+                        width="fit-content"
+                        margin=".2rem"
+                        borderRadius="full"
+                      >
+                        <TagLabel fontSize=".6rem">
+                          {tag.title.toUpperCase()}
+                        </TagLabel>
+                      </Tag>
+                    );
+                  })}
+                </Flex>
               </Box>
             );
           })}
