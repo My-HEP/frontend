@@ -53,7 +53,7 @@ function ExerciseLibrary() {
       setData(exercises);
     };
     fetchData();
-  }, [data.length]);
+  }, []);
 
   return (
     <>

@@ -27,7 +27,8 @@ function AddHEPModal() {
   const addExerciseHandler = async (url, title, tagsStr) => {
     try {
       const tagsArr = tagsStr.split(', ');
-      const tags = tagsArr.map(tag => ({ id: parseInt(tag) }));
+      const tags = tagsArr.map(tag => ({ title: tag }));
+      console.log(tags);
       const exercise = { url, title, tags };
       console.log(exercise);
       const response = await fetch(
@@ -40,6 +41,7 @@ function AddHEPModal() {
           body: JSON.stringify(exercise),
         }
       );
+      window.location.reload();
       onClose();
     } catch (error) {
       console.log(error);
