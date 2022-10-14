@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -16,25 +16,28 @@ import { logoIcon } from '../../shared/components/LogoIcon';
 import { getAuth } from 'firebase/auth';
 
 function TherapistHome() {
-  // const [data, setData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
   const auth = getAuth();
   const uid = auth.currentUser.uid;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      fetch('http://localhost:3001/user/user', {
+ useEffect(() => {
+    const fetchData = async (req, res) => {
+      const response = await fetch('http://localhost:3001/user/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ uid }),
       });
+      const user = await response.json();
+      setUserData(user);
     };
     fetchData();
-  }, []);
+  }, [uid]);
 
   const variables = {
-    userName: 'Jane McTherapist',
+    userName: userData.firstName + ' ' + userData.lastName,
     patientNum: '35',
     exerciseNum: '29',
   };

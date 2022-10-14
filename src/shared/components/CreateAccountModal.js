@@ -147,7 +147,25 @@ function CreateAccountModal() {
       });
       return;
     }
-    
+
+    let res = await createAccount(email, password);
+    const uid = res.user.uid;
+    const user = {
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      password,
+      uid,
+    };
+    fetch('http://localhost:3001/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    });
+    navigate('/home');
   };
   
 

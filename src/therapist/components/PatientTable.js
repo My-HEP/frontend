@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { IconSearch } from '@tabler/icons';
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function PatientTable(props) {
   // const patientData = [
@@ -44,8 +44,6 @@ function PatientTable(props) {
     };
     fetchData();
   }, []);
-
-  console.log(data);
 
   const handleSearch = event => {
     setSearch(event.target.value);
@@ -100,7 +98,8 @@ function PatientTable(props) {
                 <Tr
                   onClick={user => onRowClickHandler(user)}
                   cursor="pointer"
-                  key={user.id}
+                  key={user.uid}
+                  link="true"
                 >
                   <Td>{user.firstName}</Td>
                   <Td>{user.lastName}</Td>

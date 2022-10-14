@@ -7,7 +7,6 @@ import Header from '../components/Header';
 import AssignedHEP from '../components/AssignedHEP';
 import EditModal from '../../shared/components/Modal';
 import AssignmentModal from '../components/AssignmentModal';
-import { Link } from 'react-router-dom';
 
 function HEP() {
   const variables = {
@@ -20,9 +19,7 @@ function HEP() {
     <>
       <SideNav />
       <BottomNav />
-      <Link to="/therapisthome">
-        <Header />
-      </Link>
+      <Header />
       <Flex
         height="100%"
         direction="column"

@@ -35,6 +35,7 @@ function Auth() {
   const toast = useToast();
 
   const signInHandler = async (email, password) => {
+  
     let authRes = await signIn(email, password);
     let authCode = authRes.code;
     let errorMessage;
@@ -65,6 +66,7 @@ function Auth() {
       });
       return;
     }
+
   };
 
   return (
