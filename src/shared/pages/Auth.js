@@ -49,6 +49,9 @@ function Auth() {
     } else if (authCode === 'auth/too-many-requests') {
       errorMessage =
         'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
+    } else if (authCode === 'auth/internal-error'){
+      errorMessage =
+        "Please provide a valid password.";
     } else {
       errorMessage =
         "We're sorry but something went wrong. Please try again later.";
