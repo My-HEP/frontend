@@ -18,24 +18,26 @@ import {
   Stack,
   useToast
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createAccount } from '../../authCreateAccount';
 import FloatingFormControl from './FloatingFormControl';
 import { useNavigate } from 'react-router-dom';
 
 function CreateAccountModal() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [verifyPassword, setVerifyPassword] = useState('');
-  const [verifyPasswordError, setVerifyPasswordError] = useState('');
+  const [formError, setFormError] = useState('true');
   const [firstName, setFirstName] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
   const [lastName, setLastName] = useState('');
   const [lastNameError, setLastNameError] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const [verifyPasswordError, setVerifyPasswordError] = useState('');
+ 
 
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,126 +50,150 @@ function CreateAccountModal() {
   const emailRegex = /^[a-zA-Z0-9.!#$%&�*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
   const phoneRegex =  /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 
+  useEffect(() => {
+      (firstNameError || firstNameError === '') ||  (lastNameError || lastNameError === '') || (phoneNumberError || phoneNumberError === '') || (emailError || emailError === '') || (passwordError || passwordError === '') ||  (verifyPasswordError || verifyPasswordError === '') ? setFormError(true) : setFormError(false);
+      console.log(firstNameError, lastNameError, phoneNumberError, emailError, passwordError, verifyPasswordError, formError)
+  }, [firstNameError, lastNameError, phoneNumberError, emailError, passwordError, verifyPasswordError, formError])
+
   // Validate fields
-  const validateFormValues = (formValues) => {
-    email === "" ? setEmailError(true) : setEmailError(false);
-    email.match(emailRegex) ? setEmailError(false) : setEmailError(true);
-    firstName === "" ? setFirstNameError(true) : setFirstNameError(false);
-    lastName === "" ? setLastNameError(true) : setLastNameError(false);
-    phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
-    phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
-    password.length > 0 && password !== verifyPassword ? setVerifyPasswordError(true) : setVerifyPasswordError(false);
-    if(password === "") { 
-      setPasswordError(true)
-      setVerifyPasswordError(true) 
-    } 
-   
+  const validateInput = (e) => {
+     const name = e.target.name;
+    if(name === 'firstName'){
+       firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
+    }
+    if(name === 'lastName'){
+      lastName === "" ? setLastNameError(true) : setLastNameError(false);
+    }
+    if(name === 'phoneNumber'){
+      phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
+      phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
+    }
+    if(name === 'email'){
+      email === "" ? setEmailError(true) : setEmailError(false);
+      email.match(emailRegex) ? setEmailError(false) : setEmailError(true);
+    }
+    if(name === 'password'){
+      password.length < 6 ? setPasswordError(true) : setPasswordError(false)
+    }
+
+    if(name === 'verifyPassword'){
+      password !== verifyPassword ? setVerifyPasswordError(true) : setVerifyPasswordError(false)
+    }
+  
   }
 
   const handleInput = (e) => {
-    if(e.target.name === 'firstName'){
-      setFirstName(e.target.value)
-      if(firstNameError){
-        setFirstNameError(false)
-      }
+    const name = e.target.name;
+    const value = e.target.value;
+   
+    if(name === 'firstName'){
+      setFirstName(value)
+        firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
+     }
+    if(name === 'lastName'){
+      setLastName(value)
+      lastName === "" ? setLastNameError(true) : setLastNameError(false);
     }
-    if(e.target.name === 'lastName'){
-      setLastName(e.target.value)
-      if(lastNameError){
-        setLastNameError(false)
-      }
+    if(name === 'phoneNumber'){
+      setPhoneNumber(value)
+          phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
+          phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
     }
-    if(e.target.name === 'phoneNumber'){
-      setPhoneNumber(e.target.value)
-      if(phoneNumberError){
-        setPhoneNumberError(false)
-      }
+    if(name === 'email'){
+      setEmail(value)
+       email === "" ? setEmailError(true) : setEmailError(false);
+       email.match(emailRegex) ? setEmailError(true) : setEmailError(false);
     }
-    if(e.target.name === 'email'){
-      setEmail(e.target.value)
-      if(emailError){
-        setEmailError(false)
-      }
+    if(name === 'password'){
+      setPassword(value)
     }
-    if(e.target.name === 'password'){
-      setPassword(e.target.value)
-      if(passwordError){
-        setPassword(false)
-      }
-    }
-    if(e.target.name === 'verifyPassword'){
-      setVerifyPassword(e.target.value)
-      if(verifyPasswordError){
-        setVerifyPasswordError(false)
-      }
+    if(name === 'verifyPassword'){
+      setVerifyPassword(value)
     }
   }
 
+  const validateFormValues = ({...formValues}) => {
+      firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
+      lastName === "" ? setLastNameError(true) : setLastNameError(false);
+      phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
+      email === "" ? setEmailError(true) : setEmailError(false);
+      password === "" ? setPasswordError(true) : setPasswordError(false);
+      verifyPassword === "" ? setVerifyPasswordError(true) : setVerifyPasswordError(false);
+    
+      createAccountHandler(formValues)
+    }
+
+  const handleClose = () => {
+    setFirstName('')
+    setLastName('')
+    setPhoneNumber('')
+    setEmail('')
+    setPassword('')
+    setVerifyPassword('')
+    setFirstNameError('')
+    setLastNameError('')
+    setPhoneNumberError('')
+    setEmailError('')
+    setPasswordError('')
+    setVerifyPasswordError('')
+    onClose()
+  }
+
+
+
   const toast = useToast();
-  
+
   const createAccountHandler = async ({...formValues}) => {
-    validateFormValues(formValues)
-   
-    // Save user to database
-    let res = await createAccount(email, password);
-    let authCode = res.code;
-    let errorMessage;
-    if (authCode === 'auth/invalid-email') {
-     errorMessage = 'Please provide a valid email';
-    } else if (authCode === 'auth/email-already-in-use') {
-      errorMessage = 'This email is already in use. Please log in instead.';
-    }
-
-    if (!authCode) {
-      const uid = res.user.uid;
-      console.log(uid);
-      const user = {
-        firstName,
-        lastName,
-        phoneNumber,
-        email,
-        uid,
-      };
-      fetch('http://localhost:3001/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      });
-      navigate('/home');
-      return;
-    } else {
-      console.log(authCode);
-      toast({
-        title: errorMessage,
-        status: 'error',
-        isClosable: true,
-        position: 'bottom-center',
-      });
-      return;
-    }
-
-    let res = await createAccount(email, password);
-    const uid = res.user.uid;
-    const user = {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-      uid,
-    };
-    fetch('http://localhost:3001/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    navigate('/home');
-  };
   
+   if (!formError) {
+        // Save user to database
+      console.log(formValues)
+      let res = await createAccount(email, password);
+      console.log(res)
+      let authCode = res.code;
+      console.log(authCode);
+      let errorMessage;
+      if (authCode === 'auth/invalid-email') {
+      errorMessage = 'Please provide a valid email';
+      } else if (authCode === 'auth/email-already-in-use') {
+        errorMessage = 'This email is already in use. Please log in instead.';
+      } else if (authCode === 'auth/weak-password'){
+        errorMessage = 'Password must be at least 6 characters in length.';
+      } else if (authCode) {
+        errorMessage = 'We\'re sorry but something went wrong. Please try again later.';
+      }
+
+      if (!authCode) {
+        const uid = res.user.uid;
+        const user = {
+          firstName,
+          lastName,
+          phoneNumber,
+          email,
+          uid,
+        };
+        fetch('http://localhost:3001/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user),
+        });
+        navigate('/home');
+        return;
+      } else {
+        toast({
+          title: errorMessage,
+          status: 'error',
+          isClosable: true,
+          position: 'bottom-center',
+        });
+        return;
+      }
+    }else {
+      return
+    }
+  }
 
   return (
     <>
@@ -205,6 +231,7 @@ function CreateAccountModal() {
                 focusBorderColor="teal.600"
                 name="firstName"
                 onChange={handleInput}
+                onBlur={validateInput}
                 value={firstName}
               />
               <FormLabel backgroundColor={labelColor}>First name</FormLabel>
@@ -220,6 +247,7 @@ function CreateAccountModal() {
                   focusBorderColor="teal.600"
                   name="lastName"
                   onChange={handleInput}
+                  onBlur={validateInput}
                   value={lastName}
                 />
                 <FormLabel backgroundColor={labelColor}>Last name</FormLabel>
@@ -235,6 +263,7 @@ function CreateAccountModal() {
                   focusBorderColor="teal.600"
                   name="phoneNumber"
                   onChange={handleInput}
+                  onBlur={validateInput}
                   value={phoneNumber}
                 />
                 <FormLabel backgroundColor={labelColor}>Phone number</FormLabel>
@@ -250,6 +279,7 @@ function CreateAccountModal() {
                   focusBorderColor="teal.600"
                   name="email"
                   onChange={handleInput}
+                  onBlur={validateInput}
                   value={email}
                 />
                 <FormLabel backgroundColor={labelColor}>Email address</FormLabel>
@@ -265,6 +295,7 @@ function CreateAccountModal() {
                   focusBorderColor="teal.600"
                   name="password"
                   onChange={handleInput}
+                  onBlur={validateInput}
                   value={password}
                 />
                 <FormLabel backgroundColor={labelColor}>Password</FormLabel>
@@ -280,6 +311,7 @@ function CreateAccountModal() {
                   focusBorderColor="teal.600"
                   name="verifyPassword"
                   onChange={handleInput}
+                  onBlur={validateInput}
                   value={verifyPassword}
                 />
                 <FormLabel backgroundColor={labelColor}>Confirm Password</FormLabel>
@@ -298,12 +330,12 @@ function CreateAccountModal() {
                 colorScheme="teal"
                 variant="outline"
                 onClick={() =>
-                  createAccountHandler({email, password, verifyPassword, firstName, lastName})
+                  validateFormValues({email, password, verifyPassword, firstName, lastName})
                 }
               >
                 Create an account
               </Button>
-              <Button colorScheme="teal" onClick={onClose}>
+              <Button colorScheme="teal" onClick={handleClose}>
                 Cancel
               </Button>
             </Stack>
