@@ -52,7 +52,6 @@ function CreateAccountModal() {
 
   useEffect(() => {
       (firstNameError || firstNameError === '') ||  (lastNameError || lastNameError === '') || (phoneNumberError || phoneNumberError === '') || (emailError || emailError === '') || (passwordError || passwordError === '') ||  (verifyPasswordError || verifyPasswordError === '') ? setFormError(true) : setFormError(false);
-      console.log(firstNameError, lastNameError, phoneNumberError, emailError, passwordError, verifyPasswordError, formError)
   }, [firstNameError, lastNameError, phoneNumberError, emailError, passwordError, verifyPasswordError, formError])
 
   // Validate fields
@@ -147,11 +146,8 @@ function CreateAccountModal() {
   
    if (!formError) {
         // Save user to database
-      console.log(formValues)
       let res = await createAccount(email, password);
-      console.log(res)
       let authCode = res.code;
-      console.log(authCode);
       let errorMessage;
       if (authCode === 'auth/invalid-email') {
       errorMessage = 'Please provide a valid email';
