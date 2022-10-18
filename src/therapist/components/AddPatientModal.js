@@ -17,6 +17,11 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { createAccount } from '../../authCreateAccount';
+import {
+  getAuth,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
 import FloatingFormControl from '../../shared/components/FloatingFormControl';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,33 +41,74 @@ function AddNewPatientModal(props) {
   const navigate = useNavigate();
   const toast = useToast();
 
+  // create user in db with add patient => auto generate an email that links to the create account page
+  // => update user uid with firebase info in db - append uid to db
+
+  const getEmailFromCreateUser = async (req, res) => {
+    const user = {
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      password,
+    };
+
+    const auth = getAuth();
+
+    try {
+      let response = await fetch('http://localhost:3001/therapist/addPatient', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      console.log(data.email);
+      let resetEmail = await sendPasswordResetEmail(auth, data.email);
+      console.log(resetEmail);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addNewPatientHandler = async (
     email,
     firstName,
     lastName,
     phoneNumber
   ) => {
-    if (!firstName || !email || !lastName) {
+    if (!firstName || !email || !lastName || !password) {
       toast({
         title: 'Please include all fields.',
         status: 'error',
       });
       return;
     }
-    const user = {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-    };
-    fetch('http://localhost:3001/therapist/addPatient', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    });
-    navigate('/home');
+    getEmailFromCreateUser();
+    // const user = {
+    //   firstName,
+    //   lastName,
+    //   phoneNumber,
+    //   email,
+    //   password,
+    // };
+
+    // try {
+    //   let response = await fetch('http://localhost:3001/therapist/addPatient', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(user),
+    //   });
+    //   console.log(response);
+    //   // await sendPasswordResetEmail(response.uid, email);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    // navigate('/home');
   };
 
   return (
@@ -145,7 +191,9 @@ function AddNewPatientModal(props) {
                 onChange={event => setPassword(event.target.value)}
                 value={password}
               />
-              <FormLabel backgroundColor={labelColor}>Password</FormLabel>
+              <FormLabel backgroundColor={labelColor}>
+                Temporary Password
+              </FormLabel>
             </FloatingFormControl>
           </ModalBody>
 
@@ -159,7 +207,13 @@ function AddNewPatientModal(props) {
                 colorScheme="teal"
                 variant="outline"
                 onClick={() =>
-                  addNewPatientHandler(email, firstName, lastName, phoneNumber)
+                  addNewPatientHandler(
+                    email,
+                    firstName,
+                    lastName,
+                    phoneNumber,
+                    password
+                  )
                 }
               >
                 {props.formButton}
