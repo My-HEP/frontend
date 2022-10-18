@@ -13,23 +13,23 @@ import {
   VStack,
   Flex,
   useColorModeValue,
-  Link as Hyperlink,
-  Alert,
-  AlertIcon,
+  // Link as Hyperlink,
+  // Alert,
+  // AlertIcon,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
   IconPhone,
   IconMail,
-  IconLock,
+  // IconLock,
   IconPencil,
   IconUser,
 } from '@tabler/icons';
 
 const InfoForm = ({ type }) => {
   const { getDisclosureProps, getButtonProps } = useDisclosure();
-  const resetPassword = getButtonProps();
-  const alert = getDisclosureProps();
+  // const resetPassword = getButtonProps();
+  // const alert = getDisclosureProps();
 
   return (
     <VStack margin="1rem auto">
@@ -117,7 +117,7 @@ const InfoForm = ({ type }) => {
             />
           </InputGroup>
         </Editable>
-        {type === 'self' ? (
+        {/* {type === 'self' ? (
           <Editable
             defaultValue="password"
             isPreviewFocusable={true}
@@ -129,9 +129,6 @@ const InfoForm = ({ type }) => {
                   marginLeft="2.5rem"
                   py={2}
                   px={4}
-                  // _hover={{
-                  //   background: useColorModeValue("gray.100", "gray.700")
-                  // }}
                 />
               </Tooltip>
               <InputLeftElement children={<IconLock />} />
@@ -157,7 +154,7 @@ const InfoForm = ({ type }) => {
               Password reset email sent.
             </Alert>
           </VStack>
-        )}
+        )} */}
       </Stack>
     </VStack>
   );
