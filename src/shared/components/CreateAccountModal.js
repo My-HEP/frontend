@@ -46,6 +46,7 @@ function CreateAccountModal() {
     }
     let res = await createAccount(email, password);
     const uid = res.user.uid;
+    console.log(uid)
     const user = {
       firstName,
       lastName,
@@ -54,7 +55,8 @@ function CreateAccountModal() {
       password,
       uid,
     };
-    fetch('http://localhost:3001/user', {
+
+    fetch('http://localhost:3001/createUserAccount', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
