@@ -22,7 +22,7 @@ function TherapistHome() {
 
   useEffect(() => {
     const fetchData = async (req, res) => {
-      const response = await fetch('http://localhost:3001/user/user', {
+      const response = await fetch('http://localhost:3001/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,6 +30,7 @@ function TherapistHome() {
         body: JSON.stringify({ uid }),
       });
       const user = await response.json();
+      console.log(user)
       setUserData(user);
     };
     fetchData();
