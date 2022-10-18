@@ -54,7 +54,7 @@ function CreateAccountModal() {
       password,
       uid,
     };
-    fetch('http://localhost:3001/user', {
+    fetch('http://localhost:3001/createUserAccount', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
