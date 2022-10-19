@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import { Flex, VStack, Avatar, Heading, Text, Button } from '@chakra-ui/react';
 import { IconMail, IconPhone, IconEye } from '@tabler/icons';
 import SideNav from '../components/SideNav';
@@ -8,12 +8,35 @@ import AssignedHEP from '../components/AssignedHEP';
 import EditModal from '../../shared/components/Modal';
 import AssignmentModal from '../components/AssignmentModal';
 
+
 function HEP() {
+
+  const [patientData, setPatientData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let id = window.location.href.slice(26);
+      const response = await fetch(`http://localhost:3001/therapist/patient/${id}`);
+      const patient = await response.json();
+      setPatientData(patient);
+    };
+    fetchData();
+  }, []);
+
+ const formatPhoneNumber = (phoneNumber) => {
+    if(phoneNumber !== undefined){
+      let stringNumber = phoneNumber.toString()
+      return stringNumber.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+    }
+ }
+
+ formatPhoneNumber(patientData.phone)
   const variables = {
-    patientName: 'Patty Patient',
-    patientPhone: '123-456-7890',
-    patientEmail: 'perfectpatient@hotmail.com',
+    patientName: `${patientData.firstName} ${patientData.lastName}`,
+    patientPhone: formatPhoneNumber(patientData.phone),
+    patientEmail: `${patientData.email}`,
   };
+
 
   return (
     <>
@@ -40,7 +63,7 @@ function HEP() {
           maxWidth="800px"
         >
           <Avatar
-            name="Patty Patient"
+            name={variables.patientName}
             src="https://bit.ly/3eoXqDz"
             size="2xl"
             marginRight={['0', '3rem', '3rem']}
