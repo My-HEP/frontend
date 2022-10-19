@@ -17,6 +17,7 @@ import { getAuth } from 'firebase/auth';
 
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
+  const [patientsNum, setPatientsNum] = useState([]);
   const auth = getAuth();
   const uid = auth.currentUser.uid;
 
@@ -33,11 +34,21 @@ function TherapistHome() {
       setUserData(user);
     };
     fetchData();
+    
   }, [uid]);
+
+
+  const getPatientsNum = async (req, res) => {
+    const response = await fetch('http://localhost:3001/therapist/homeStats');
+    const patientsNumData = await response.json();
+    setPatientsNum(patientsNumData)
+  }
+
+  getPatientsNum();
 
   const variables = {
     userName: userData.firstName + ' ' + userData.lastName,
-    patientNum: '35',
+    patientNum: `${patientsNum}`,
     exerciseNum: '29',
   };
 
