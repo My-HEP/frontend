@@ -53,8 +53,10 @@ function PatientTable(props) {
     item.lastName.toLowerCase().includes(search.toLowerCase())
   );
 
-  const onRowClickHandler = () => {
-    navigate('/hep/:id');
+  
+  const onRowClickHandler = (user) => {
+    let id = user.currentTarget.id;
+    navigate(`/hep/${id}`);
   };
 
   return (
@@ -100,6 +102,7 @@ function PatientTable(props) {
                   cursor="pointer"
                   key={user.uid}
                   link="true"
+                  id={user.id}
                 >
                   <Td>{user.firstName}</Td>
                   <Td>{user.lastName}</Td>
