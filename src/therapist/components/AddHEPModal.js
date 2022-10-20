@@ -14,6 +14,7 @@ import {
   Tooltip,
   FormLabel,
   IconButton,
+  VStack,
 } from '@chakra-ui/react';
 import { IconPlus, IconFileUpload } from '@tabler/icons';
 
@@ -72,6 +73,7 @@ function AddHEPModal() {
             <Tooltip label="Select exercise to upload">
               <FormLabel
                 display="flex"
+                minWidth="300px"
                 justifyContent="center"
                 htmlFor="add-exercise"
                 padding="3rem 2rem"
@@ -90,29 +92,37 @@ function AddHEPModal() {
                 />
               </FormLabel>
             </Tooltip>
-            <InputGroup maxW="450px" marginBottom="2rem">
-              <Input
-                variant="outline"
-                placeholder="Exercise URL"
-                focusBorderColor="teal.500"
-                value={url}
-                onChange={event => setUrl(event.target.value)}
-              />
-              <Input
-                variant="outline"
-                placeholder="Exercise Title"
-                focusBorderColor="teal.500"
-                value={title}
-                onChange={event => setTitle(event.target.value)}
-              />
-              <Input
-                variant="outline"
-                placeholder="Tags"
-                focusBorderColor="teal.500"
-                value={tagsStr}
-                onChange={event => setTagsStr(event.target.value)}
-              />
+
+            <InputGroup justifyContent="center" marginBottom="2rem">
+              <VStack display="flex" maxWidth="100%" spacing={2}>
+                <Input
+                  variant="outline"
+                  minWidth="300px"
+                  width="100%"
+                  placeholder="Exercise URL"
+                  focusBorderColor="teal.500"
+                  value={url}
+                  onChange={event => setUrl(event.target.value)}
+                />
+                <Input
+                  variant="outline"
+                  minWidth="300px"
+                  placeholder="Exercise Title"
+                  focusBorderColor="teal.500"
+                  value={title}
+                  onChange={event => setTitle(event.target.value)}
+                />
+                <Input
+                  variant="outline"
+                  minWidth="300px"
+                  placeholder="Tags"
+                  focusBorderColor="teal.500"
+                  value={tagsStr}
+                  onChange={event => setTagsStr(event.target.value)}
+                />
+              </VStack>
             </InputGroup>
+
             {
               // @TODO add dropdown select for tags //
               // @TODO tags added as chakra-ui Tag component
