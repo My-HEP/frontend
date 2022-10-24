@@ -162,7 +162,7 @@ function Auth() {
               >
                 Sign in
               </Button>
-              <CreateAccountModal email={email} password={password} />
+              <CreateAccountModal  />
             </Stack>
           </Stack>
         </Flex>
