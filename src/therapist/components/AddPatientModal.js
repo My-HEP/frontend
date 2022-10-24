@@ -203,9 +203,11 @@ function AddNewPatientModal(props) {
               justify="space-between"
               width="100%"
             >
+                <Button variant="outline" onClick={onClose}>
+                Cancel
+              </Button>
               <Button
                 colorScheme="teal"
-                variant="outline"
                 onClick={() =>
                   addNewPatientHandler(
                     email,
@@ -218,9 +220,7 @@ function AddNewPatientModal(props) {
               >
                 {props.formButton}
               </Button>
-              <Button colorScheme="teal" onClick={onClose}>
-                Cancel
-              </Button>
+            
             </Stack>
           </ModalFooter>
         </ModalContent>
