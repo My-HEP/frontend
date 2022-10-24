@@ -139,7 +139,8 @@ function CreateAccountModal() {
     }
   };
 
-  const validateFormValues = () => {
+  const validateFormValues = ({...formValues}) => {
+    console.log(formValues)
     firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
     lastName === '' ? setLastNameError(true) : setLastNameError(false);
     phoneNumber === '' ? setPhoneNumberError(true) : setPhoneNumberError(false);
