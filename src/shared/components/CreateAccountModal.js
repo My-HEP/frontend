@@ -45,8 +45,7 @@ function CreateAccountModal() {
   const finalRef = React.useRef(null);
 
   const navigate = useNavigate();
-  const emailRegex =
-    /^[a-zA-Z0-9.!#$%&�*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
+  const emailRegex =/^[a-zA-Z0-9.!#$%&�*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
   const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 
   useEffect(() => {
@@ -140,7 +139,8 @@ function CreateAccountModal() {
     }
   };
 
-  const validateFormValues = ({ ...formValues }) => {
+  const validateFormValues = ({...formValues}) => {
+    console.log(formValues)
     firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
     lastName === '' ? setLastNameError(true) : setLastNameError(false);
     phoneNumber === '' ? setPhoneNumberError(true) : setPhoneNumberError(false);
@@ -150,7 +150,8 @@ function CreateAccountModal() {
       ? setVerifyPasswordError(true)
       : setVerifyPasswordError(false);
 
-    createAccountHandler(formValues);
+    createAccountHandler();
+    
   };
 
   const handleClose = () => {
@@ -171,7 +172,7 @@ function CreateAccountModal() {
 
   const toast = useToast();
 
-  const createAccountHandler = async ({ ...formValues }) => {
+  const createAccountHandler = async () => {
     if (!formError) {
       // Save user to database
       let res = await createAccount(email, password);
@@ -197,7 +198,7 @@ function CreateAccountModal() {
           email,
           uid,
         };
-        fetch('http://localhost:3001/user', {
+        fetch('http://localhost:3001/createUserAccount', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -240,7 +241,7 @@ function CreateAccountModal() {
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={handleClose}
       >
         <ModalOverlay />
         <ModalContent padding="1rem">
@@ -250,7 +251,6 @@ function CreateAccountModal() {
             <FloatingFormControl>
               <FormControl isInvalid={firstNameError}>
                 <Input
-                  ref={initialRef}
                   placeholder=" "
                   type="text"
                   focusBorderColor="teal.600"
@@ -390,15 +390,7 @@ function CreateAccountModal() {
               <Button
                 colorScheme="teal"
                 variant="outline"
-                onClick={() =>
-                  validateFormValues({
-                    email,
-                    password,
-                    verifyPassword,
-                    firstName,
-                    lastName,
-                  })
-                }
+                onClick={validateFormValues}
               >
                 Create account
               </Button>
