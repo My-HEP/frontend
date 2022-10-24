@@ -23,9 +23,9 @@ function TherapistHome() {
   const user = auth.currentUser;
   const uid = user?.uid;
 
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async (req, res) => {
-      const response = await fetch('http://localhost:3001/user', {
+      const response = await fetch('http://localhost:3001/user/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

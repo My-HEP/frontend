@@ -35,7 +35,6 @@ function Auth() {
   const toast = useToast();
 
   const signInHandler = async (email, password) => {
-  
     let authRes = await signIn(email, password);
     let authCode = authRes.code;
     let errorMessage;
@@ -49,9 +48,8 @@ function Auth() {
     } else if (authCode === 'auth/too-many-requests') {
       errorMessage =
         'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
-    } else if (authCode === 'auth/internal-error'){
-      errorMessage =
-        "Please provide a valid password.";
+    } else if (authCode === 'auth/internal-error') {
+      errorMessage = 'Please provide a valid password.';
     } else {
       errorMessage =
         "We're sorry but something went wrong. Please try again later.";
@@ -69,7 +67,6 @@ function Auth() {
       });
       return;
     }
-
   };
 
   return (
@@ -165,13 +162,7 @@ function Auth() {
               >
                 Sign in
               </Button>
-              <CreateAccountModal
-                button={'Create a new account'}
-                heading={'Sign up with your email'}
-                formButton={'Create account'}
-                email={email}
-                password={password}
-              />
+              <CreateAccountModal email={email} password={password} />
             </Stack>
           </Stack>
         </Flex>

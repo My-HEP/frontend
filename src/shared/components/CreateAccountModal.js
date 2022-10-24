@@ -233,7 +233,7 @@ function CreateAccountModal() {
           color: 'white',
         }}
       >
-        {props.button}
+        Create a new account
       </Button>
 
       <Modal
@@ -400,7 +400,7 @@ function CreateAccountModal() {
                   })
                 }
               >
-                {props.formButton}
+                Create account
               </Button>
               <Button colorScheme="teal" onClick={handleClose}>
                 Cancel
