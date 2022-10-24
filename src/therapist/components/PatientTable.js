@@ -35,7 +35,7 @@ function PatientTable(props) {
     fetchData();
   }, []);
 
-console.log(data)
+
   const handleSearch = event => {
     setSearch(event.target.value);
   };
