@@ -46,10 +46,10 @@ const EditModal = ({ type }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="teal" mr={3} onClick={onClose}>
+            <Button variant="outline" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="outline">Save Updates</Button>
+            <Button colorScheme="teal">Save Updates</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
