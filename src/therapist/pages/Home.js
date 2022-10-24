@@ -18,13 +18,14 @@ import { FaKaaba } from 'react-icons/fa';
 
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
+
   const auth = getAuth();
   const user = auth.currentUser;
   const uid = user?.uid;
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchData = async (req, res) => {
-      const response = await fetch('http://localhost:3001/user/user', {
+      const response = await fetch('http://localhost:3001/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
