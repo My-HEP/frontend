@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -22,21 +22,20 @@ function TherapistHome() {
   const user = auth.currentUser;
   const uid = user?.uid;
 
-  useEffect(() => {
-    const fetchData = async (req, res) => {
-      const response = await fetch('http://localhost:3001/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ uid }),
-      });
-      const userResponse = await response.json();
-      setUserData(userResponse);
-    };
-    fetchData();
-  }, [uid]);
 
+  const fetchData = async (req, res) => {
+    const response = await fetch('http://localhost:3001/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ uid }),
+    });
+    const userResponse = await response.json();
+    setUserData(userResponse);
+  };
+
+  fetchData();
   const variables = {
     userName: userData?.firstName + ' ' + userData?.lastName,
     patientNum: '35',
