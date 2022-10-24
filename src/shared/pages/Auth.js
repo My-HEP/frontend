@@ -9,6 +9,7 @@ import {
   Text,
   Image,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
@@ -31,9 +32,44 @@ function Auth() {
     'linear(to-l, gray.100, gray.50)'
   );
 
+  const toast = useToast();
+
   const signInHandler = async (email, password) => {
-    await signIn(email, password);
-    navigate('/home');
+  
+    let authRes = await signIn(email, password);
+    let authCode = authRes.code;
+    let errorMessage;
+    if (authCode === 'auth/invalid-email') {
+      errorMessage = 'Please provide a valid email';
+    } else if (authCode === 'auth/user-not-found') {
+      errorMessage =
+        'A user with this email address does not exist. Please create an account.';
+    } else if (authCode === 'auth/wrong-password') {
+      errorMessage = 'The provided password is incorrect. Please try again.';
+    } else if (authCode === 'auth/too-many-requests') {
+      errorMessage =
+        'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.';
+    } else if (authCode === 'auth/internal-error'){
+      errorMessage =
+        "Please provide a valid password.";
+    } else {
+      errorMessage =
+        "We're sorry but something went wrong. Please try again later.";
+    }
+
+    if (!authCode) {
+      navigate('/home');
+      return;
+    } else {
+      toast({
+        title: errorMessage,
+        status: 'error',
+        isClosable: true,
+        position: 'bottom-left',
+      });
+      return;
+    }
+
   };
 
   return (

@@ -17,10 +17,11 @@ import { getAuth } from 'firebase/auth';
 
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
+
   const auth = getAuth();
   const uid = auth.currentUser.uid;
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchData = async (req, res) => {
       const response = await fetch('http://localhost:3001/user', {
         method: 'POST',

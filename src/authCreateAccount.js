@@ -6,9 +6,8 @@ const createAccount = async (email, password) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     return user;
   } catch (error) {
-    const errorMessage = error.message;
-    alert(error.message);
-  }
+      return error;
+    }
 };
 
 export { createAccount };
