@@ -14,7 +14,6 @@ import EditModal from '../../shared/components/Modal';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../../shared/components/LogoIcon';
 import { getAuth } from 'firebase/auth';
-import { FaKaaba } from 'react-icons/fa';
 
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
@@ -44,8 +43,8 @@ function TherapistHome() {
     exerciseNum: '29',
   };
 
-  {
-    if (user) {
+// eslint-disable-next-line no-lone-blocks
+{ if (user) {
       return (
         <Flex
           height="100%"
