@@ -13,23 +13,23 @@ import {
   VStack,
   Flex,
   useColorModeValue,
-  Link as Hyperlink,
-  Alert,
-  AlertIcon,
+  // Link as Hyperlink,
+  // Alert,
+  // AlertIcon,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
   IconPhone,
   IconMail,
-  IconLock,
+  // IconLock,
   IconPencil,
   IconUser,
 } from '@tabler/icons';
 
 const InfoForm = ({ type }) => {
   const { getDisclosureProps, getButtonProps } = useDisclosure();
-  const resetPassword = getButtonProps();
-  const alert = getDisclosureProps();
+  // const resetPassword = getButtonProps();
+  // const alert = getDisclosureProps();
 
   return (
     <VStack margin="1rem auto">
@@ -117,47 +117,7 @@ const InfoForm = ({ type }) => {
             />
           </InputGroup>
         </Editable>
-        {type === 'self' ? (
-          <Editable
-            defaultValue="password"
-            isPreviewFocusable={true}
-            display="flex"
-          >
-            <InputGroup>
-              <Tooltip label="Click to edit">
-                <EditablePreview
-                  marginLeft="2.5rem"
-                  py={2}
-                  px={4}
-                  // _hover={{
-                  //   background: useColorModeValue("gray.100", "gray.700")
-                  // }}
-                />
-              </Tooltip>
-              <InputLeftElement children={<IconLock />} />
-              <Input
-                type="password"
-                as={EditableInput}
-                focusBorderColor="teal.500"
-              />
-            </InputGroup>
-          </Editable>
-        ) : (
-          <VStack align="start" paddingLeft="0.6rem" spacing={3}>
-            <Tooltip label="Click to send password reset">
-              <Flex>
-                <IconLock color="teal" />
-                <Hyperlink marginLeft="1.5rem" color="teal" {...resetPassword}>
-                  Reset Patient Password
-                </Hyperlink>
-              </Flex>
-            </Tooltip>
-            <Alert status="success" colorScheme="teal" {...alert}>
-              <AlertIcon />
-              Password reset email sent.
-            </Alert>
-          </VStack>
-        )}
+       
       </Stack>
     </VStack>
   );
