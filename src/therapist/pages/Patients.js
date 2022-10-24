@@ -35,7 +35,11 @@ function Patients() {
             Select Existing Patient
           </Heading>
 
-          <AddPatientModal />
+          <AddPatientModal
+            button={'Add New Patient'}
+            heading={'Create a new patient account'}
+            formButton={'Add patient'}
+          />
         </Flex>
         <PatientTable />
       </Flex>

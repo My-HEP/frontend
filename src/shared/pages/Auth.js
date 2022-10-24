@@ -165,7 +165,13 @@ function Auth() {
               >
                 Sign in
               </Button>
-              <CreateAccountModal email={email} password={password} />
+              <CreateAccountModal
+                button={'Create a new account'}
+                heading={'Sign up with your email'}
+                formButton={'Create account'}
+                email={email}
+                password={password}
+              />
             </Stack>
           </Stack>
         </Flex>

@@ -8,32 +8,123 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormControl,
   FormLabel,
   Input,
   useDisclosure,
+  useToast,
+  useColorModeValue,
+  Stack,
 } from '@chakra-ui/react';
-import { IconPlus } from '@tabler/icons';
+import { useState } from 'react';
+import { createAccount } from '../../authCreateAccount';
+import {
+  getAuth,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
+import FloatingFormControl from '../../shared/components/FloatingFormControl';
+import { useNavigate } from 'react-router-dom';
 
-function AddPatientModal() {
+function AddNewPatientModal(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const labelColor = useColorModeValue('white', 'gray.700');
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
+  const navigate = useNavigate();
+  const toast = useToast();
+
+  // create user in db with add patient => auto generate an email that links to the create account page
+  // => update user uid with firebase info in db - append uid to db
+
+  const getEmailFromCreateUser = async (req, res) => {
+    const user = {
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      password,
+    };
+
+    const auth = getAuth();
+
+    try {
+      let response = await fetch('http://localhost:3001/therapist/addPatient', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      console.log(data.email);
+      let resetEmail = await sendPasswordResetEmail(auth, data.email);
+      console.log(resetEmail);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addNewPatientHandler = async (
+    email,
+    firstName,
+    lastName,
+    phoneNumber
+  ) => {
+    if (!firstName || !email || !lastName || !password) {
+      toast({
+        title: 'Please include all fields.',
+        status: 'error',
+      });
+      return;
+    }
+    getEmailFromCreateUser();
+    // const user = {
+    //   firstName,
+    //   lastName,
+    //   phoneNumber,
+    //   email,
+    //   password,
+    // };
+
+    // try {
+    //   let response = await fetch('http://localhost:3001/therapist/addPatient', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(user),
+    //   });
+    //   console.log(response);
+    //   // await sendPasswordResetEmail(response.uid, email);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    // navigate('/home');
+  };
 
   return (
     <>
       <Button
         onClick={onOpen}
-        variant="solid"
-        leftIcon={<IconPlus />}
+        variant="outline"
         size="lg"
-        maxWidth="350px"
-        minWidth="12rem"
         colorScheme="teal"
-        marginLeft={['0', '0', '2rem']}
+        _hover={{
+          transition: 'ease',
+          bgGradient: 'linear(to-l, cyan.700, green.500)',
+          color: 'white',
+        }}
       >
-        Add New Patient
+        {props.button}
       </Button>
 
       <Modal
@@ -43,37 +134,94 @@ function AddPatientModal() {
         onClose={onClose}
       >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add a New Patient</ModalHeader>
+        <ModalContent padding="1.5rem">
+          <ModalHeader>{props.heading}</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
+            <FloatingFormControl>
               <Input
                 ref={initialRef}
-                placeholder="First name"
-                focusBorderColor="teal.500"
+                placeholder=" "
+                type="text"
+                focusBorderColor="teal.600"
+                onChange={event => setFirstName(event.target.value)}
+                value={firstName}
               />
-            </FormControl>
+              <FormLabel backgroundColor={labelColor}>First name</FormLabel>
+            </FloatingFormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" focusBorderColor="teal.500" />
-            </FormControl>
+            <FloatingFormControl>
+              <Input
+                placeholder=" "
+                type="text"
+                focusBorderColor="teal.600"
+                onChange={event => setLastName(event.target.value)}
+                value={lastName}
+              />
+              <FormLabel backgroundColor={labelColor}>Last name</FormLabel>
+            </FloatingFormControl>
 
-            <FormControl mt={4}>
-              <FormLabel>Email address</FormLabel>
-              <Input placeholder="Email address" focusBorderColor="teal.500" />
-            </FormControl>
+            <FloatingFormControl>
+              <Input
+                type="tel"
+                placeholder=" "
+                focusBorderColor="teal.600"
+                onChange={event => setPhoneNumber(event.target.value)}
+                value={phoneNumber}
+              />
+              <FormLabel backgroundColor={labelColor}>Phone number</FormLabel>
+            </FloatingFormControl>
+
+            <FloatingFormControl>
+              <Input
+                type="email"
+                placeholder=" "
+                focusBorderColor="teal.600"
+                onChange={event => setEmail(event.target.value)}
+                value={email}
+              />
+              <FormLabel backgroundColor={labelColor}>Email address</FormLabel>
+            </FloatingFormControl>
+
+            <FloatingFormControl>
+              <Input
+                type="password"
+                placeholder=" "
+                focusBorderColor="teal.600"
+                onChange={event => setPassword(event.target.value)}
+                value={password}
+              />
+              <FormLabel backgroundColor={labelColor}>
+                Temporary Password
+              </FormLabel>
+            </FloatingFormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button onClick={onClose} variant="outline">
-              Cancel
-            </Button>
-            <Button colorScheme="teal" ml={3}>
-              Add Patient
-            </Button>
+            <Stack
+              direction={['column', 'column', 'row']}
+              justify="space-between"
+              width="100%"
+            >
+              <Button
+                colorScheme="teal"
+                variant="outline"
+                onClick={() =>
+                  addNewPatientHandler(
+                    email,
+                    firstName,
+                    lastName,
+                    phoneNumber,
+                    password
+                  )
+                }
+              >
+                {props.formButton}
+              </Button>
+              <Button colorScheme="teal" onClick={onClose}>
+                Cancel
+              </Button>
+            </Stack>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -81,4 +229,4 @@ function AddPatientModal() {
   );
 }
 
-export default AddPatientModal;
+export default AddNewPatientModal;

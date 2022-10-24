@@ -16,7 +16,7 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { createAccount } from '../../authCreateAccount';
@@ -37,8 +37,6 @@ function CreateAccountModal() {
   const [passwordError, setPasswordError] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
   const [verifyPasswordError, setVerifyPasswordError] = useState('');
- 
-
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -47,116 +45,147 @@ function CreateAccountModal() {
   const finalRef = React.useRef(null);
 
   const navigate = useNavigate();
-  const emailRegex = /^[a-zA-Z0-9.!#$%&�*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
-  const phoneRegex =  /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&�*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
+  const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 
   useEffect(() => {
-      (firstNameError || firstNameError === '') ||  (lastNameError || lastNameError === '') || (phoneNumberError || phoneNumberError === '') || (emailError || emailError === '') || (passwordError || passwordError === '') ||  (verifyPasswordError || verifyPasswordError === '') ? setFormError(true) : setFormError(false);
-  }, [firstNameError, lastNameError, phoneNumberError, emailError, passwordError, verifyPasswordError, formError])
+    firstNameError ||
+    firstNameError === '' ||
+    lastNameError ||
+    lastNameError === '' ||
+    phoneNumberError ||
+    phoneNumberError === '' ||
+    emailError ||
+    emailError === '' ||
+    passwordError ||
+    passwordError === '' ||
+    verifyPasswordError ||
+    verifyPasswordError === ''
+      ? setFormError(true)
+      : setFormError(false);
+  }, [
+    firstNameError,
+    lastNameError,
+    phoneNumberError,
+    emailError,
+    passwordError,
+    verifyPasswordError,
+    formError,
+  ]);
 
   // Validate fields
-  const validateInput = (e) => {
-     const name = e.target.name;
-    if(name === 'firstName'){
-       firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
+  const validateInput = e => {
+    const name = e.target.name;
+    if (name === 'firstName') {
+      firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
     }
-    if(name === 'lastName'){
-      lastName === "" ? setLastNameError(true) : setLastNameError(false);
+    if (name === 'lastName') {
+      lastName === '' ? setLastNameError(true) : setLastNameError(false);
     }
-    if(name === 'phoneNumber'){
-      phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
-      phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
+    if (name === 'phoneNumber') {
+      phoneNumber === ''
+        ? setPhoneNumberError(true)
+        : setPhoneNumberError(false);
+      phoneNumber.match(phoneRegex)
+        ? setPhoneNumberError(false)
+        : setPhoneNumberError(true);
     }
-    if(name === 'email'){
-      email === "" ? setEmailError(true) : setEmailError(false);
+    if (name === 'email') {
+      email === '' ? setEmailError(true) : setEmailError(false);
       email.match(emailRegex) ? setEmailError(false) : setEmailError(true);
     }
-    if(name === 'password'){
-      password.length < 6 ? setPasswordError(true) : setPasswordError(false)
+    if (name === 'password') {
+      password.length < 6 ? setPasswordError(true) : setPasswordError(false);
     }
 
-    if(name === 'verifyPassword'){
-      password !== verifyPassword ? setVerifyPasswordError(true) : setVerifyPasswordError(false)
+    if (name === 'verifyPassword') {
+      password !== verifyPassword
+        ? setVerifyPasswordError(true)
+        : setVerifyPasswordError(false);
     }
-  
-  }
+  };
 
-  const handleInput = (e) => {
+  const handleInput = e => {
     const name = e.target.name;
     const value = e.target.value;
-   
-    if(name === 'firstName'){
-      setFirstName(value)
-        firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
-     }
-    if(name === 'lastName'){
-      setLastName(value)
-      lastName === "" ? setLastNameError(true) : setLastNameError(false);
-    }
-    if(name === 'phoneNumber'){
-      setPhoneNumber(value)
-          phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
-          phoneNumber.match(phoneRegex) ? setPhoneNumberError(false) : setPhoneNumberError(true);
-    }
-    if(name === 'email'){
-      setEmail(value)
-       email === "" ? setEmailError(true) : setEmailError(false);
-       email.match(emailRegex) ? setEmailError(true) : setEmailError(false);
-    }
-    if(name === 'password'){
-      setPassword(value)
-    }
-    if(name === 'verifyPassword'){
-      setVerifyPassword(value)
-    }
-  }
 
-  const validateFormValues = ({...formValues}) => {
+    if (name === 'firstName') {
+      setFirstName(value);
       firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
-      lastName === "" ? setLastNameError(true) : setLastNameError(false);
-      phoneNumber === "" ? setPhoneNumberError(true) : setPhoneNumberError(false);
-      email === "" ? setEmailError(true) : setEmailError(false);
-      password === "" ? setPasswordError(true) : setPasswordError(false);
-      verifyPassword === "" ? setVerifyPasswordError(true) : setVerifyPasswordError(false);
-    
-      createAccountHandler(formValues)
     }
+    if (name === 'lastName') {
+      setLastName(value);
+      lastName === '' ? setLastNameError(true) : setLastNameError(false);
+    }
+    if (name === 'phoneNumber') {
+      setPhoneNumber(value);
+      phoneNumber === ''
+        ? setPhoneNumberError(true)
+        : setPhoneNumberError(false);
+      phoneNumber.match(phoneRegex)
+        ? setPhoneNumberError(false)
+        : setPhoneNumberError(true);
+    }
+    if (name === 'email') {
+      setEmail(value);
+      email === '' ? setEmailError(true) : setEmailError(false);
+      email.match(emailRegex) ? setEmailError(true) : setEmailError(false);
+    }
+    if (name === 'password') {
+      setPassword(value);
+    }
+    if (name === 'verifyPassword') {
+      setVerifyPassword(value);
+    }
+  };
+
+  const validateFormValues = ({ ...formValues }) => {
+    firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
+    lastName === '' ? setLastNameError(true) : setLastNameError(false);
+    phoneNumber === '' ? setPhoneNumberError(true) : setPhoneNumberError(false);
+    email === '' ? setEmailError(true) : setEmailError(false);
+    password === '' ? setPasswordError(true) : setPasswordError(false);
+    verifyPassword === ''
+      ? setVerifyPasswordError(true)
+      : setVerifyPasswordError(false);
+
+    createAccountHandler(formValues);
+  };
 
   const handleClose = () => {
-    setFirstName('')
-    setLastName('')
-    setPhoneNumber('')
-    setEmail('')
-    setPassword('')
-    setVerifyPassword('')
-    setFirstNameError('')
-    setLastNameError('')
-    setPhoneNumberError('')
-    setEmailError('')
-    setPasswordError('')
-    setVerifyPasswordError('')
-    onClose()
-  }
-
-
+    setFirstName('');
+    setLastName('');
+    setPhoneNumber('');
+    setEmail('');
+    setPassword('');
+    setVerifyPassword('');
+    setFirstNameError('');
+    setLastNameError('');
+    setPhoneNumberError('');
+    setEmailError('');
+    setPasswordError('');
+    setVerifyPasswordError('');
+    onClose();
+  };
 
   const toast = useToast();
 
-  const createAccountHandler = async ({...formValues}) => {
-  
-   if (!formError) {
-        // Save user to database
+  const createAccountHandler = async ({ ...formValues }) => {
+    if (!formError) {
+      // Save user to database
       let res = await createAccount(email, password);
       let authCode = res.code;
       let errorMessage;
       if (authCode === 'auth/invalid-email') {
-      errorMessage = 'Please provide a valid email';
+        errorMessage = 'Please provide a valid email';
       } else if (authCode === 'auth/email-already-in-use') {
         errorMessage = 'This email is already in use. Please log in instead.';
-      } else if (authCode === 'auth/weak-password'){
+      } else if (authCode === 'auth/weak-password') {
         errorMessage = 'Password must be at least 6 characters in length.';
       } else if (authCode) {
-        errorMessage = 'We\'re sorry but something went wrong. Please try again later.';
+        errorMessage =
+          "We're sorry but something went wrong. Please try again later.";
       }
 
       if (!authCode) {
@@ -186,10 +215,10 @@ function CreateAccountModal() {
         });
         return;
       }
-    }else {
-      return
+    } else {
+      return;
     }
-  }
+  };
 
   return (
     <>
@@ -204,7 +233,7 @@ function CreateAccountModal() {
           color: 'white',
         }}
       >
-        Create an account
+        {props.button}
       </Button>
 
       <Modal
@@ -219,20 +248,24 @@ function CreateAccountModal() {
           <ModalCloseButton />
           <ModalBody pb={4}>
             <FloatingFormControl>
-            <FormControl isInvalid={firstNameError}> 
-              <Input
-                ref={initialRef}
-                placeholder=" "
-                type="text"
-                focusBorderColor="teal.600"
-                name="firstName"
-                onChange={handleInput}
-                onBlur={validateInput}
-                value={firstName}
-              />
-              <FormLabel backgroundColor={labelColor}>First name</FormLabel>
-              {!firstNameError ? <></> : <FormErrorMessage>First name is required.</FormErrorMessage>}
-            </FormControl>
+              <FormControl isInvalid={firstNameError}>
+                <Input
+                  ref={initialRef}
+                  placeholder=" "
+                  type="text"
+                  focusBorderColor="teal.600"
+                  name="firstName"
+                  onChange={handleInput}
+                  onBlur={validateInput}
+                  value={firstName}
+                />
+                <FormLabel backgroundColor={labelColor}>First name</FormLabel>
+                {!firstNameError ? (
+                  <></>
+                ) : (
+                  <FormErrorMessage>First name is required.</FormErrorMessage>
+                )}
+              </FormControl>
             </FloatingFormControl>
 
             <FloatingFormControl>
@@ -247,7 +280,11 @@ function CreateAccountModal() {
                   value={lastName}
                 />
                 <FormLabel backgroundColor={labelColor}>Last name</FormLabel>
-                {!lastNameError ? <></> : <FormErrorMessage>Last name is required.</FormErrorMessage>}
+                {!lastNameError ? (
+                  <></>
+                ) : (
+                  <FormErrorMessage>Last name is required.</FormErrorMessage>
+                )}
               </FormControl>
             </FloatingFormControl>
 
@@ -263,7 +300,13 @@ function CreateAccountModal() {
                   value={phoneNumber}
                 />
                 <FormLabel backgroundColor={labelColor}>Phone number</FormLabel>
-              {!phoneNumberError ? <></> : <FormErrorMessage>A valid phone number is required.</FormErrorMessage>}
+                {!phoneNumberError ? (
+                  <></>
+                ) : (
+                  <FormErrorMessage>
+                    A valid phone number is required.
+                  </FormErrorMessage>
+                )}
               </FormControl>
             </FloatingFormControl>
 
@@ -278,8 +321,16 @@ function CreateAccountModal() {
                   onBlur={validateInput}
                   value={email}
                 />
-                <FormLabel backgroundColor={labelColor}>Email address</FormLabel>
-              {!emailError ? <></> : <FormErrorMessage>A valid email is required.</FormErrorMessage>}
+                <FormLabel backgroundColor={labelColor}>
+                  Email address
+                </FormLabel>
+                {!emailError ? (
+                  <></>
+                ) : (
+                  <FormErrorMessage>
+                    A valid email is required.
+                  </FormErrorMessage>
+                )}
               </FormControl>
             </FloatingFormControl>
 
@@ -295,7 +346,15 @@ function CreateAccountModal() {
                   value={password}
                 />
                 <FormLabel backgroundColor={labelColor}>Password</FormLabel>
-                {!passwordError ? <FormHelperText>Passwords must be at least 6 characters in length.</FormHelperText>  : <FormErrorMessage>Password of at least 6 characters is required.</FormErrorMessage>}
+                {!passwordError ? (
+                  <FormHelperText>
+                    Passwords must be at least 6 characters in length.
+                  </FormHelperText>
+                ) : (
+                  <FormErrorMessage>
+                    Password of at least 6 characters is required.
+                  </FormErrorMessage>
+                )}
               </FormControl>
             </FloatingFormControl>
 
@@ -310,8 +369,14 @@ function CreateAccountModal() {
                   onBlur={validateInput}
                   value={verifyPassword}
                 />
-                <FormLabel backgroundColor={labelColor}>Confirm Password</FormLabel>
-              {!verifyPasswordError ? <FormHelperText></FormHelperText>  : <FormErrorMessage>Passwords must match.</FormErrorMessage>}
+                <FormLabel backgroundColor={labelColor}>
+                  Confirm Password
+                </FormLabel>
+                {!verifyPasswordError ? (
+                  <FormHelperText></FormHelperText>
+                ) : (
+                  <FormErrorMessage>Passwords must match.</FormErrorMessage>
+                )}
               </FormControl>
             </FloatingFormControl>
           </ModalBody>
@@ -326,10 +391,16 @@ function CreateAccountModal() {
                 colorScheme="teal"
                 variant="outline"
                 onClick={() =>
-                  validateFormValues({email, password, verifyPassword, firstName, lastName})
+                  validateFormValues({
+                    email,
+                    password,
+                    verifyPassword,
+                    firstName,
+                    lastName,
+                  })
                 }
               >
-                Create an account
+                {props.formButton}
               </Button>
               <Button colorScheme="teal" onClick={handleClose}>
                 Cancel
