@@ -129,18 +129,25 @@ function CreateAccountModal() {
     }
   };
 
-  const validateFormValues = ({...formValues}) => {
+  const validateFormValues = () => {
     firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
     lastName === '' ? setLastNameError(true) : setLastNameError(false);
     phoneNumber === '' ? setPhoneNumberError(true) : setPhoneNumberError(false);
+    phoneNumber.match(phoneRegex)
+    ? setPhoneNumberError(false)
+    : setPhoneNumberError(true);
     email === '' ? setEmailError(true) : setEmailError(false);
+    email.match(emailRegex) ? setEmailError(false) : setEmailError(true);
     password === '' ? setPasswordError(true) : setPasswordError(false);
+    password.length < 6 ? setPasswordError(true) : setPasswordError(false);
     verifyPassword === ''
       ? setVerifyPasswordError(true)
       : setVerifyPasswordError(false);
-
+    password !== verifyPassword
+    ? setVerifyPasswordError(true)
+    : setVerifyPasswordError(false);
+    console.log(firstNameError, formError)
     createAccountHandler();
-    
   };
 
   const handleClose = () => {
@@ -162,6 +169,7 @@ function CreateAccountModal() {
   const toast = useToast();
 
   const createAccountHandler = async () => {
+    console.log(formError)
     if (!formError) {
       // Save user to database
       let res = await createAccount(email, password);
