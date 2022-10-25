@@ -1,4 +1,4 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -8,6 +8,8 @@ import {
   Button,
   VStack,
   Avatar,
+  Skeleton,
+  SkeletonCircle,
 } from '@chakra-ui/react';
 import Confirmation from '../components/LogoutConfirmation';
 import EditModal from '../../shared/components/Modal';
@@ -18,6 +20,7 @@ import { getAuth } from 'firebase/auth';
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
   const [homeStats, setHomeStats] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const auth = getAuth();
   const user = auth.currentUser;
@@ -32,22 +35,21 @@ function TherapistHome() {
         },
         body: JSON.stringify({ uid }),
       });
-     
-        const userResponse = await response.json();
-        setUserData(userResponse);
-      }
 
-      const homeStats = async (req, res) => {
-        const response = await fetch('http://localhost:3001/therapist/homeStats')
-        const stats = await response.json();
-        setHomeStats(stats);
-      }
-    
-      homeStats();
-      fetchData();
-    
+      const userResponse = await response.json();
+      setUserData(userResponse);
+      setIsLoaded(true);
+    };
+
+    const homeStats = async (req, res) => {
+      const response = await fetch('http://localhost:3001/therapist/homeStats');
+      const stats = await response.json();
+      setHomeStats(stats);
+    };
+
+    homeStats();
+    fetchData();
   }, [uid]);
-
 
   const variables = {
     userName: userData?.firstName + ' ' + userData?.lastName,
@@ -55,8 +57,9 @@ function TherapistHome() {
     exerciseNum: homeStats?.exercisesNum,
   };
 
-// eslint-disable-next-line no-lone-blocks
-{ if (user) {
+  // eslint-disable-next-line no-lone-blocks
+  {
+    if (user) {
       return (
         <Flex
           height="100%"
@@ -89,17 +92,21 @@ function TherapistHome() {
             justify="center"
           >
             <VStack spacing={[3, 3, 5]}>
-              <Avatar
-                name="Dan Abrahmov"
-                src="https://bit.ly/dan-abramov"
-                size="2xl"
-              />
+              <SkeletonCircle isLoaded={isLoaded} size={40}>
+                <Avatar
+                  name="Dan Abrahmov"
+                  src="https://bit.ly/dan-abramov"
+                  size="2xl"
+                />
+              </SkeletonCircle>
 
               <VStack spacing={5} align="start">
                 <Flex minWidth="175px" gap="2" justify="start">
-                  <Text as="b" fontSize="2xl">
-                    {variables.userName}
-                  </Text>
+                  <Skeleton isLoaded={isLoaded}>
+                    <Text as="b" fontSize="2xl">
+                      {variables.userName}
+                    </Text>
+                  </Skeleton>
                 </Flex>
                 <EditModal type={'self'} />
                 <Confirmation />
@@ -110,9 +117,11 @@ function TherapistHome() {
               width={['100%', '100%', '50%']}
               mt={['3rem', '3rem', 0]}
             >
-              <Text as="b">
-                Currently serving {variables.patientNum} patients
-              </Text>
+              <Skeleton isLoaded={isLoaded}>
+                <Text as="b">
+                  Currently serving {variables.patientNum} patients
+                </Text>
+              </Skeleton>
               <Link to="/patients">
                 <Button
                   leftIcon={<IconUsers />}
@@ -124,7 +133,9 @@ function TherapistHome() {
                   My Patients
                 </Button>
               </Link>
-              <Text as="b">{variables.exerciseNum} Exercises uploaded</Text>
+              <Skeleton isLoaded={isLoaded}>
+                <Text as="b">{variables.exerciseNum} Exercises uploaded</Text>
+              </Skeleton>
               <Link to="/exerciselibrary">
                 <Button
                   leftIcon={<IconBarbell />}
