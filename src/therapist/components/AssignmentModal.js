@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -36,18 +36,45 @@ import { IconPlus, IconEdit, IconFileUpload } from '@tabler/icons';
 import SearchBar from './SearchBar';
 
 const AssignmentModal = ({ type }) => {
+  
+  const [frequencyByDay, setFrequencyByDay] = useState();
+  const [frequencyByWeek, setFrequencyByWeek] = useState('');
+  const [duration, setDuration] = useState('');
+  const [durationUnits, setDurationUnits] = useState('');
+  const [notes, setNotes] = useState('');
+
+
   const exercises = [
-    { title: 'Tendon Glides' },
-    { title: 'Carpal Tunnel' },
-    { title: 'Leg Lifts' },
+    { id: '1', title: 'Tendon Glides' },
+    { id: '2', title: 'Carpal Tunnel' },
+    { id: '3', title: 'Leg Lifts' },
   ];
-  let text, heading;
+
+  let assignHEP = () =>{
+    let assignedData = { frequencyByDay, frequencyByWeek, duration, durationUnits, notes }
+    fetch('http://localhost:3001/therapist/addHEPExercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(assignedData),
+    });
+    onClose();
+  }
+
+  let updateHEP = () =>{
+    onClose();
+  }
+
+  let text, heading, method;
   if (type === 'new') {
     heading = 'Assign New Exercise';
     text = 'Assign Exercise';
+    method = assignHEP;
   } else {
     heading = 'Edit Assigned Exercise';
     text = 'Update Exercise';
+    method = updateHEP;
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -104,7 +131,8 @@ const AssignmentModal = ({ type }) => {
                     </Tbody>
                   </Table>
                 </TableContainer>
-                <Heading as="h2" size="sm">
+                {/* Upload New Exercise from assignment modal feature for later */}
+                {/* <Heading as="h2" size="sm">
                   Upload New Exercise
                 </Heading>
                 <Flex
@@ -132,7 +160,7 @@ const AssignmentModal = ({ type }) => {
                       />
                     </FormLabel>
                   </Tooltip>
-                </Flex>
+                </Flex> */}
               </VStack>
               <VStack align="start" width={['100%', '100%', '48%']} spacing={5}>
                 <Heading
@@ -154,6 +182,8 @@ const AssignmentModal = ({ type }) => {
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
+                          value={frequencyByDay}
+                          onChange={(value) => setFrequencyByDay(value)}
                         >
                           <NumberInputField />
                           <NumberInputStepper>
@@ -169,6 +199,8 @@ const AssignmentModal = ({ type }) => {
                           min={1}
                           max={7}
                           focusBorderColor="teal.500"
+                          value={frequencyByWeek}
+                          onChange={(value) => setFrequencyByWeek(value)}
                         >
                           <NumberInputField />
                           <NumberInputStepper>
@@ -191,6 +223,8 @@ const AssignmentModal = ({ type }) => {
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
+                          value={duration}
+                          onChange={(value) => setDuration(value)}
                         >
                           <NumberInputField />
                           <NumberInputStepper>
@@ -202,10 +236,11 @@ const AssignmentModal = ({ type }) => {
                           placeholder="units"
                           width="6rem"
                           focusBorderColor="teal.500"
+                          onChange={e => setDurationUnits(e.target.value)}
                         >
-                          <option value="option1">reps</option>
-                          <option value="option2">seconds</option>
-                          <option value="option3">minutes</option>
+                          <option value="reps">reps</option>
+                          <option value="seconds">seconds</option>
+                          <option value="minutes">minutes</option>
                         </Select>
                       </Flex>
                     </Flex>
@@ -217,6 +252,8 @@ const AssignmentModal = ({ type }) => {
                 <Textarea
                   focusBorderColor="teal.500"
                   placeholder="Provide additional instructions here."
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
                 />
               </VStack>
             </Flex>
@@ -226,7 +263,7 @@ const AssignmentModal = ({ type }) => {
             <Button mr={3} variant="outline" onClick={onClose}>
               Discard
             </Button>
-            <Button colorScheme="teal">{text}</Button>
+            <Button colorScheme="teal" onClick={method}>{text}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
