@@ -69,7 +69,7 @@ function PatientTable(props) {
       <Skeleton isLoaded={isLoaded} fadeDuration={1}>
         <TableContainer
           width="100%"
-          maxWidth="700px"
+          maxWidth="827px"
           border="solid"
           borderRadius="7"
           borderColor="gray"
