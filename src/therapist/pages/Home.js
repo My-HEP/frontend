@@ -71,6 +71,7 @@ function TherapistHome() {
           marginTop={['20', '20', '40']}
           paddingTop="2rem"
           paddingBottom="100px"
+          style={{ transition: '1s ease-in' }}
         >
           <Flex
             gap={['2', '5']}
@@ -92,7 +93,7 @@ function TherapistHome() {
             justify="center"
           >
             <VStack spacing={[3, 3, 5]}>
-              <SkeletonCircle isLoaded={isLoaded} size={40}>
+              <SkeletonCircle isLoaded={isLoaded} size={40} fadeDuration={1}>
                 <Avatar
                   name="Dan Abrahmov"
                   src="https://bit.ly/dan-abramov"

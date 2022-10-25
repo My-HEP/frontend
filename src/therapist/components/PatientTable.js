@@ -8,6 +8,7 @@ import {
   TableCaption,
   TableContainer,
   Flex,
+  Skeleton,
 } from '@chakra-ui/react';
 import {
   InputGroup,
@@ -20,9 +21,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function PatientTable(props) {
-
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,10 +32,10 @@ function PatientTable(props) {
       const response = await fetch('http://localhost:3001/therapist/patients');
       const patients = await response.json();
       setData(patients);
+      setIsLoaded(true);
     };
     fetchData();
   }, []);
-
 
   const handleSearch = event => {
     setSearch(event.target.value);
@@ -44,7 +45,7 @@ function PatientTable(props) {
     item.lastName.toLowerCase().includes(search.toLowerCase())
   );
 
-  const onRowClickHandler = (user) => {
+  const onRowClickHandler = user => {
     let id = user.currentTarget.id;
     navigate(`/hep/${id}`);
   };
@@ -77,30 +78,34 @@ function PatientTable(props) {
           <TableCaption color="gray.400">
             Search by first name, last name, or email address
           </TableCaption>
-          <Thead>
-            <Tr>
-              <Th>First Name</Th>
-              <Th>Last Name</Th>
-              <Th>Email</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {searchData.map(user => {
-              return (
-                <Tr
-                  onClick={user => onRowClickHandler(user)}
-                  cursor="pointer"
-                  key={user.uid}
-                  id={user.id}
-                  link="true"
-                >
-                  <Td>{user.firstName}</Td>
-                  <Td>{user.lastName}</Td>
-                  <Td>{user.email}</Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
+          <Skeleton isLoaded={isLoaded} fadeDuration={5}>
+            <Thead>
+              <Tr>
+                <Th>First Name</Th>
+                <Th>Last Name</Th>
+                <Th>Email</Th>
+              </Tr>
+            </Thead>
+          </Skeleton>
+          <Skeleton isLoaded={isLoaded} fadeDuration={1}>
+            <Tbody>
+              {searchData.map(user => {
+                return (
+                  <Tr
+                    onClick={user => onRowClickHandler(user)}
+                    cursor="pointer"
+                    key={user.uid}
+                    id={user.id}
+                    link="true"
+                  >
+                    <Td>{user.firstName}</Td>
+                    <Td>{user.lastName}</Td>
+                    <Td>{user.email}</Td>
+                  </Tr>
+                );
+              })}
+            </Tbody>
+          </Skeleton>
         </Table>
       </TableContainer>
     </>

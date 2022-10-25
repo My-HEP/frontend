@@ -7,6 +7,8 @@ import {
   Image,
   Tag,
   TagLabel,
+  Skeleton,
+  SkeletonText,
 } from '@chakra-ui/react';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
@@ -45,12 +47,14 @@ function ExerciseLibrary() {
   // ];
 
   const [data, setData] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:3001/therapist/exercises');
       const exercises = await response.json();
       setData(exercises);
+      setIsLoaded(true);
     };
     fetchData();
   }, []);
@@ -70,70 +74,84 @@ function ExerciseLibrary() {
         paddingTop="2rem"
         paddingBottom="100px"
       >
-        <Flex
-          direction={['column', 'column', 'row', 'row']}
-          align={['center', 'center', 'left']}
-          justifyContent="space-between"
-          maxWidth="800px"
-          marginBottom="4rem"
-        >
-          <Heading
-            paddingBottom={['2rem', '2rem', '0', '0']}
-            width={{ base: '100%' }}
-            textAlign={['center', 'center', 'left']}
+        <SkeletonText isLoaded={isLoaded} noOfLines={6} spacing="7">
+          <Flex
+            direction={['column', 'column', 'row', 'row']}
+            align={['center', 'center', 'left']}
+            justifyContent="space-between"
+            maxWidth="800px"
+            marginBottom="4rem"
           >
-            Home Exercise Library
-          </Heading>
+            <Heading
+              paddingBottom={['2rem', '2rem', '0', '0']}
+              width={{ base: '100%' }}
+              textAlign={['center', 'center', 'left']}
+            >
+              Home Exercise Library
+            </Heading>
 
-          <AddHEPModal />
-        </Flex>
-        <Flex justifyContent={['center', 'center', 'left']}>
-          <SearchBar />
-        </Flex>
-        <SimpleGrid minChildWidth="200px" spacingX="20px" spacingY="20px">
-          {data.map(item => {
-            return (
-              <Box
-                key={item.id}
-                height="fit-content"
-                margin="1rem"
-                minWidth="200px"
-              >
-                <Image
-                  boxSize="250px"
-                  objectFit="cover"
-                  src={item.url}
-                  alt="HEP handout"
-                  borderRadius="7px"
-                />
-                <label>{item.title}</label>
-                <Flex
-                  justify="space-between"
-                  flexWrap="wrap
-                "
+            <AddHEPModal />
+          </Flex>
+          <Flex justifyContent={['center', 'center', 'left']}>
+            <SearchBar />
+          </Flex>
+
+          <SimpleGrid
+            minChildWidth="200px"
+            spacingX="20px"
+            spacingY="20px"
+            transition="200ms"
+            zIndex="-10"
+          >
+            {data.map(item => {
+              return (
+                <Box
+                  key={item.id}
+                  height="fit-content"
+                  margin="1rem"
+                  minWidth="200px"
                 >
-                  {item.tags.map(tag => {
-                    return (
-                      <Tag
-                        key={tag.title}
-                        size="sm"
-                        variant="subtle"
-                        colorScheme="gray"
-                        width="fit-content"
-                        margin=".2rem"
-                        borderRadius="full"
-                      >
-                        <TagLabel fontSize=".7rem">
-                          {tag.title.toUpperCase()}
-                        </TagLabel>
-                      </Tag>
-                    );
-                  })}
-                </Flex>
-              </Box>
-            );
-          })}
-        </SimpleGrid>
+                  <Skeleton isLoaded={isLoaded}>
+                    <Image
+                      key={item.url}
+                      boxSize="250px"
+                      objectFit="cover"
+                      src={item.url}
+                      alt="HEP handout"
+                      borderRadius="7px"
+                    />
+                  </Skeleton>
+                  <Skeleton isLoaded={isLoaded}>
+                    <label key={item.title}>{item.title}</label>
+                  </Skeleton>
+                  <Flex
+                    justify="space-between"
+                    flexWrap="wrap
+                "
+                  >
+                    {item.tags.map(tag => {
+                      return (
+                        <Tag
+                          key={tag.id}
+                          size="sm"
+                          variant="subtle"
+                          colorScheme="gray"
+                          width="fit-content"
+                          margin=".2rem"
+                          borderRadius="full"
+                        >
+                          <TagLabel key={tag.title} fontSize=".7rem">
+                            {tag.title.toUpperCase()}
+                          </TagLabel>
+                        </Tag>
+                      );
+                    })}
+                  </Flex>
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        </SkeletonText>
       </Flex>
     </>
   );
