@@ -111,25 +111,15 @@ function CreateAccountModal() {
 
     if (name === 'firstName') {
       setFirstName(value);
-      firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
     }
     if (name === 'lastName') {
       setLastName(value);
-      lastName === '' ? setLastNameError(true) : setLastNameError(false);
     }
     if (name === 'phoneNumber') {
       setPhoneNumber(value);
-      phoneNumber === ''
-        ? setPhoneNumberError(true)
-        : setPhoneNumberError(false);
-      phoneNumber.match(phoneRegex)
-        ? setPhoneNumberError(false)
-        : setPhoneNumberError(true);
     }
     if (name === 'email') {
       setEmail(value);
-      email === '' ? setEmailError(true) : setEmailError(false);
-      email.match(emailRegex) ? setEmailError(true) : setEmailError(false);
     }
     if (name === 'password') {
       setPassword(value);
@@ -140,7 +130,6 @@ function CreateAccountModal() {
   };
 
   const validateFormValues = ({...formValues}) => {
-    console.log(formValues)
     firstName === '' ? setFirstNameError(true) : setFirstNameError(false);
     lastName === '' ? setLastNameError(true) : setLastNameError(false);
     phoneNumber === '' ? setPhoneNumberError(true) : setPhoneNumberError(false);
@@ -387,15 +376,15 @@ function CreateAccountModal() {
               justify="space-between"
               width="100%"
             >
+              
+              <Button colorScheme="teal" variant="outline" onClick={handleClose}>
+                Cancel
+              </Button>
               <Button
                 colorScheme="teal"
-                variant="outline"
                 onClick={validateFormValues}
               >
                 Create account
-              </Button>
-              <Button colorScheme="teal" onClick={handleClose}>
-                Cancel
               </Button>
             </Stack>
           </ModalFooter>
