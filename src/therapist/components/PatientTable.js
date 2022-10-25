@@ -66,19 +66,18 @@ function PatientTable(props) {
           />
         </InputGroup>
       </Flex>
-
-      <TableContainer
-        width="100%"
-        maxWidth="700px"
-        border="solid"
-        borderRadius="7"
-        borderColor="gray"
-      >
-        <Table variant="simple">
-          <TableCaption color="gray.400">
-            Search by first name, last name, or email address
-          </TableCaption>
-          <Skeleton isLoaded={isLoaded} fadeDuration={5}>
+      <Skeleton isLoaded={isLoaded} fadeDuration={1}>
+        <TableContainer
+          width="100%"
+          maxWidth="700px"
+          border="solid"
+          borderRadius="7"
+          borderColor="gray"
+        >
+          <Table variant="simple">
+            <TableCaption color="gray.400">
+              Search by first name, last name, or email address
+            </TableCaption>
             <Thead>
               <Tr>
                 <Th>First Name</Th>
@@ -86,8 +85,7 @@ function PatientTable(props) {
                 <Th>Email</Th>
               </Tr>
             </Thead>
-          </Skeleton>
-          <Skeleton isLoaded={isLoaded} fadeDuration={1}>
+
             <Tbody>
               {searchData.map(user => {
                 return (
@@ -105,9 +103,9 @@ function PatientTable(props) {
                 );
               })}
             </Tbody>
-          </Skeleton>
-        </Table>
-      </TableContainer>
+          </Table>
+        </TableContainer>
+      </Skeleton>
     </>
   );
 }
