@@ -10,12 +10,10 @@ import {
   useDisclosure,
   Button,
   Icon,
-  IconButton,
   Flex,
   VStack,
   Heading,
   Text,
-  Input,
   Textarea,
   Select,
   NumberInput,
@@ -23,17 +21,19 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
-  Table,
-  Tbody,
-  Tr,
-  Td,
-  TableContainer,
-  Tooltip,
-  FormLabel,
+  // IconButton,
+  // Input,
+  // Tooltip,
+  // FormLabel,
 } from '@chakra-ui/react';
-
-import { IconPlus, IconEdit, IconFileUpload } from '@tabler/icons';
+import ExerciseList from './ExerciseList';
 import SearchBar from './SearchBar';
+
+import {
+  IconPlus, 
+  IconEdit, 
+  // IconFileUpload 
+} from '@tabler/icons';
 
 const AssignmentModal = ({ type }) => {
   
@@ -42,13 +42,6 @@ const AssignmentModal = ({ type }) => {
   const [duration, setDuration] = useState('');
   const [durationUnits, setDurationUnits] = useState('');
   const [notes, setNotes] = useState('');
-
-
-  const exercises = [
-    { id: '1', title: 'Tendon Glides' },
-    { id: '2', title: 'Carpal Tunnel' },
-    { id: '3', title: 'Leg Lifts' },
-  ];
 
   let assignHEP = () =>{
     let assignedData = { frequencyByDay, frequencyByWeek, duration, durationUnits, notes }
@@ -78,6 +71,7 @@ const AssignmentModal = ({ type }) => {
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       {type === 'new' ? (
@@ -112,25 +106,7 @@ const AssignmentModal = ({ type }) => {
                   Select Existing Exercise
                 </Heading>
                 <SearchBar />
-                <TableContainer
-                  width="100%"
-                  maxWidth="700px"
-                  border="1px"
-                  borderRadius="7"
-                  borderColor="lightgray"
-                >
-                  <Table variant="simple">
-                    <Tbody>
-                      {exercises.map(exercise => {
-                        return (
-                          <Tr>
-                            <Td>{exercise.title}</Td>
-                          </Tr>
-                        );
-                      })}
-                    </Tbody>
-                  </Table>
-                </TableContainer>
+               <ExerciseList />
                 {/* Upload New Exercise from assignment modal feature for later */}
                 {/* <Heading as="h2" size="sm">
                   Upload New Exercise
