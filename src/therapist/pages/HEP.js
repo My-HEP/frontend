@@ -37,7 +37,6 @@ function HEP() {
     patientEmail: `${patientData.email}`,
   };
 
-
   return (
     <>
       <SideNav />
@@ -101,7 +100,7 @@ function HEP() {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal type="new" />
+          <AssignmentModal type="new"  patientId={patientData.id}/>
         </Flex>
         <AssignedHEP />
         <Button
