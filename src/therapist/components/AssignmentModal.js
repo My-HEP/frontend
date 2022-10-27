@@ -35,7 +35,7 @@ import {
   // IconFileUpload 
 } from '@tabler/icons';
 
-const AssignmentModal = ({ type }) => {
+const AssignmentModal = ({ type, patientId}) => {
   
   const [frequencyByDay, setFrequencyByDay] = useState();
   const [frequencyByWeek, setFrequencyByWeek] = useState('');
@@ -44,7 +44,7 @@ const AssignmentModal = ({ type }) => {
   const [notes, setNotes] = useState('');
 
   let assignHEP = () =>{
-    let assignedData = { frequencyByDay, frequencyByWeek, duration, durationUnits, notes }
+    let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
     fetch('http://localhost:3001/therapist/addHEPExercise', {
       method: 'POST',
       headers: {
@@ -58,6 +58,10 @@ const AssignmentModal = ({ type }) => {
   let updateHEP = () =>{
     onClose();
   }
+
+  let exerciseId = '1jiouklkjio7890';
+  let assignedById = 22;
+
 
   let text, heading, method;
   if (type === 'new') {
