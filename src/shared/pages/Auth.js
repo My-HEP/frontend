@@ -10,12 +10,14 @@ import {
   Image,
   useColorModeValue,
   useToast,
+  Link,
 } from '@chakra-ui/react';
 import { IconMail, IconLock } from '@tabler/icons';
 import { useState } from 'react';
 import CreateAccountModal from '../components/CreateAccountModal';
 import { signIn } from '../../authSignIn';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 
 function Auth() {
   const [email, setEmail] = useState('');
@@ -66,6 +68,35 @@ function Auth() {
         position: 'bottom-left',
       });
       return;
+    }
+  };
+
+  const forgotPasswordHandler = () => {
+    const auth = getAuth();
+    try {
+      if (email) {
+        sendPasswordResetEmail(auth, email);
+        toast({
+          title: 'Password reset email sent.',
+          status: 'success',
+          isClosable: true,
+          position: 'bottom-left',
+        });
+      } else {
+        toast({
+          title: 'Please input a valid email.',
+          status: 'error',
+          isClosable: true,
+          position: 'bottom-left',
+        });
+      }
+    } catch (error) {
+      toast({
+        title: 'Error sending password reset email. Please try again later.',
+        status: 'error',
+        isClosable: true,
+        position: 'bottom-left',
+      });
     }
   };
 
@@ -127,11 +158,11 @@ function Auth() {
             </Text>
           </Flex>
 
-          <Heading marginTop="1.5rem" marginBottom="2rem" fontSize="1.5rem">
+          <Heading marginTop="2rem" marginBottom="1.5rem" fontSize="1.5rem">
             Sign in
           </Heading>
-          <Stack spacing={10} maxWidth="23rem" paddingBottom="3rem">
-            <InputGroup>
+          <Stack spacing={3} maxWidth="23rem" paddingBottom="3rem">
+            <InputGroup marginTop="0" marginBottom="1rem">
               <InputLeftElement children={<IconMail />} />
               <Input
                 type="email"
@@ -142,7 +173,7 @@ function Auth() {
               />
             </InputGroup>
 
-            <InputGroup>
+            <InputGroup marginTop="0" marginBottom="1rem">
               <InputLeftElement children={<IconLock />} />
               <Input
                 type="password"
@@ -150,19 +181,25 @@ function Auth() {
                 focusBorderColor="teal.600"
                 onChange={event => setPassword(event.target.value)}
                 value={password}
+                marginBottom="0rem"
               />
             </InputGroup>
+            <Link onClick={() => forgotPasswordHandler()}>
+              Forgot password?
+            </Link>
             <Stack direction="column" justify="space-between">
               <Button
                 colorScheme="teal"
                 width="100%"
+                marginTop="1.75rem"
+                marginBottom=".75rem"
                 variant="solid"
                 size="lg"
                 onClick={() => signInHandler(email, password)}
               >
                 Sign in
               </Button>
-              <CreateAccountModal  />
+              <CreateAccountModal />
             </Stack>
           </Stack>
         </Flex>
