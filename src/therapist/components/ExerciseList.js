@@ -16,6 +16,9 @@ const ExerciseList = () => {
 
     }, [])
 
+    const selectExercise = (exerciseId) => {
+      // console.log(exerciseId)
+    } 
 
     return exercises ? (
         <TableContainer
@@ -29,8 +32,8 @@ const ExerciseList = () => {
           <Tbody>
             {exercises.map(exercise => {
             return(
-              <Tr>
-                <Td key={exercise.id} id={exercise.id}>{exercise.title}</Td>
+              <Tr key={exercise.id}>
+                <Td id={exercise.id} >{exercise.title}</Td>
               </Tr>
             )})
             }
