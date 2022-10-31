@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { TableContainer, Table, Tbody, Tr, Td, TabList } from '@chakra-ui/react';
+import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
 
 const ExerciseList = () => {
 
