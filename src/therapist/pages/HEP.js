@@ -35,6 +35,7 @@ function HEP() {
     patientName: `${patientData.firstName} ${patientData.lastName}`,
     patientPhone: formatPhoneNumber(patientData.phone),
     patientEmail: `${patientData.email}`,
+    avatar: '',
   };
 
   return (
@@ -63,7 +64,7 @@ function HEP() {
         >
           <Avatar
             name={variables.patientName}
-            src="https://bit.ly/3eoXqDz"
+            src={variables.avatar}
             size="2xl"
             marginRight={['0', '3rem', '3rem']}
           />

@@ -53,6 +53,7 @@ function TherapistHome() {
     userName: userData?.firstName + ' ' + userData?.lastName,
     patientNum: homeStats?.patientsNum,
     exerciseNum: homeStats?.exercisesNum,
+    avatar: userData?.avatar,
   };
 
 // eslint-disable-next-line no-lone-blocks
@@ -90,8 +91,8 @@ function TherapistHome() {
           >
             <VStack spacing={[3, 3, 5]}>
               <Avatar
-                name="Dan Abrahmov"
-                src="https://bit.ly/dan-abramov"
+                name={variables.userName}
+                src={variables.avatar}
                 size="2xl"
               />
 
