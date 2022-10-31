@@ -37,11 +37,13 @@ import {
 
 const AssignmentModal = ({ type, patientId}) => {
   
+  const [selectedExercise, setSelectedExercise] = useState('');
   const [frequencyByDay, setFrequencyByDay] = useState();
   const [frequencyByWeek, setFrequencyByWeek] = useState('');
   const [duration, setDuration] = useState('');
   const [durationUnits, setDurationUnits] = useState('');
   const [notes, setNotes] = useState('');
+
 
   let assignHEP = () =>{
     let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
@@ -110,7 +112,7 @@ const AssignmentModal = ({ type, patientId}) => {
                   Select Existing Exercise
                 </Heading>
                 <SearchBar />
-               <ExerciseList />
+               <ExerciseList setSelectedExercise={setSelectedExercise} selectedExercise={selectedExercise}/>
                 {/* Upload New Exercise from assignment modal feature for later */}
                 {/* <Heading as="h2" size="sm">
                   Upload New Exercise
