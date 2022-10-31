@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
 
-const ExerciseList = () => {
-
+const ExerciseList = ({selectedExercise, setSelectedExercise}) => {
+  
     const [exercises, setExercises] = useState([]);
-    const [selectedExercise, setSelectedExercise] = useState('');
 
   
     const exerciseTable = useRef();
