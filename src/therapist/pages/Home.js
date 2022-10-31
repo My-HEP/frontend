@@ -90,7 +90,7 @@ function TherapistHome() {
           >
             <VStack spacing={[3, 3, 5]}>
               <Avatar
-                name="Dan Abrahmov"
+                name={variables.userName}
                 src="https://bit.ly/dan-abramov"
                 size="2xl"
               />
