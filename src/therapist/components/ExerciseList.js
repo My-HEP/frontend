@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
+import { TableContainer, Table, Tbody, Tr, Td, TabList } from '@chakra-ui/react';
 
 const ExerciseList = () => {
 
@@ -23,23 +23,14 @@ const ExerciseList = () => {
           Array.from(exerciseTable.current.children).forEach(row => Array.from(row.children).forEach(
             tableRow => {
               if(tableRow.id === selectedRow){
+                tableRow.style.fontWeight = "600"
                 tableRow.style.backgroundColor = "#E6FFFA"
-              }else(
+              }else{
+                tableRow.style.fontWeight = "initial"
                 tableRow.style.backgroundColor = "white"
-              )
+              }
             }
           ))
-
-          Array.from(exerciseTable.current.children).forEach(row => Array.from(row.children).forEach(
-            tableData => {
-              if(tableData.id === selectedRow){
-                tableData.style.fontWeight = "600"
-              }else(
-                tableData.style.fontWeight = "initial"
-              )
-            }
-          ))
-         
         };
 
         styleSelected(selectedExercise);
