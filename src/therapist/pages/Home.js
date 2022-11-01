@@ -1,4 +1,4 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -8,9 +8,11 @@ import {
   Button,
   VStack,
   Avatar,
+  Box,
 } from '@chakra-ui/react';
 import Confirmation from '../components/LogoutConfirmation';
 import EditModal from '../../shared/components/Modal';
+import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../../shared/components/LogoIcon';
 import { getAuth } from 'firebase/auth';
@@ -32,22 +34,20 @@ function TherapistHome() {
         },
         body: JSON.stringify({ uid }),
       });
-     
-        const userResponse = await response.json();
-        setUserData(userResponse);
-      }
 
-      const homeStats = async (req, res) => {
-        const response = await fetch('http://localhost:3001/therapist/homeStats')
-        const stats = await response.json();
-        setHomeStats(stats);
-      }
-    
-      homeStats();
-      fetchData();
-    
+      const userResponse = await response.json();
+      setUserData(userResponse);
+    };
+
+    const homeStats = async (req, res) => {
+      const response = await fetch('http://localhost:3001/therapist/homeStats');
+      const stats = await response.json();
+      setHomeStats(stats);
+    };
+
+    homeStats();
+    fetchData();
   }, [uid]);
-
 
   const variables = {
     userName: userData?.firstName + ' ' + userData?.lastName,
@@ -56,8 +56,9 @@ function TherapistHome() {
     avatar: userData?.avatar,
   };
 
-// eslint-disable-next-line no-lone-blocks
-{ if (user) {
+  // eslint-disable-next-line no-lone-blocks
+  {
+    if (user) {
       return (
         <Flex
           height="100%"
@@ -73,6 +74,7 @@ function TherapistHome() {
           <Flex
             gap={['2', '5']}
             mb={['1rem', '1rem', '2rem']}
+            marginLeft={['0', '0', '3rem']}
             align="center"
             justify={['center', 'center', 'start']}
             minWidth={['300px', '300px', '500px']}
@@ -139,6 +141,15 @@ function TherapistHome() {
               </Link>
             </VStack>
           </Flex>
+          <Box
+            display="block"
+            position="fixed"
+            bottom="30px"
+            align="center"
+            left="20px"
+          >
+            <ColorModeSwitcher />
+          </Box>
         </Flex>
       );
     } else {
