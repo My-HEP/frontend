@@ -18,7 +18,7 @@ import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import { IconUsers, IconBarbell } from '@tabler/icons';
 import { logoIcon } from '../../shared/components/LogoIcon';
 import { getAuth } from 'firebase/auth';
-import waves from './layered-waves-haikei (2).png';
+import waves from './layered-waves-haikei (1).svg';
 
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
@@ -73,7 +73,11 @@ function TherapistHome() {
             zIndex="1"
             overflow="scroll"
           >
-            <AspectRatio ratio={16 / 9} position="null">
+            <AspectRatio
+              ratio={16 / 9}
+              position="null"
+              display={['none', 'none', 'flex']}
+            >
               <Image src={waves} position="fixed" />
             </AspectRatio>
             <Flex
@@ -89,8 +93,10 @@ function TherapistHome() {
               minWidth="10rem"
               zIndex="1"
             >
-              <VStack align="start" marginLeft={['1rem', '0']}>
-                <Heading size={'3xl'}>Welcome back,</Heading>
+              <VStack align={['center', 'center', 'start']}>
+                <Heading size={'3xl'} textAlign={['center', 'left']}>
+                  Welcome back,
+                </Heading>
                 {userData.firstName ? (
                   <Heading size={'2xl'} textAlign={['center', 'left']}>
                     {userData.firstName}
@@ -114,7 +120,7 @@ function TherapistHome() {
               <Flex
                 direction={['column', 'column', 'row']}
                 // margin={['1rem 0', '0.5rem 0', '2rem 0']}
-                marginTop="5rem"
+                marginTop={['2rem', '2rem', '5rem']}
               >
                 <VStack
                   spacing={[3, 3, 5]}
