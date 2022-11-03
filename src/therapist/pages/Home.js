@@ -88,7 +88,7 @@ function TherapistHome() {
               marginLeft={['10', '10', '20%']}
               marginRight={['10', '10', '20%']}
               marginTop={['20', '20', '40']}
-              paddingTop="5rem"
+              paddingTop={['0', '0', '5rem']}
               paddingBottom="100px"
               minWidth="10rem"
               zIndex="1"
