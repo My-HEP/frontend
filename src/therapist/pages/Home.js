@@ -73,7 +73,7 @@ function TherapistHome() {
             zIndex="1"
             overflow="scroll"
           >
-            <AspectRatio ratio={16 / 9}>
+            <AspectRatio ratio={16 / 9} position="null">
               <Image src={waves} position="fixed" />
             </AspectRatio>
             <Flex
