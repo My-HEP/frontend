@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { Link, useHref } from 'react-router-dom';
 import {
   Flex,
   Icon,
@@ -13,31 +13,27 @@ import {
   Image,
 } from '@chakra-ui/react';
 import Confirmation from '../components/LogoutConfirmation';
-import EditModal from '../../shared/components/Modal';
+// import EditModal from '../../shared/components/Modal';
+import EditInfoForm from '../../shared/components/EditInfoForm';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import { IconUsers, IconBarbell } from '@tabler/icons';
-import { logoIcon } from '../../shared/components/LogoIcon';
+// import { logoIcon } from '../../shared/components/LogoIcon';
 import { getAuth } from 'firebase/auth';
 import waves from './layered-waves-haikei (1).svg';
+import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
-  const [homeStats, setHomeStats] = useState();
+  const [homeStats, setHomeStats] = useState({});
 
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const uid = user?.uid;
+  const { auth } = useFirebaseAuth() ?? {};
+  const uid = auth?.currentUser?.uid;
 
   useEffect(() => {
-    const fetchData = async (req, res) => {
-      const response = await fetch('http://localhost:3001/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ uid }),
-      });
+    if (!uid) return;
 
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:3001/user/${uid}`);
       const userResponse = await response.json();
       setUserData(userResponse);
     };
@@ -50,7 +46,7 @@ function TherapistHome() {
 
     homeStats();
     fetchData();
-  }, [uid]);
+  }, [uid, setHomeStats, setUserData]);
 
   const variables = {
     userName: userData?.firstName + ' ' + userData?.lastName,
@@ -61,7 +57,7 @@ function TherapistHome() {
 
   // eslint-disable-next-line no-lone-blocks
   {
-    if (user) {
+    if (uid) {
       return (
         <>
           <Flex
@@ -145,7 +141,16 @@ function TherapistHome() {
                         {variables.userName}
                       </Text>
                     </Flex>
-                    <EditModal type={'self'} />
+                    {/* <EditModal type={'self'} /> */}
+                    <EditInfoForm
+                      type={'self'}
+                      patientId={userData.uid}
+                      currentFirstName={userData.firstName}
+                      currentLastName={userData.lastName}
+                      currentPhone={userData.phone}
+                      currentEmail={userData.email}
+                      currentFullName={variables.patientName}
+                    />
                     <Confirmation />
                   </VStack>
                 </VStack>

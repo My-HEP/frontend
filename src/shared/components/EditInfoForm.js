@@ -133,7 +133,7 @@ const EditInfoForm = props => {
                     />
                     <Tooltip label="Update avatar">
                       <FormLabel htmlFor="upload">
-                        <Input type="text" id="upload" hidden />
+                        <Input type="text" id="upload" />
                         <IconButton
                           as={IconPencil}
                           size="xs"
