@@ -20,7 +20,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function PatientTable(props) {
-
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
 
@@ -35,7 +34,6 @@ function PatientTable(props) {
     fetchData();
   }, []);
 
-
   const handleSearch = event => {
     setSearch(event.target.value);
   };
@@ -44,9 +42,9 @@ function PatientTable(props) {
     item.lastName.toLowerCase().includes(search.toLowerCase())
   );
 
-  const onRowClickHandler = (user) => {
-    let id = user.currentTarget.id;
-    navigate(`/hep/${id}`);
+  const onRowClickHandler = user => {
+    let uid = user.currentTarget.id;
+    navigate(`/hep/${uid}`);
   };
 
   return (
@@ -91,7 +89,7 @@ function PatientTable(props) {
                   onClick={user => onRowClickHandler(user)}
                   cursor="pointer"
                   key={user.uid}
-                  id={user.id}
+                  id={user.uid}
                   link="true"
                 >
                   <Td>{user.firstName}</Td>

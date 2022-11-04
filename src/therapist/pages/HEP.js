@@ -1,41 +1,51 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Flex, VStack, Avatar, Heading, Text, Button } from '@chakra-ui/react';
 import { IconMail, IconPhone, IconEye } from '@tabler/icons';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import AssignedHEP from '../components/AssignedHEP';
-import EditModal from '../../shared/components/Modal';
+import EditInfoForm from '../../shared/components/EditInfoForm';
 import AssignmentModal from '../components/AssignmentModal';
-
+import { useParams } from 'react-router-dom';
 
 function HEP() {
+  const uidFromUrl = useParams();
+  const uid = uidFromUrl.uid;
 
-  const [patientData, setPatientData] = useState([]);
+  const [currentUserData, setCurrentUserData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let id = window.location.href.slice(26);
-      const response = await fetch(`http://localhost:3001/therapist/patient/${id}`);
-      const patient = await response.json();
-      setPatientData(patient);
+    const fetchData = async (req, res) => {
+      const response = await fetch('http://localhost:3001/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ uid }),
+      });
+
+      const userResponse = await response.json();
+      setCurrentUserData(userResponse);
     };
     fetchData();
-  }, []);
+  }, [uid]);
 
- const formatPhoneNumber = (phoneNumber) => {
-    if(phoneNumber !== undefined){
-      let stringNumber = phoneNumber.toString()
-      return stringNumber.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+  const formatPhoneNumber = phoneNumber => {
+    if (phoneNumber !== undefined) {
+      let stringNumber = phoneNumber.toString();
+      return stringNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     }
- }
+  };
 
- formatPhoneNumber(patientData.phone)
+  formatPhoneNumber(currentUserData.phone);
   const variables = {
-    patientName: `${patientData.firstName} ${patientData.lastName}`,
-    patientPhone: formatPhoneNumber(patientData.phone),
-    patientEmail: `${patientData.email}`,
-    avatar: '',
+    fullName: `${currentUserData.firstName} ${currentUserData.lastName}`,
+    firstName: `${currentUserData.firstName}`,
+    lastName: `${currentUserData.lastName}`,
+    phone: formatPhoneNumber(currentUserData.phone),
+    email: `${currentUserData.email}`,
+    avatar: `${currentUserData.avatar}`,
   };
 
   return (
@@ -63,14 +73,14 @@ function HEP() {
           maxWidth="800px"
         >
           <Avatar
-            name={variables.patientName}
+            name={variables.fullName}
             src={variables.avatar}
             size="2xl"
             marginRight={['0', '3rem', '3rem']}
           />
           <VStack justify="center" align="start" spacing={5}>
             <Heading as="h1" size="xl">
-              {variables.patientName}
+              {variables.fullName}
             </Heading>
             <Flex
               width="100%"
@@ -81,14 +91,22 @@ function HEP() {
             >
               <Flex gap="2" minWidth="200px">
                 <IconPhone />
-                <Text>{variables.patientPhone}</Text>
+                <Text>{variables.phone}</Text>
               </Flex>
               <Flex gap="2" minWidth="200px">
                 <IconMail />
-                <Text>{variables.patientEmail}</Text>
+                <Text>{variables.email}</Text>
               </Flex>
             </Flex>
-            <EditModal type={'therapist'} />
+            <EditInfoForm
+              type={'therapist'}
+              patientId={uid}
+              currentFirstName={variables.firstName}
+              currentLastName={variables.lastName}
+              currentPhone={variables.phone}
+              currentEmail={variables.email}
+              currentFullName={variables.patientName}
+            />
           </VStack>
         </Flex>
         <Flex
@@ -101,7 +119,7 @@ function HEP() {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal type="new"  patientId={patientData.id}/>
+          <AssignmentModal type="new" patientId={currentUserData.id} />
         </Flex>
         <AssignedHEP />
         <Button
