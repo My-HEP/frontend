@@ -50,6 +50,8 @@ const EditInfoForm = props => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [isHidden, setIsHidden] = useState(true);
 
   // const uid = currentUserData.uid;
 
@@ -133,18 +135,30 @@ const EditInfoForm = props => {
                     />
                     <Tooltip label="Update avatar">
                       <FormLabel htmlFor="upload">
-                        <Input type="text" id="upload" hidden />
                         <IconButton
                           as={IconPencil}
                           size="xs"
                           aria-label="edit content"
                           variant="ghost"
                           colorScheme="teal"
+                          onClick={() => setIsHidden(!isHidden)}
                         />
                       </FormLabel>
                     </Tooltip>
                   </Flex>
                 </Editable>
+                <Input
+                  type="text"
+                  id="upload"
+                  marginTop="1rem"
+                  width="90%"
+                  alignSelf="center"
+                  focusBorderColor="teal.500"
+                  display="inline"
+                  onChange={event => setAvatar(event.target.value)}
+                  value={avatar}
+                  hidden={isHidden}
+                />
                 <Editable
                   defaultValue={props.currentFirstName}
                   isPreviewFocusable={true}
