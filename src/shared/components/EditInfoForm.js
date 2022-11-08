@@ -13,9 +13,6 @@ import {
   VStack,
   Flex,
   useColorModeValue,
-  // Link as Hyperlink,
-  // Alert,
-  // AlertIcon,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -28,46 +25,18 @@ import {
   Link as HyperLink,
   Text,
 } from '@chakra-ui/react';
-import {
-  IconPhone,
-  IconMail,
-  // IconLock,
-  IconPencil,
-  IconUser,
-} from '@tabler/icons';
+import { IconPhone, IconMail, IconPencil, IconUser } from '@tabler/icons';
 import { IconSettings } from '@tabler/icons';
 import { useState, useEffect } from 'react';
 
 const EditInfoForm = props => {
-  // const { getDisclosureProps, getButtonProps } = useDisclosure();
-  // const resetPassword = getButtonProps();
-  // const alert = getDisclosureProps();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [currentUserData, setCurrentUserData] = useState([]);
-  // const [userId, setUserId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-
-  // const uid = currentUserData.uid;
-
-  // useEffect(patientId => {
-  //   const fetchData = async (req, res) => {
-  //     const response = await fetch('http://localhost:3001/user', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ patientId }),
-  //     });
-
-  //     const userResponse = await response.json();
-  //     setCurrentUserData(userResponse);
-  //   };
-  //   fetchData();
-  // }, []);
 
   const updateDataHandler = async (
     uid,
