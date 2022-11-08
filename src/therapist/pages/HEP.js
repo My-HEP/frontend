@@ -18,14 +18,7 @@ function HEP() {
 
   useEffect(() => {
     const fetchUser = async (req, res) => {
-      const response = await fetch('http://localhost:3001/user', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ uid }),
-      });
-
+      const response = await fetch(`http://localhost:3001/user/${uid}`);
       const userResponse = await response.json();
       setCurrentUserData(userResponse);
     };
