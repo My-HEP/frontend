@@ -40,6 +40,7 @@ function TherapistHome() {
       const response = await fetch(`http://localhost:3001/user/${uid}`);
       const userResponse = await response.json();
       setUserData(userResponse);
+      setIsLoaded(true);
     };
 
     const homeStats = async (req, res) => {
@@ -50,10 +51,7 @@ function TherapistHome() {
 
     homeStats();
     fetchData();
-    if (userData) {
-      setIsLoaded(true);
-    }
-  }, [uid, setHomeStats, setUserData]);
+  }, [uid, setHomeStats, setUserData, setIsLoaded]);
 
   const variables = {
     userName: userData?.firstName + ' ' + userData?.lastName,
@@ -81,8 +79,7 @@ function TherapistHome() {
           <Skeleton height="20px" width="50%" maxWidth="600px" />
         </Flex>
       );
-    }
-    if (userData.firstName) {
+    } else if (userData.firstName) {
       return (
         <>
           <Fade in={isLoaded}>
@@ -125,11 +122,6 @@ function TherapistHome() {
                   ) : (
                     <SkeletonText />
                   )}
-                  {/* (
-                    <Heading size={'2xl'} textAlign={['center', 'left']}>
-                      Therapist
-                    </Heading>
-                  )} */}
                 </VStack>
                 <Flex
                   direction={['column', 'column', 'row']}
@@ -224,8 +216,7 @@ function TherapistHome() {
           </Fade>
         </>
       );
-    }
-    if (!uid) {
+    } else {
       return (
         <Flex
           flexDirection="column"
