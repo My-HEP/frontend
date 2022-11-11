@@ -224,8 +224,7 @@ function TherapistHome() {
           </Fade>
         </>
       );
-    }
-    if (!uid) {
+    } else {
       return (
         <Flex
           flexDirection="column"
