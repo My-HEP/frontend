@@ -45,7 +45,8 @@ const EditInfoForm = props => {
     firstName,
     lastName,
     phoneNumber,
-    email
+    email,
+    avatar
   ) => {
     const updatedUser = {
       uid,
@@ -53,6 +54,7 @@ const EditInfoForm = props => {
       lastName,
       phoneNumber,
       email,
+      avatar,
     };
     try {
       const response = await fetch('http://localhost:3001/updateUser', {
@@ -247,7 +249,8 @@ const EditInfoForm = props => {
                   firstName,
                   lastName,
                   phoneNumber,
-                  email
+                  email,
+                  avatar
                 )
               }
               colorScheme="teal"
