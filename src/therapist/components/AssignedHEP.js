@@ -56,6 +56,10 @@ const AssignedHEP = ({hepTitle, url, frequencyByDay, frequencyByWeek, duration, 
         align='start'
         justify='center'
         spacing={3}
+        width={['100%','100%','50%']}
+        maxWidth={'400px'}
+        marginLeft={['auto', 'auto', '4']}
+        marginRight={['auto', 'auto', '0']}
       >
         <Flex
           width='100%'
