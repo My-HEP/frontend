@@ -28,6 +28,7 @@ import {
 import { IconPhone, IconMail, IconPencil, IconUser } from '@tabler/icons';
 import { IconSettings } from '@tabler/icons';
 import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const EditInfoForm = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -64,8 +65,8 @@ const EditInfoForm = props => {
         },
         body: JSON.stringify(updatedUser),
       });
+      props.fetchUserData();
       onClose();
-      window.location.reload();
     } catch (error) {
       console.log(error);
     }

@@ -27,21 +27,25 @@ import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
   const [homeStats, setHomeStats] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   const { auth } = useFirebaseAuth() ?? {};
   const uid = auth?.currentUser?.uid;
 
+  console.log(auth);
+
+  const fetchUserData = async (req, res) => {
+    const response = await fetch(`http://localhost:3001/user/${uid}`);
+    const userResponse = await response.json();
+    setUserData(userResponse);
+    setIsLoaded(true);
+  };
+
   useEffect(() => {
     setIsLoaded(false);
-    if (!uid) return;
-
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:3001/user/${uid}`);
-      const userResponse = await response.json();
-      setUserData(userResponse);
-      setIsLoaded(true);
-    };
+    if (uid) {
+      fetchUserData();
+    }
 
     const homeStats = async (req, res) => {
       const response = await fetch('http://localhost:3001/therapist/homeStats');
@@ -50,7 +54,6 @@ function TherapistHome() {
     };
 
     homeStats();
-    fetchData();
   }, [uid, setHomeStats, setUserData, setIsLoaded]);
 
   const variables = {
@@ -59,6 +62,8 @@ function TherapistHome() {
     exerciseNum: homeStats?.exercisesNum,
     avatar: userData?.avatar,
   };
+
+  console.log(userData.email);
 
   // eslint-disable-next-line no-lone-blocks
   {
@@ -159,6 +164,7 @@ function TherapistHome() {
                         currentPhone={userData.phone}
                         currentEmail={userData.email}
                         currentFullName={variables.patientName}
+                        fetchUserData={fetchUserData}
                       />
                       <Confirmation />
                     </VStack>
