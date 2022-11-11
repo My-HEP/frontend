@@ -35,7 +35,7 @@ import {
   // IconFileUpload 
 } from '@tabler/icons';
 
-const AssignmentModal = ({ type, patientId}) => {
+const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
   
   const [exerciseId, setExerciseId] = useState('');
   const [frequencyByDay, setFrequencyByDay] = useState();
@@ -45,16 +45,24 @@ const AssignmentModal = ({ type, patientId}) => {
   const [notes, setNotes] = useState('');
 
 
-  let assignHEP = () =>{
+  let assignHEP = async () =>{
     let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
-    fetch('http://localhost:3001/therapist/addHEPExercise', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(assignedData),
-    });
-    onClose();
+    try{
+      let response = await fetch('http://localhost:3001/therapist/addHEPExercise', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(assignedData),
+      });
+      if(response.ok){
+          fetchHEPs();
+          onClose();
+        }
+    } catch (error){
+      console.log(error)
+    }
+
   }
 
   let updateHEP = () =>{
