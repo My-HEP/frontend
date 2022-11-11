@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Skeleton } from '@chakra-ui/react';
 import PatientTable from '../components/PatientTable';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';

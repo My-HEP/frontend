@@ -8,9 +8,14 @@ import {
   Button,
   VStack,
   Avatar,
+  Skeleton,
+  SkeletonCircle,
   Box,
   AspectRatio,
   Image,
+  Stack,
+  Fade,
+  SkeletonText,
 } from '@chakra-ui/react';
 import Confirmation from '../components/LogoutConfirmation';
 import EditInfoForm from '../../shared/components/EditInfoForm';
@@ -22,11 +27,13 @@ import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 function TherapistHome() {
   const [userData, setUserData] = useState([]);
   const [homeStats, setHomeStats] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const { auth } = useFirebaseAuth() ?? {};
   const uid = auth?.currentUser?.uid;
 
   useEffect(() => {
+    setIsLoaded(false);
     if (!uid) return;
 
     const fetchData = async () => {
@@ -43,6 +50,9 @@ function TherapistHome() {
 
     homeStats();
     fetchData();
+    if (userData) {
+      setIsLoaded(true);
+    }
   }, [uid, setHomeStats, setUserData]);
 
   const variables = {
@@ -54,137 +64,168 @@ function TherapistHome() {
 
   // eslint-disable-next-line no-lone-blocks
   {
-    if (uid) {
+    if (!isLoaded) {
+      return (
+        <Flex
+          direction="column"
+          align="center"
+          justify="center"
+          height="100vh"
+          padding="0"
+          gap="1rem"
+          position="relative"
+        >
+          <SkeletonCircle left="0" size={40} />
+          <Skeleton height="40px" width="50%" maxWidth="600px" />
+          <Skeleton height="20px" width="50%" maxWidth="600px" />
+          <Skeleton height="20px" width="50%" maxWidth="600px" />
+        </Flex>
+      );
+    }
+    if (userData.firstName) {
       return (
         <>
-          <Flex
-            direction="column"
-            align="center"
-            height="100vh"
-            padding="0"
-            zIndex="1"
-            overflow="scroll"
-          >
-            <AspectRatio
-              ratio={16 / 9}
-              position="null"
-              display={['none', 'none', 'flex']}
-            >
-              <Image src={waves} position="fixed" />
-            </AspectRatio>
+          <Fade in={isLoaded}>
             <Flex
-              height="100%"
               direction="column"
-              align={['center', 'center', 'start']}
-              marginLeft={['10', '10', '20%']}
-              marginRight={['10', '10', '20%']}
-              marginTop={['20', '20', '40']}
-              paddingTop={['0', '0', '5rem']}
-              paddingBottom="100px"
-              minWidth="10rem"
+              align="center"
+              height="100vh"
+              padding="0"
               zIndex="1"
+              overflow="scroll"
             >
-              <VStack align={['center', 'center', 'start']}>
-                <Heading size={'3xl'} textAlign={['center', 'left']}>
-                  Welcome back,
-                </Heading>
-                {userData.firstName ? (
-                  <Heading size={'2xl'} textAlign={['center', 'left']}>
-                    {userData.firstName}
-                  </Heading>
-                ) : (
-                  <Heading size={'2xl'} textAlign={['center', 'left']}>
-                    Therapist
-                  </Heading>
-                )}
-              </VStack>
+              <AspectRatio
+                ratio={16 / 9}
+                position="null"
+                display={['none', 'none', 'flex']}
+              >
+                <Image src={waves} position="fixed" />
+              </AspectRatio>
+
               <Flex
-                direction={['column', 'column', 'row']}
-                marginTop={['2rem', '2rem', '5rem']}
+                height="100%"
+                direction="column"
+                align={['center', 'center', 'start']}
+                marginLeft={['10', '10', '20%']}
+                marginRight={['10', '10', '20%']}
+                marginTop={['20', '20', '40']}
+                paddingTop={['0', '0', '5rem']}
+                paddingBottom="100px"
+                minWidth="10rem"
+                zIndex="1"
               >
-                <VStack
-                  spacing={[3, 3, 5]}
-                  width={['100%', '100%', '50%']}
-                  minWidth="300px"
-                  align={['center', 'center', 'start']}
-                  padding="0px"
+                <VStack align={['center', 'center', 'start']}>
+                  <Heading size={'3xl'} textAlign={['center', 'left']}>
+                    Welcome back,
+                  </Heading>
+                  {userData.firstName ? (
+                    <Heading size={'2xl'} textAlign={['center', 'left']}>
+                      {userData.firstName}
+                    </Heading>
+                  ) : (
+                    <SkeletonText />
+                  )}
+                  {/* (
+                    <Heading size={'2xl'} textAlign={['center', 'left']}>
+                      Therapist
+                    </Heading>
+                  )} */}
+                </VStack>
+                <Flex
+                  direction={['column', 'column', 'row']}
+                  marginTop={['2rem', '2rem', '5rem']}
                 >
-                  <Avatar
-                    name={variables.userName}
-                    src={variables.avatar}
-                    size="2xl"
-                  />
-                  <VStack spacing={5} align="start">
-                    <Flex
-                      minWidth="200px"
-                      gap="3"
-                      justify="start"
-                      align="start"
-                    >
-                      <Text as="b" fontSize="2xl">
-                        {variables.userName}
-                      </Text>
-                    </Flex>
-                    <EditInfoForm
-                      type={'self'}
-                      patientId={userData.uid}
-                      currentFirstName={userData.firstName}
-                      currentLastName={userData.lastName}
-                      currentPhone={userData.phone}
-                      currentEmail={userData.email}
-                      currentFullName={variables.patientName}
+                  <VStack
+                    spacing={[3, 3, 5]}
+                    width={['100%', '100%', '50%']}
+                    minWidth="300px"
+                    align={['center', 'center', 'start']}
+                    padding="0px"
+                  >
+                    <Avatar
+                      name={variables.userName}
+                      src={variables.avatar}
+                      size="2xl"
                     />
-                    <Confirmation />
+
+                    <VStack spacing={5} align="start">
+                      <Flex
+                        minWidth="200px"
+                        gap="3"
+                        justify="start"
+                        align="start"
+                      >
+                        <Text as="b" fontSize="2xl">
+                          {variables.userName}
+                        </Text>
+                      </Flex>
+                      <EditInfoForm
+                        type={'self'}
+                        patientId={userData.uid}
+                        currentFirstName={userData.firstName}
+                        currentLastName={userData.lastName}
+                        currentPhone={userData.phone}
+                        currentEmail={userData.email}
+                        currentFullName={variables.patientName}
+                      />
+                      <Confirmation />
+                    </VStack>
                   </VStack>
-                </VStack>
-                <VStack
-                  spacing={[6, 7, 10]}
-                  width={['100%', '100%', '50%']}
-                  mt={['3rem', '3rem', 0]}
-                  minWidth="300px"
+                  <VStack
+                    spacing={[6, 7, 10]}
+                    width={['100%', '100%', '50%']}
+                    mt={['3rem', '3rem', 0]}
+                    minWidth="300px"
+                  >
+                    <Text as="b">
+                      Currently serving {variables.patientNum} patients
+                    </Text>
+
+                    <Link to="/patients">
+                      <Button
+                        leftIcon={<IconUsers />}
+                        colorScheme="teal"
+                        variant="outline"
+                        size="lg"
+                        minWidth="14.5rem"
+                      >
+                        My Patients
+                      </Button>
+                    </Link>
+
+                    <Text as="b">
+                      {variables.exerciseNum} Exercises uploaded
+                    </Text>
+
+                    <Link to="/exerciselibrary">
+                      <Button
+                        leftIcon={<IconBarbell />}
+                        colorScheme="teal"
+                        variant="outline"
+                        size="lg"
+                        minWidth="14.5rem"
+                      >
+                        Exercise Library
+                      </Button>
+                    </Link>
+                  </VStack>
+                </Flex>
+                <Box
+                  display="block"
+                  position="fixed"
+                  bottom={['10px', '10px', '30px']}
+                  align="center"
+                  left={['4px', '7px', '20px']}
                 >
-                  <Text as="b">
-                    Currently serving {variables.patientNum} patients
-                  </Text>
-                  <Link to="/patients">
-                    <Button
-                      leftIcon={<IconUsers />}
-                      colorScheme="teal"
-                      variant="outline"
-                      size="lg"
-                      minWidth="14.5rem"
-                    >
-                      My Patients
-                    </Button>
-                  </Link>
-                  <Text as="b">{variables.exerciseNum} Exercises uploaded</Text>
-                  <Link to="/exerciselibrary">
-                    <Button
-                      leftIcon={<IconBarbell />}
-                      colorScheme="teal"
-                      variant="outline"
-                      size="lg"
-                      minWidth="14.5rem"
-                    >
-                      Exercise Library
-                    </Button>
-                  </Link>
-                </VStack>
+                  <ColorModeSwitcher />
+                </Box>
               </Flex>
-              <Box
-                display="block"
-                position="fixed"
-                bottom={['10px', '10px', '30px']}
-                align="center"
-                left={['4px', '7px', '20px']}
-              >
-                <ColorModeSwitcher />
-              </Box>
             </Flex>
-          </Flex>
+          </Fade>
         </>
       );
-    } else {
+    }
+    if (!uid) {
       return (
         <Flex
           flexDirection="column"
