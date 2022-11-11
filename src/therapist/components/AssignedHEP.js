@@ -1,10 +1,12 @@
 import React from 'react';
-import { Flex, VStack, Heading, Image, Text, Icon } from '@chakra-ui/react';
+import { Flex, VStack, Heading, Image, Text } from '@chakra-ui/react';
 
 import AssignmentModal from './AssignmentModal';
 
-const AssignedHEP = ({hepTitle, url, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, therapist}) => {
+const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, therapist}) => {
   const variables = {
+    patientId,
+    exerciseId,
     hepTitle,
     url,
     frequencyByDay,
@@ -32,7 +34,7 @@ const AssignedHEP = ({hepTitle, url, frequencyByDay, frequencyByWeek, duration, 
         justify='end'
         order={['0', '0', '3']}
       >
-        <AssignmentModal type='edit' />
+        <AssignmentModal type='edit' patientId={patientId} assignmentData={variables}/>
       </Flex>
       <VStack
         align={['center', 'center', 'start']}
