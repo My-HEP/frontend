@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -35,8 +35,8 @@ import {
   // IconFileUpload 
 } from '@tabler/icons';
 
-const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
-  
+const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
+
   const [exerciseId, setExerciseId] = useState('');
   const [frequencyByDay, setFrequencyByDay] = useState();
   const [frequencyByWeek, setFrequencyByWeek] = useState('');
@@ -44,8 +44,18 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
   const [durationUnits, setDurationUnits] = useState('');
   const [notes, setNotes] = useState('');
 
+  useEffect(() => {
+    if(assignmentData){
+      setExerciseId(assignmentData.exerciseId)
+      setFrequencyByDay(assignmentData.frequencyByDay)
+      setFrequencyByWeek(assignmentData.frequencyByWeek)
+      setDuration(assignmentData.duration)
+      setDurationUnits(assignmentData.durationUnits)
+      setNotes(assignmentData.notes)
+    }
+  }, [assignmentData])
 
-  let assignHEP = async () =>{
+  const assignHEP = async () =>{
     let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
     try{
       let response = await fetch('http://localhost:3001/therapist/addHEPExercise', {
@@ -60,14 +70,32 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
           onClose();
         }
     } catch (error){
-      console.log(error)
+     
     }
 
   }
 
-  let updateHEP = () =>{
-    onClose();
+  const updateHEP = async () =>{
+    let updatedHEP = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+    try{
+      let response = await fetch('http://localhost:3001/therapist/updateHEPExercise', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedHEP),
+      });
+      if(response.ok){
+          fetchHEPs();
+          onClose();
+        }
+    } catch (error){
+   
+    }
   }
+
+  
+
 
   let assignedById = 6;
 
@@ -170,7 +198,7 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
-                          value={frequencyByDay}
+                          value={frequencyByDay} 
                           onChange={(value) => setFrequencyByDay(value)}
                         >
                           <NumberInputField />
