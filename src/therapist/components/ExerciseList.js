@@ -1,72 +1,69 @@
 import { useState, useEffect, useRef } from 'react';
 import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
 
-const ExerciseList = ({selectedExercise, setSelectedExercise}) => {
-  
-    const [exercises, setExercises] = useState([]);
+const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
+  const [exercises, setExercises] = useState([]);
 
-  
-    const exerciseTable = useRef();
+  const exerciseTable = useRef();
 
-    useEffect(()=> {
-        let getHEPExercises = async (req, res) => {
-        const response = await fetch('http://localhost:3001/therapist/Exercises')
-        const exerciseAssignments = await response.json();
-        setExercises(exerciseAssignments)
-        }
+  useEffect(() => {
+    let getHEPExercises = async (req, res) => {
+      const response = await fetch('http://localhost:3001/therapist/Exercises');
+      const exerciseAssignments = await response.json();
+      setExercises(exerciseAssignments);
+    };
 
-        getHEPExercises()
+    getHEPExercises();
 
+    const styleSelected = selectedRow => {
+      Array.from(exerciseTable.current.children).forEach(row =>
+        Array.from(row.children).forEach(tableRow => {
+          if (tableRow.id === selectedRow) {
+            tableRow.style.fontWeight = '600';
+            tableRow.style.backgroundColor = '#E6FFFA';
+            tableRow.style.color = 'black';
+          } else {
+            tableRow.style.fontWeight = 'initial';
+            tableRow.style.backgroundColor = 'initial';
+            tableRow.style.color = 'initial';
+          }
+        })
+      );
+    };
 
-        const styleSelected = (selectedRow) => {
-          Array.from(exerciseTable.current.children).forEach(row => Array.from(row.children).forEach(
-            tableRow => {
-              if(tableRow.id === selectedRow){
-                tableRow.style.fontWeight = "600"
-                tableRow.style.backgroundColor = "#E6FFFA"
-                tableRow.style.color = "black"
-              }else{
-                tableRow.style.fontWeight = "initial"
-                tableRow.style.backgroundColor = "initial"
-                tableRow.style.color = "initial"
-              }
-            }
-          ))
-        };
+    styleSelected(selectedExercise);
+  }, [selectedExercise]);
 
-        styleSelected(selectedExercise);
+  const selectExercise = e => {
+    let exerciseId = e.target.id;
+    setSelectedExercise(exerciseId);
+  };
 
-    }, [selectedExercise])
-
-    const selectExercise = (e) => {
-      let exerciseId = e.target.id;
-      setSelectedExercise(exerciseId)
-    } 
-
-  
-    return exercises ? (
-        <TableContainer
-        width="100%"
-        maxWidth="700px"
-        border="1px"
-        borderRadius="7"
-        borderColor="lightgray"
-      >
-        <Table variant="simple">
-          <Tbody ref={exerciseTable}>
-            {exercises.map(exercise => {
-            return(
+  return exercises ? (
+    <TableContainer
+      width="100%"
+      maxWidth="700px"
+      border="1px"
+      borderRadius="7"
+      borderColor="lightgray"
+    >
+      <Table variant="simple">
+        <Tbody ref={exerciseTable}>
+          {exercises.map(exercise => {
+            return (
               <Tr key={exercise.id}>
-                <Td id={exercise.id} onClick={selectExercise}>{exercise.title}</Td>
+                <Td id={exercise.id} onClick={selectExercise}>
+                  {exercise.title}
+                </Td>
               </Tr>
-            )})
-            }
-          </Tbody>
-        </Table>
-      </TableContainer>
-    ) : (
-       <p>"Loading exercises..."</p>
-    );
-}
+            );
+          })}
+        </Tbody>
+      </Table>
+    </TableContainer>
+  ) : (
+    <p>"Loading exercises..."</p>
+  );
+};
 
 export default ExerciseList;
