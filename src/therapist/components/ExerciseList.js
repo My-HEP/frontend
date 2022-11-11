@@ -21,9 +21,11 @@ const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
           if (tableRow.id === selectedRow) {
             tableRow.style.fontWeight = '600';
             tableRow.style.backgroundColor = '#E6FFFA';
+            tableRow.style.color = 'black';
           } else {
             tableRow.style.fontWeight = 'initial';
-            tableRow.style.backgroundColor = 'white';
+            tableRow.style.backgroundColor = 'initial';
+            tableRow.style.color = 'initial';
           }
         })
       );
