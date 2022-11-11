@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Flex, VStack, Avatar, Heading, Text, Button } from '@chakra-ui/react';
 import { IconMail, IconPhone, IconEye } from '@tabler/icons';
 import SideNav from '../components/SideNav';
@@ -16,29 +16,29 @@ function HEP() {
   const [currentUserData, setCurrentUserData] = useState([]);
   const [assignedHEPs, setAssignedHEPs] = useState([]);
 
+ 
+  const fetchHEPs = useCallback(async (req, res) => {
+    const response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
+    const hepExercises = await response.json();
+    setAssignedHEPs(hepExercises);
+  }, [currentUserData.id]);
+ 
   useEffect(() => {
     const fetchUser = async (req, res) => {
       const response = await fetch(`http://localhost:3001/user/${uid}`);
       const userResponse = await response.json();
       setCurrentUserData(userResponse);
     };
-
-    const fetchHEPs = async (req, res) => {
-      const response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
-      const hepExercises = await response.json();
-      setAssignedHEPs(hepExercises);
-    };
-  
+    
     fetchUser();
     
     if(currentUserData.id){
       fetchHEPs();
     }
 
-  }, [uid, currentUserData.id]);
+  }, [uid, currentUserData.id, fetchHEPs]);
 
  
-
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
       let stringNumber = phoneNumber.toString();
@@ -127,7 +127,7 @@ function HEP() {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal type="new" patientId={currentUserData.id} />
+          <AssignmentModal type="new" patientId={currentUserData.id} fetchHEPs={fetchHEPs} />
         </Flex>
         {assignedHEPs.map(assignment => {
           return (
