@@ -14,15 +14,30 @@ function HEP() {
   const uid = uidFromUrl.uid;
 
   const [currentUserData, setCurrentUserData] = useState([]);
+  const [assignedHEPs, setAssignedHEPs] = useState([]);
 
   useEffect(() => {
-    const fetchData = async (req, res) => {
+    const fetchUser = async (req, res) => {
       const response = await fetch(`http://localhost:3001/user/${uid}`);
       const userResponse = await response.json();
       setCurrentUserData(userResponse);
     };
-    fetchData();
-  }, [uid]);
+
+    const fetchHEPs = async (req, res) => {
+      const response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
+      const hepExercises = await response.json();
+      setAssignedHEPs(hepExercises);
+    };
+  
+    fetchUser();
+    
+    if(currentUserData.id){
+      fetchHEPs();
+    }
+
+  }, [uid, currentUserData.id]);
+
+ 
 
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
@@ -114,7 +129,21 @@ function HEP() {
           </Heading>
           <AssignmentModal type="new" patientId={currentUserData.id} />
         </Flex>
-        <AssignedHEP />
+        {assignedHEPs.map(assignment => {
+          return (
+            <AssignedHEP 
+              key={assignment.exerciseId} 
+              hepTitle={assignment.exercise.title}
+              url={assignment.exercise.url}
+              frequencyByDay={assignment.frequencyByDay}
+              frequencyByWeek={assignment.frequencyByWeek}
+              duration={assignment.duration}
+              durationUnits={assignment.durationUnits}
+              notes={assignment.notes}
+              therapist={assignment.assignedById}
+            /> 
+          )
+        })}
         <Button
           leftIcon={<IconEye />}
           variant="solid"
