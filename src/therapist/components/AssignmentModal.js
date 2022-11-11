@@ -61,7 +61,7 @@ const AssignmentModal = ({ type, patientId}) => {
     onClose();
   }
 
-  let assignedById = 21;
+  let assignedById = 6;
 
   let text, heading, method;
   if (type === 'new') {
