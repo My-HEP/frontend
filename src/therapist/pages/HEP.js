@@ -133,6 +133,8 @@ function HEP() {
           return (
             <AssignedHEP 
               key={assignment.exerciseId} 
+              patientId={assignment.patientId}
+              exerciseId={assignment.exerciseId}
               hepTitle={assignment.exercise.title}
               url={assignment.exercise.url}
               frequencyByDay={assignment.frequencyByDay}
