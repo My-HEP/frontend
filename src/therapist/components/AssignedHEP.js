@@ -3,16 +3,16 @@ import { Flex, VStack, Heading, Image, Text, Icon } from '@chakra-ui/react';
 
 import AssignmentModal from './AssignmentModal';
 
-const AssignedHEP = () => {
+const AssignedHEP = ({hepTitle, url, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, therapist}) => {
   const variables = {
-    hepTitle: 'Tendon Glides',
-    frequencyByDay: '1',
-    frequencyByWeek: '2',
-    durationValue: '4',
-    durationUnits: 'mins',
-    notes:
-      "Do your best to get to 4 reps but if you need to start with 2 and work your way up, that's fine",
-    therapist: 'You (Jane McTherapist)',
+    hepTitle,
+    url,
+    frequencyByDay,
+    frequencyByWeek,
+    duration,
+    durationUnits,
+    notes,
+    therapist,
   };
 
   return (
@@ -46,7 +46,7 @@ const AssignedHEP = () => {
           {variables.hepTitle}
         </Heading>
         <Image
-          src='https://bit.ly/3cOL9YU'
+          src={variables.url}
           boxSize='200px'
           minWidth='200px'
           objectFit='cover'
@@ -79,7 +79,7 @@ const AssignedHEP = () => {
         >
           <Text>Duration:</Text>
           <Text>
-            {variables.durationValue} {variables.durationUnits}
+            {variables.duration} {variables.durationUnits}
           </Text>
         </Flex>
         <Flex

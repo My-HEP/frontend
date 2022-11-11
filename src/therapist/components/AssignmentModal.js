@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -10,12 +10,10 @@ import {
   useDisclosure,
   Button,
   Icon,
-  IconButton,
   Flex,
   VStack,
   Heading,
   Text,
-  Input,
   Textarea,
   Select,
   NumberInput,
@@ -23,34 +21,61 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
-  Table,
-  Tbody,
-  Tr,
-  Td,
-  TableContainer,
-  Tooltip,
-  FormLabel,
+  // IconButton,
+  // Input,
+  // Tooltip,
+  // FormLabel,
 } from '@chakra-ui/react';
-
-import { IconPlus, IconEdit, IconFileUpload } from '@tabler/icons';
+import ExerciseList from './ExerciseList';
 import SearchBar from './SearchBar';
 
-const AssignmentModal = ({ type }) => {
-  const exercises = [
-    { title: 'Tendon Glides' },
-    { title: 'Carpal Tunnel' },
-    { title: 'Leg Lifts' },
-  ];
-  let text, heading;
+import {
+  IconPlus, 
+  IconEdit, 
+  // IconFileUpload 
+} from '@tabler/icons';
+
+const AssignmentModal = ({ type, patientId}) => {
+  
+  const [exerciseId, setExerciseId] = useState('');
+  const [frequencyByDay, setFrequencyByDay] = useState();
+  const [frequencyByWeek, setFrequencyByWeek] = useState('');
+  const [duration, setDuration] = useState('');
+  const [durationUnits, setDurationUnits] = useState('');
+  const [notes, setNotes] = useState('');
+
+
+  let assignHEP = () =>{
+    let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+    fetch('http://localhost:3001/therapist/addHEPExercise', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(assignedData),
+    });
+    onClose();
+  }
+
+  let updateHEP = () =>{
+    onClose();
+  }
+
+  let assignedById = 6;
+
+  let text, heading, method;
   if (type === 'new') {
     heading = 'Assign New Exercise';
     text = 'Assign Exercise';
+    method = assignHEP;
   } else {
     heading = 'Edit Assigned Exercise';
     text = 'Update Exercise';
+    method = updateHEP;
   }
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       {type === 'new' ? (
@@ -85,26 +110,9 @@ const AssignmentModal = ({ type }) => {
                   Select Existing Exercise
                 </Heading>
                 <SearchBar />
-                <TableContainer
-                  width="100%"
-                  maxWidth="700px"
-                  border="1px"
-                  borderRadius="7"
-                  borderColor="lightgray"
-                >
-                  <Table variant="simple">
-                    <Tbody>
-                      {exercises.map(exercise => {
-                        return (
-                          <Tr>
-                            <Td>{exercise.title}</Td>
-                          </Tr>
-                        );
-                      })}
-                    </Tbody>
-                  </Table>
-                </TableContainer>
-                <Heading as="h2" size="sm">
+               <ExerciseList setSelectedExercise={setExerciseId} selectedExercise={exerciseId}/>
+                {/* Upload New Exercise from assignment modal feature for later */}
+                {/* <Heading as="h2" size="sm">
                   Upload New Exercise
                 </Heading>
                 <Flex
@@ -132,7 +140,7 @@ const AssignmentModal = ({ type }) => {
                       />
                     </FormLabel>
                   </Tooltip>
-                </Flex>
+                </Flex> */}
               </VStack>
               <VStack align="start" width={['100%', '100%', '48%']} spacing={5}>
                 <Heading
@@ -154,6 +162,8 @@ const AssignmentModal = ({ type }) => {
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
+                          value={frequencyByDay}
+                          onChange={(value) => setFrequencyByDay(value)}
                         >
                           <NumberInputField />
                           <NumberInputStepper>
@@ -169,6 +179,8 @@ const AssignmentModal = ({ type }) => {
                           min={1}
                           max={7}
                           focusBorderColor="teal.500"
+                          value={frequencyByWeek}
+                          onChange={(value) => setFrequencyByWeek(value)}
                         >
                           <NumberInputField />
                           <NumberInputStepper>
@@ -191,6 +203,8 @@ const AssignmentModal = ({ type }) => {
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
+                          value={duration}
+                          onChange={(value) => setDuration(value)}
                         >
                           <NumberInputField />
                           <NumberInputStepper>
@@ -202,10 +216,11 @@ const AssignmentModal = ({ type }) => {
                           placeholder="units"
                           width="6rem"
                           focusBorderColor="teal.500"
+                          onChange={e => setDurationUnits(e.target.value)}
                         >
-                          <option value="option1">reps</option>
-                          <option value="option2">seconds</option>
-                          <option value="option3">minutes</option>
+                          <option value="reps">reps</option>
+                          <option value="seconds">seconds</option>
+                          <option value="minutes">minutes</option>
                         </Select>
                       </Flex>
                     </Flex>
@@ -217,6 +232,8 @@ const AssignmentModal = ({ type }) => {
                 <Textarea
                   focusBorderColor="teal.500"
                   placeholder="Provide additional instructions here."
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
                 />
               </VStack>
             </Flex>
@@ -226,7 +243,7 @@ const AssignmentModal = ({ type }) => {
             <Button mr={3} variant="outline" onClick={onClose}>
               Discard
             </Button>
-            <Button colorScheme="teal">{text}</Button>
+            <Button colorScheme="teal" onClick={method}>{text}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
