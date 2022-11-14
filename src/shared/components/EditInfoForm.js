@@ -24,11 +24,17 @@ import {
   Button,
   Link as HyperLink,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import { IconPhone, IconMail, IconPencil, IconUser } from '@tabler/icons';
 import { IconSettings } from '@tabler/icons';
-import { useState, useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { useState } from 'react';
+import {
+  getAuth,
+  updateEmail,
+  reauthenticateWithCredential,
+} from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const EditInfoForm = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,6 +46,10 @@ const EditInfoForm = props => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [avatar, setAvatar] = useState('');
   const [isHidden, setIsHidden] = useState(true);
+
+  const auth = getAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const updateDataHandler = async (
     uid,
@@ -57,18 +67,45 @@ const EditInfoForm = props => {
       email,
       avatar,
     };
-    try {
-      const response = await fetch('http://localhost:3001/updateUser', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedUser),
-      });
-      props.fetchUserData();
-      onClose();
-    } catch (error) {
-      console.log(error);
+    if (props.type === 'self') {
+      try {
+        const response = await fetch('http://localhost:3001/updateInfo', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedUser),
+        });
+        await updateEmail(auth.currentUser, email);
+        props.fetchUserData();
+        onClose();
+      } catch (error) {
+        if (error.code === 'auth/requires-recent-login') {
+          toast({
+            description: `Changing your email address requires a (very) recent login. On closing this alert you will be redirected to the login page for reauthentication.`,
+            status: 'warning',
+            duration: null,
+            isClosable: true,
+            position: 'top',
+            onCloseComplete: () => navigate('/'),
+          });
+        }
+        console.log(error);
+      }
+    } else {
+      try {
+        const response = await fetch('http://localhost:3001/updateUser', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedUser),
+        });
+        props.fetchUserData();
+        onClose();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

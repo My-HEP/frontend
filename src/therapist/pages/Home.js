@@ -32,8 +32,6 @@ function TherapistHome() {
   const { auth } = useFirebaseAuth() ?? {};
   const uid = auth?.currentUser?.uid;
 
-  console.log(auth);
-
   const fetchUserData = async (req, res) => {
     const response = await fetch(`http://localhost:3001/user/${uid}`);
     const userResponse = await response.json();
@@ -62,8 +60,6 @@ function TherapistHome() {
     exerciseNum: homeStats?.exercisesNum,
     avatar: userData?.avatar,
   };
-
-  console.log(userData.email);
 
   // eslint-disable-next-line no-lone-blocks
   {
