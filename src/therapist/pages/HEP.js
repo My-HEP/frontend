@@ -15,12 +15,12 @@ function HEP() {
 
   const [currentUserData, setCurrentUserData] = useState([]);
   const [assignedHEPs, setAssignedHEPs] = useState([]);
-
  
-  const fetchHEPs = useCallback(async (req, res) => {
-    const response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
+  const fetchHEPs = useCallback(async () => {
+    let response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
     const hepExercises = await response.json();
-    setAssignedHEPs(hepExercises);
+    let reversedArray = [...hepExercises].reverse();
+    setAssignedHEPs(reversedArray);
   }, [currentUserData.id]);
  
   useEffect(() => {
