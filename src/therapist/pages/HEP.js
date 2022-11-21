@@ -18,14 +18,13 @@ const HEP = () => {
   const [newHEP, setNewHEP] = useState([]);
   const [updatedHEP, setUpdatedHEP] = useState([]);
 
+  const fetchUser = async (req, res) => {
+    const response = await fetch(`http://localhost:3001/user/${uid}`);
+    const userResponse = await response.json();
+    setCurrentUserData(userResponse);
+  };
 
   useEffect(() => {
-    const fetchUser = async (req, res) => {
-      const response = await fetch(`http://localhost:3001/user/${uid}`);
-      const userResponse = await response.json();
-      setCurrentUserData(userResponse);
-    };
-    
     fetchUser();
     
     const fetchHEPs = async () => {
@@ -134,6 +133,7 @@ const HEP = () => {
               currentPhone={variables.phone}
               currentEmail={variables.email}
               currentFullName={variables.patientName}
+              fetchUserData={fetchUser}
             />
           </VStack>
         </Flex>
