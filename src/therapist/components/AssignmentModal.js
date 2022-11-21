@@ -35,18 +35,22 @@ import {
   // IconFileUpload 
 } from '@tabler/icons';
 
-const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
+const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdatedHEP}) => {
 
   const [exerciseId, setExerciseId] = useState('');
+  const [exercise, setExercise] = useState('');
+  
   const [frequencyByDay, setFrequencyByDay] = useState();
   const [frequencyByWeek, setFrequencyByWeek] = useState('');
   const [duration, setDuration] = useState('');
   const [durationUnits, setDurationUnits] = useState('');
   const [notes, setNotes] = useState('');
 
+
   useEffect(() => {
     if(assignmentData){
       setExerciseId(assignmentData.exerciseId)
+      setExercise({url: assignmentData.exercise?.url, title: assignmentData.exercise?.title});
       setFrequencyByDay(assignmentData.frequencyByDay)
       setFrequencyByWeek(assignmentData.frequencyByWeek)
       setDuration(assignmentData.duration)
@@ -56,7 +60,7 @@ const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
   }, [assignmentData])
 
   const assignHEP = async () =>{
-    let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+      let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById}
     try{
       let response = await fetch('http://localhost:3001/therapist/addHEPExercise', {
         method: 'POST',
@@ -66,7 +70,7 @@ const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
         body: JSON.stringify(assignedData),
       });
       if(response.ok){
-          fetchHEPs();
+          setNewHEP(assignedData)
           onClose();
         }
     } catch (error){
@@ -77,6 +81,7 @@ const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
 
   const updateHEP = async () =>{
     let updatedHEP = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+    let HEPToDisplay = { exerciseId, exercise, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
     try{
       let response = await fetch('http://localhost:3001/therapist/updateHEPExercise', {
         method: 'PUT',
@@ -86,15 +91,14 @@ const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
         body: JSON.stringify(updatedHEP),
       });
       if(response.ok){
-          fetchHEPs();
+          setUpdatedHEP(HEPToDisplay)
           onClose();
         }
-    } catch (error){
+      } catch (error){
    
     }
   }
 
-  
 
 
   let assignedById = 6;
@@ -146,7 +150,7 @@ const AssignmentModal = ({ assignmentData, type, patientId, fetchHEPs}) => {
                   Select Existing Exercise
                 </Heading>
                 <SearchBar />
-               <ExerciseList setSelectedExercise={setExerciseId} selectedExercise={exerciseId}/>
+               <ExerciseList setSelectedExerciseId={setExerciseId} selectedExerciseId={exerciseId} setExercise={setExercise} />
                 {/* Upload New Exercise from assignment modal feature for later */}
                 {/* <Heading as="h2" size="sm">
                   Upload New Exercise
