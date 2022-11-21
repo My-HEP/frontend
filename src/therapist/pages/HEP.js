@@ -16,29 +16,31 @@ function HEP() {
   const [currentUserData, setCurrentUserData] = useState([]);
   const [assignedHEPs, setAssignedHEPs] = useState([]);
 
- 
-  const fetchHEPs = useCallback(async (req, res) => {
-    const response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
-    const hepExercises = await response.json();
-    setAssignedHEPs(hepExercises);
-  }, [currentUserData.id]);
- 
+  const fetchHEPs = useCallback(
+    async (req, res) => {
+      const response = await fetch(
+        `http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`
+      );
+      const hepExercises = await response.json();
+      setAssignedHEPs(hepExercises);
+    },
+    [currentUserData.id]
+  );
+
+  const fetchUser = async (req, res) => {
+    const response = await fetch(`http://localhost:3001/user/${uid}`);
+    const userResponse = await response.json();
+    setCurrentUserData(userResponse);
+  };
+
   useEffect(() => {
-    const fetchUser = async (req, res) => {
-      const response = await fetch(`http://localhost:3001/user/${uid}`);
-      const userResponse = await response.json();
-      setCurrentUserData(userResponse);
-    };
-    
     fetchUser();
-    
-    if(currentUserData.id){
+
+    if (currentUserData.id) {
       fetchHEPs();
     }
-
   }, [uid, currentUserData.id, fetchHEPs]);
 
- 
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
       let stringNumber = phoneNumber.toString();
@@ -114,6 +116,7 @@ function HEP() {
               currentPhone={variables.phone}
               currentEmail={variables.email}
               currentFullName={variables.patientName}
+              fetchUserData={fetchUser}
             />
           </VStack>
         </Flex>
@@ -127,12 +130,16 @@ function HEP() {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal type="new" patientId={currentUserData.id} fetchHEPs={fetchHEPs} />
+          <AssignmentModal
+            type="new"
+            patientId={currentUserData.id}
+            fetchHEPs={fetchHEPs}
+          />
         </Flex>
         {assignedHEPs.map(assignment => {
           return (
-            <AssignedHEP 
-              key={assignment.exerciseId} 
+            <AssignedHEP
+              key={assignment.exerciseId}
               hepTitle={assignment.exercise.title}
               url={assignment.exercise.url}
               frequencyByDay={assignment.frequencyByDay}
@@ -141,8 +148,8 @@ function HEP() {
               durationUnits={assignment.durationUnits}
               notes={assignment.notes}
               therapist={assignment.assignedById}
-            /> 
-          )
+            />
+          );
         })}
         <Button
           leftIcon={<IconEye />}
