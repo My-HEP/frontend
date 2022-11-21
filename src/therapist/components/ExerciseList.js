@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
 
-const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
+const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise }) => {
   const [exercises, setExercises] = useState([]);
 
   const exerciseTable = useRef();
@@ -31,16 +31,18 @@ const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
       );
     };
 
-    styleSelected(selectedExercise);
-  }, [selectedExercise]);
+    styleSelected(selectedExerciseId);
+  }, [selectedExerciseId]);
 
   const selectExercise = e => {
     let exerciseId = e.target.id;
-    setSelectedExercise(exerciseId);
+    let selectedExerciseData = exercises.find(exercise => exercise.id === exerciseId)
+    setSelectedExerciseId(exerciseId);
+    setExercise({url: selectedExerciseData.url, title: selectedExerciseData.title})
   };
 
   const setSelectedStyle = (currentExercise) => {
-    return currentExercise === selectedExercise ? selectedStyle : deselectedStyle;
+    return currentExercise === selectedExerciseId ? selectedStyle : deselectedStyle;
   }
   
   const selectedStyle = { backgroundColor: '#E6FFFA', fontWeight: 600, color: 'black' } ;
