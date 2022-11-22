@@ -41,12 +41,6 @@ const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise }
     setExercise({url: selectedExerciseData.url, title: selectedExerciseData.title})
   };
 
-  const setSelectedStyle = (currentExercise) => {
-    return currentExercise === selectedExerciseId ? selectedStyle : deselectedStyle;
-  }
-  
-  const selectedStyle = { backgroundColor: '#E6FFFA', fontWeight: 600, color: 'black' } ;
-  const deselectedStyle = { backgroundColor: 'initial', fontWeight: 'intial', color: 'initial' } ;
   
 
   return exercises ? (
@@ -61,7 +55,7 @@ const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise }
         <Tbody ref={exerciseTable}>
           {exercises.map(exercise => {
             return (
-              <Tr key={exercise.id} style={setSelectedStyle(exercise.id)}>
+              <Tr key={exercise.id}>
                 <Td id={exercise.id} onClick={selectExercise}>
                   {exercise.title}
                 </Td>
