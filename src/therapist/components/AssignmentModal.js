@@ -21,6 +21,7 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
+  Image,
   // IconButton,
   // Input,
   // Tooltip,
@@ -35,7 +36,7 @@ import {
   // IconFileUpload 
 } from '@tabler/icons';
 
-const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdatedHEP}) => {
+const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdatedHEP, HEPs}) => {
 
   const [exerciseId, setExerciseId] = useState('');
   const [exercise, setExercise] = useState('');
@@ -133,6 +134,7 @@ const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdate
         <Icon as={IconEdit} color="teal" cursor="pointer" onClick={onOpen} />
       )}
 
+      
       <Modal size={['sm', 'lg', '4xl']} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -145,12 +147,29 @@ const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdate
               align={['center', 'center', 'start']}
               paddingBottom="1rem"
             >
-              <VStack width={['100%', '100%', '48%']} align="start" spacing={5}>
-                <Heading as="h2" size="sm">
-                  Select Existing Exercise
+              
+              {type === 'new' ? 
+                (<VStack width={['100%', '100%', '48%']} align="start" spacing={5}>
+                  <Heading as="h2" size="sm">
+                    Select Existing Exercise
+                  </Heading>
+                  <SearchBar />
+                  <ExerciseList setSelectedExerciseId={setExerciseId} selectedExerciseId={exerciseId} setExercise={setExercise} HEPs={HEPs}/>
+                </VStack>) 
+               : 
+               (<VStack width={['100%', '100%', '48%']} align="start" spacing={6}>
+                  <Heading
+                    as='h3'
+                    size='md'
+                  >
+                  {assignmentData?.hepTitle}
                 </Heading>
-                <SearchBar />
-               <ExerciseList setSelectedExerciseId={setExerciseId} selectedExerciseId={exerciseId} setExercise={setExercise} />
+                <Image
+                  src={assignmentData?.url}
+                  boxSize='400px'
+                  minWidth='200px'
+                  objectFit='cover'
+                />
                 {/* Upload New Exercise from assignment modal feature for later */}
                 {/* <Heading as="h2" size="sm">
                   Upload New Exercise
@@ -181,7 +200,7 @@ const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdate
                     </FormLabel>
                   </Tooltip>
                 </Flex> */}
-              </VStack>
+              </VStack>)}
               <VStack align="start" width={['100%', '100%', '48%']} spacing={5}>
                 <Heading
                   as="h2"
@@ -278,13 +297,16 @@ const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdate
               </VStack>
             </Flex>
           </ModalBody>
-
-          <ModalFooter>
-            <Button mr={3} variant="outline" onClick={onClose}>
-              Discard
-            </Button>
+          {type === 'new' ? 
+            (<ModalFooter>
+              <Button mr={3} variant="outline" onClick={onClose}>Discard</Button>
+              <Button colorScheme="teal" onClick={method}>{text}</Button>
+            </ModalFooter>) : 
+            (<ModalFooter>
+            <Button colorScheme="red" marginRight="50%">Remove Assignment</Button>
+            <Button mr={3} variant="outline" onClick={onClose}>Cancel</Button>
             <Button colorScheme="teal" onClick={method}>{text}</Button>
-          </ModalFooter>
+          </ModalFooter>)}
         </ModalContent>
       </Modal>
     </>
