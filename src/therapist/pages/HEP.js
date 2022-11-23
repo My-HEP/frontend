@@ -147,7 +147,7 @@ const HEP = () => {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal type="new" patientId={currentUserData.id} setNewHEP={setNewHEP} />
+          <AssignmentModal type="new" patientId={currentUserData.id} setNewHEP={setNewHEP} HEPs={HEPs} />
         </Flex>
         <HEPList HEPs={HEPs} setUpdatedHEP={setUpdatedHEP} />
 
