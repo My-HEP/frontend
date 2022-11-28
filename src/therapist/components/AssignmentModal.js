@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -21,6 +21,7 @@ import {
   NumberInputStepper,
   NumberDecrementStepper,
   NumberIncrementStepper,
+  Image,
   // IconButton,
   // Input,
   // Tooltip,
@@ -35,9 +36,11 @@ import {
   // IconFileUpload 
 } from '@tabler/icons';
 
-const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
-  
+const AssignmentModal = ({ assignmentData, type, patientId, setNewHEP, setUpdatedHEP, HEPs}) => {
+
   const [exerciseId, setExerciseId] = useState('');
+  const [exercise, setExercise] = useState('');
+  
   const [frequencyByDay, setFrequencyByDay] = useState();
   const [frequencyByWeek, setFrequencyByWeek] = useState('');
   const [duration, setDuration] = useState('');
@@ -45,8 +48,20 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
   const [notes, setNotes] = useState('');
 
 
-  let assignHEP = async () =>{
-    let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+  useEffect(() => {
+    if(assignmentData){
+      setExerciseId(assignmentData.exerciseId)
+      setExercise({url: assignmentData.exercise?.url, title: assignmentData.exercise?.title});
+      setFrequencyByDay(assignmentData.frequencyByDay)
+      setFrequencyByWeek(assignmentData.frequencyByWeek)
+      setDuration(assignmentData.duration)
+      setDurationUnits(assignmentData.durationUnits)
+      setNotes(assignmentData.notes)
+    }
+  }, [assignmentData])
+
+  const assignHEP = async () =>{
+      let assignedData = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById}
     try{
       let response = await fetch('http://localhost:3001/therapist/addHEPExercise', {
         method: 'POST',
@@ -56,18 +71,36 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
         body: JSON.stringify(assignedData),
       });
       if(response.ok){
-          fetchHEPs();
+          setNewHEP(assignedData)
           onClose();
         }
     } catch (error){
-      console.log(error)
+     
     }
 
   }
 
-  let updateHEP = () =>{
-    onClose();
+  const updateHEP = async () =>{
+    let updatedHEP = { exerciseId, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+    let HEPToDisplay = { exerciseId, exercise, patientId, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, assignedById }
+    try{
+      let response = await fetch('http://localhost:3001/therapist/updateHEPExercise', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedHEP),
+      });
+      if(response.ok){
+          setUpdatedHEP(HEPToDisplay)
+          onClose();
+        }
+      } catch (error){
+   
+    }
   }
+
+
 
   let assignedById = 6;
 
@@ -101,6 +134,7 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
         <Icon as={IconEdit} color="teal" cursor="pointer" onClick={onOpen} />
       )}
 
+      
       <Modal size={['sm', 'lg', '4xl']} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -113,12 +147,29 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
               align={['center', 'center', 'start']}
               paddingBottom="1rem"
             >
-              <VStack width={['100%', '100%', '48%']} align="start" spacing={5}>
-                <Heading as="h2" size="sm">
-                  Select Existing Exercise
+              
+              {type === 'new' ? 
+                (<VStack width={['100%', '100%', '48%']} align="start" spacing={5}>
+                  <Heading as="h2" size="sm">
+                    Select Existing Exercise
+                  </Heading>
+                  <SearchBar />
+                  <ExerciseList setSelectedExerciseId={setExerciseId} selectedExerciseId={exerciseId} setExercise={setExercise} HEPs={HEPs}/>
+                </VStack>) 
+               : 
+               (<VStack width={['100%', '100%', '48%']} align="start" spacing={6}>
+                  <Heading
+                    as='h3'
+                    size='md'
+                  >
+                  {assignmentData?.hepTitle}
                 </Heading>
-                <SearchBar />
-               <ExerciseList setSelectedExercise={setExerciseId} selectedExercise={exerciseId}/>
+                <Image
+                  src={assignmentData?.url}
+                  boxSize='400px'
+                  minWidth='200px'
+                  objectFit='cover'
+                />
                 {/* Upload New Exercise from assignment modal feature for later */}
                 {/* <Heading as="h2" size="sm">
                   Upload New Exercise
@@ -149,7 +200,7 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
                     </FormLabel>
                   </Tooltip>
                 </Flex> */}
-              </VStack>
+              </VStack>)}
               <VStack align="start" width={['100%', '100%', '48%']} spacing={5}>
                 <Heading
                   as="h2"
@@ -170,7 +221,7 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
-                          value={frequencyByDay}
+                          value={frequencyByDay} 
                           onChange={(value) => setFrequencyByDay(value)}
                         >
                           <NumberInputField />
@@ -246,13 +297,16 @@ const AssignmentModal = ({ type, patientId, fetchHEPs}) => {
               </VStack>
             </Flex>
           </ModalBody>
-
-          <ModalFooter>
-            <Button mr={3} variant="outline" onClick={onClose}>
-              Discard
-            </Button>
+          {type === 'new' ? 
+            (<ModalFooter>
+              <Button mr={3} variant="outline" onClick={onClose}>Discard</Button>
+              <Button colorScheme="teal" onClick={method}>{text}</Button>
+            </ModalFooter>) : 
+            (<ModalFooter>
+            <Button colorScheme="red" marginRight="50%">Remove Assignment</Button>
+            <Button mr={3} variant="outline" onClick={onClose}>Cancel</Button>
             <Button colorScheme="teal" onClick={method}>{text}</Button>
-          </ModalFooter>
+          </ModalFooter>)}
         </ModalContent>
       </Modal>
     </>

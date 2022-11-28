@@ -1,31 +1,22 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Flex, VStack, Avatar, Heading, Text, Button } from '@chakra-ui/react';
 import { IconMail, IconPhone, IconEye } from '@tabler/icons';
 import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
-import AssignedHEP from '../components/AssignedHEP';
 import EditInfoForm from '../../shared/components/EditInfoForm';
 import AssignmentModal from '../components/AssignmentModal';
+import HEPList from '../components/HEPList';
 import { useParams } from 'react-router-dom';
 
-function HEP() {
+const HEP = () => {
   const uidFromUrl = useParams();
   const uid = uidFromUrl.uid;
 
   const [currentUserData, setCurrentUserData] = useState([]);
-  const [assignedHEPs, setAssignedHEPs] = useState([]);
-
-  const fetchHEPs = useCallback(
-    async (req, res) => {
-      const response = await fetch(
-        `http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`
-      );
-      const hepExercises = await response.json();
-      setAssignedHEPs(hepExercises);
-    },
-    [currentUserData.id]
-  );
+  const [HEPs, setHEPs] = useState([]);
+  const [newHEP, setNewHEP] = useState([]);
+  const [updatedHEP, setUpdatedHEP] = useState([]);
 
   const fetchUser = async (req, res) => {
     const response = await fetch(`http://localhost:3001/user/${uid}`);
@@ -35,12 +26,38 @@ function HEP() {
 
   useEffect(() => {
     fetchUser();
-
-    if (currentUserData.id) {
-      fetchHEPs();
+    
+    const fetchHEPs = async () => {
+      let response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
+      const hepExercises = await response.json();
+      let reversedArray = [...hepExercises].reverse();
+      setHEPs(reversedArray);
     }
-  }, [uid, currentUserData.id, fetchHEPs]);
 
+    if(currentUserData.id){
+      fetchHEPs()
+    }
+
+    const addHEP = () => {
+      setHEPs([...HEPs, newHEP])
+    }
+
+    addHEP()
+
+    const updateHEP = () => {
+      const indexOfUpdated = HEPs.findIndex(HEP => {
+        return HEP.exerciseId === updatedHEP.exerciseId;
+      });
+      const newHEPs = HEPs.splice(indexOfUpdated, 1);
+      setHEPs([updatedHEP, ...newHEPs])
+    }
+
+    updateHEP()
+
+  }, [uid, currentUserData.id, newHEP, updatedHEP]);
+  
+ 
+ 
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
       let stringNumber = phoneNumber.toString();
@@ -130,27 +147,10 @@ function HEP() {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal
-            type="new"
-            patientId={currentUserData.id}
-            fetchHEPs={fetchHEPs}
-          />
+          <AssignmentModal type="new" patientId={currentUserData.id} setNewHEP={setNewHEP} HEPs={HEPs} />
         </Flex>
-        {assignedHEPs.map(assignment => {
-          return (
-            <AssignedHEP
-              key={assignment.exerciseId}
-              hepTitle={assignment.exercise.title}
-              url={assignment.exercise.url}
-              frequencyByDay={assignment.frequencyByDay}
-              frequencyByWeek={assignment.frequencyByWeek}
-              duration={assignment.duration}
-              durationUnits={assignment.durationUnits}
-              notes={assignment.notes}
-              therapist={assignment.assignedById}
-            />
-          );
-        })}
+        <HEPList HEPs={HEPs} setUpdatedHEP={setUpdatedHEP} />
+
         <Button
           leftIcon={<IconEye />}
           variant="solid"

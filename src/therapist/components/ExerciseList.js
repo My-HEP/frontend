@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
 
-const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
+const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise, HEPs }) => {
   const [exercises, setExercises] = useState([]);
 
   const exerciseTable = useRef();
@@ -31,14 +31,31 @@ const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
       );
     };
 
-    styleSelected(selectedExercise);
-  }, [selectedExercise]);
+    styleSelected(selectedExerciseId);
+  }, [selectedExerciseId]);
 
   const selectExercise = e => {
     let exerciseId = e.target.id;
-    setSelectedExercise(exerciseId);
+    let exerciseArray = [];
+    HEPs.forEach(HEP => exerciseArray.push(HEP.exerciseId))
+    if(exerciseArray.includes(exerciseId)){
+      return
+    }
+    let selectedExerciseData = exercises.find(exercise => exercise.id === exerciseId)
+    setSelectedExerciseId(exerciseId);
+    setExercise({url: selectedExerciseData.url, title: selectedExerciseData.title})
   };
 
+  const setDisabled = (currentExercise) => {
+    let exerciseArray = [];
+    HEPs.forEach(HEP => exerciseArray.push(HEP.exerciseId))
+    return exerciseArray.includes(currentExercise) ? disabledStyle : activeStyle;
+  }
+
+  
+  const disabledStyle = {backgroundColor: "RGBA(0, 0, 0, 0.16)", fontStyle: "italic", color: "gray"};
+  const activeStyle = { backgroundColor: 'initial', fontWeight: 'intial', color: 'initial' } ;
+  
   return exercises ? (
     <TableContainer
       width="100%"
@@ -51,7 +68,7 @@ const ExerciseList = ({ selectedExercise, setSelectedExercise }) => {
         <Tbody ref={exerciseTable}>
           {exercises.map(exercise => {
             return (
-              <Tr key={exercise.id}>
+              <Tr key={exercise.id} style={setDisabled(exercise.id)}>
                 <Td id={exercise.id} onClick={selectExercise}>
                   {exercise.title}
                 </Td>
