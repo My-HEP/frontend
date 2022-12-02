@@ -4,12 +4,15 @@ import * as ReactDOM from 'react-dom/client';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import App from './App';
+import ProtectedRoutes from './ProtectedRoutes';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FirebaseAuthProvider } from './context/FirebaseAuthContext';
 import Auth from './shared/pages/Auth';
 import TherapistHome from './therapist/pages/Home';
+import PatientHome from './patient/Home';
+import PatientHEPs from './patient/HEPs';
 import Patients from './therapist/pages/Patients';
 import HEP from './therapist/pages/HEP';
 import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
@@ -23,6 +26,7 @@ Sentry.init({
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
+
 root.render(
   <StrictMode>
     <ColorModeScript />
@@ -30,19 +34,19 @@ root.render(
       <FirebaseAuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/*" element={<App />} />
-            <Route index element={<Auth />} />
-
-            <Route>
-              <Route path="home" element={<TherapistHome />} />
-              <Route path="patients" element={<Patients />} />
-              {/* <Route path="hep/:uid" element={<HEP />} /> */}
-              <Route path="exerciselibrary" element={<ExerciseLibrary />} />
-            </Route>
-
-            <Route>
-              <Route path="hep/:uid" element={<HEP />} />
-            </Route>
+            <Route path="/" element={<App />}>
+              <Route index element={<Auth />} />
+                <Route path="/therapist" element={<ProtectedRoutes allowedRoles={['THERAPIST']} />}>
+                  <Route path="home" element={<TherapistHome />} />
+                  <Route path="patients" element={<Patients />} />
+                  <Route path="hep/:uid" element={<HEP />} />
+                  <Route path="exerciselibrary" element={<ExerciseLibrary />} />
+                </Route>
+                <Route path="/patient" element={<ProtectedRoutes allowedRoles={['PATIENT']} />}>
+                  <Route path="home" element={<PatientHome />} />
+                  <Route path="my-HEPs" element={<PatientHEPs />} />
+                </Route>
+              </Route>
           </Routes>
         </BrowserRouter>
       </FirebaseAuthProvider>
