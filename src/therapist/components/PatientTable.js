@@ -49,7 +49,7 @@ function PatientTable(props) {
 
   const onRowClickHandler = user => {
     let uid = user.currentTarget.id;
-    navigate(`/hep/${uid}`);
+    navigate(`/therapist/hep/${uid}`);
   };
 
   return (

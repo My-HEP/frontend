@@ -37,7 +37,7 @@ function TherapistHome() {
 
   const navigate = useNavigate();
 
-  const { user } = useFirebaseAuth() ?? {};
+  const { user, userRole } = useFirebaseAuth() ?? {};
   const uid = user.auth?.currentUser?.uid;
 
   const fetchUserData = async (req, res) => {
@@ -183,7 +183,7 @@ function TherapistHome() {
                       Currently serving {variables.patientNum} patients
                     </Text>
 
-                    <Link to="/patients">
+                    <Link to='/therapist/patients'>
                       <Button
                         leftIcon={<IconUsers />}
                         colorScheme="teal"
@@ -199,7 +199,7 @@ function TherapistHome() {
                       {variables.exerciseNum} Exercises uploaded
                     </Text>
 
-                    <Link to="/exerciselibrary">
+                    <Link to="/therapist/exerciselibrary">
                       <Button
                         leftIcon={<IconBarbell />}
                         colorScheme="teal"

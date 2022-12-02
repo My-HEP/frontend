@@ -59,10 +59,10 @@ function Auth() {
         "We're sorry but something went wrong. Please try again later.";
     }
     
-    let userRole = 'PATIENT'.toLowerCase();
+    const formattedUserRole = userRole?.toLowerCase();
 
     if (!authCode) {
-      navigate(`${userRole}/home`);
+      navigate(`${formattedUserRole}/home`);
       return;
     } else {
       toast({

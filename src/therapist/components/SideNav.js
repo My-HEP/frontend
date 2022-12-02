@@ -4,6 +4,7 @@ import { IconHome, IconUsers, IconBarbell } from '@tabler/icons';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 
 const SideNav = () => {
+
   return (
     <Box
       as="nav"
@@ -16,17 +17,17 @@ const SideNav = () => {
     >
       <Flex direction="column" height="100%" justify="center">
         <VStack spacing="10" align="center">
-          <Link to="/home">
+          <Link to="/therapist/home">
             <Button variant="ghost">
               <IconHome size={35} />
             </Button>
           </Link>
-          <Link to="/patients">
+          <Link to="/therapist/patients">
             <Button variant="ghost">
               <IconUsers size={35} />
             </Button>
           </Link>
-          <Link to="/exerciselibrary">
+          <Link to="/therapist/exerciselibrary">
             <Button variant="ghost">
               <IconBarbell size={35} />
             </Button>

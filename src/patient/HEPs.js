@@ -5,8 +5,8 @@ import HEPList from '../therapist/components/HEPList';
 import { useFirebaseAuth } from '../context/FirebaseAuthContext';
 
 const PatientHEPs = () => {
-  const { auth } = useFirebaseAuth() ?? {};
-  const uid = auth?.currentUser?.uid;
+  const { user } = useFirebaseAuth() ?? {};
+  const uid = user?.auth?.currentUser?.uid;
 
   const [currentUserData, setCurrentUserData] = useState([]);
   const [HEPs, setHEPs] = useState([]);

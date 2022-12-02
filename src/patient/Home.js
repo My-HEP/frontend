@@ -30,8 +30,8 @@ function PatientHome() {
   const [isLoaded, setIsLoaded] = useState(true);
   
 
-  const { auth } = useFirebaseAuth() ?? {};
-  const uid = auth?.currentUser?.uid;
+  const { user } = useFirebaseAuth() ?? {};
+  const uid = user?.auth?.currentUser?.uid;
 
   const fetchUserData = async (req, res) => {
     const response = await fetch(`http://localhost:3001/user/${uid}`);
