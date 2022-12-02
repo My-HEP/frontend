@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import { IconSearch } from '@tabler/icons';
 
-function SearchBar() {
+function SearchBar({ handleSearch }) {
   const searchIconColor = useColorModeValue('black', 'white');
 
   return (
@@ -19,6 +19,7 @@ function SearchBar() {
         variant="outline"
         placeholder="Search"
         focusBorderColor="teal.500"
+        onChange={handleSearch}
       />
     </InputGroup>
   );

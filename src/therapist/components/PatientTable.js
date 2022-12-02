@@ -78,9 +78,7 @@ function PatientTable(props) {
             borderColor="gray"
           >
             <Table variant="simple">
-              <TableCaption color="gray.400">
-                Search by first name, last name, or email address
-              </TableCaption>
+              <TableCaption color="gray.400">Search by last name</TableCaption>
               <Thead>
                 <Tr>
                   <Th>First Name</Th>
