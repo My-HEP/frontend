@@ -24,7 +24,8 @@ function Auth() {
   const { userRole } = useFirebaseAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const auth = getAuth();
+  console.log(auth)
   const navigate = useNavigate();
 
   const headingColorMobile = useColorModeValue(
@@ -37,6 +38,14 @@ function Auth() {
   );
 
   const toast = useToast();
+  
+  useEffect(() => {
+    console.log('on auth', userRole);
+    const formattedUserRole = userRole?.toLowerCase();
+    if(userRole){
+      navigate(`/${formattedUserRole}/home`);
+    }
+  }, [userRole]);
 
   const signInHandler = async (email, password) => {
     let authRes = await signIn(email, password);
@@ -59,12 +68,7 @@ function Auth() {
         "We're sorry but something went wrong. Please try again later.";
     }
     
-    const formattedUserRole = userRole?.toLowerCase();
-
-    if (!authCode) {
-      navigate(`${formattedUserRole}/home`);
-      return;
-    } else {
+    if (authCode) {
       toast({
         title: errorMessage,
         status: 'error',

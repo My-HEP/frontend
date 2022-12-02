@@ -17,17 +17,17 @@ const BottomNav = () => {
     >
       <Flex direction="row" bottom="0" height="100%" justify="center">
         <HStack spacing="19" align="center">
-          <Link to="/home">
+          <Link to="/therapist/home">
             <Button variant="ghost">
               <IconHome size={35} />
             </Button>
           </Link>
-          <Link to="/patients">
+          <Link to="/therapist/patients">
             <Button variant="ghost">
               <IconUsers size={35} />
             </Button>
           </Link>
-          <Link to="/exerciselibrary">
+          <Link to="/therapist/exerciselibrary">
             <Button variant="ghost">
               <IconBarbell size={35} />
             </Button>
