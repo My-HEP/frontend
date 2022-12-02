@@ -1,9 +1,12 @@
 import React from 'react';
 import { Flex, VStack, Heading, Image, Text } from '@chakra-ui/react';
+import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 import AssignmentModal from './AssignmentModal';
 
+
 const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, therapist, setUpdatedHEP, HEPs}) => {
+  const { userRole } = useFirebaseAuth() ?? {};
   const variables = {
     patientId,
     exerciseId,
@@ -34,7 +37,10 @@ const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, freq
         justify='end'
         order={['0', '0', '3']}
       >
-        <AssignmentModal type='edit' patientId={patientId} assignmentData={variables} setUpdatedHEP={setUpdatedHEP} HEPs={HEPs} />
+        { userRole === 'THERAPIST' ? 
+        (<AssignmentModal type='edit' patientId={patientId} assignmentData={variables} setUpdatedHEP={setUpdatedHEP} HEPs={HEPs} />)
+        :
+        (<div></div>)}
       </Flex>
       <VStack
         align={['center', 'center', 'start']}
