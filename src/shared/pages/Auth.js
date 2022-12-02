@@ -13,13 +13,15 @@ import {
   Link,
 } from '@chakra-ui/react';
 import { IconMail, IconLock } from '@tabler/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateAccountModal from '../components/CreateAccountModal';
 import { signIn } from '../../authSignIn';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 function Auth() {
+  const { userRole } = useFirebaseAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

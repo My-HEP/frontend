@@ -1,5 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Link, useHref } from 'react-router-dom';
+import {
+  Link,
+  Navigate,
+  useHref,
+  useNavigate,
+  useOutletContext,
+} from 'react-router-dom';
 import {
   Flex,
   Icon,
@@ -29,8 +35,10 @@ function TherapistHome() {
   const [homeStats, setHomeStats] = useState({});
   const [isLoaded, setIsLoaded] = useState(true);
 
-  const { auth } = useFirebaseAuth() ?? {};
-  const uid = auth?.currentUser?.uid;
+  const navigate = useNavigate();
+
+  const { user } = useFirebaseAuth() ?? {};
+  const uid = user.auth?.currentUser?.uid;
 
   const fetchUserData = async (req, res) => {
     const response = await fetch(`http://localhost:3001/user/${uid}`);
