@@ -7,13 +7,12 @@ const ProtectedRoutes=({ allowedRoles }) => {
     const { auth } = useFirebaseAuth() ?? {};
     const location = useLocation();
     const uid = auth?.currentUser?.uid;
-    const [userRole, setUserRole] = useState('THERAPIST');
+    const [userRole, setUserRole] = useState('PATIENT');
     
 
     const fetchUserRole = async (req, res) => {
        const response = await fetch(`http://localhost:3001/user/${uid}`);
        const userResponse = await response.json();
-       console.log(userResponse)
        setUserRole(userResponse.role);
    };
     fetchUserRole();

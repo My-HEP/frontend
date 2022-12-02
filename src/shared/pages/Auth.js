@@ -56,9 +56,11 @@ function Auth() {
       errorMessage =
         "We're sorry but something went wrong. Please try again later.";
     }
+    
+    let userRole = 'PATIENT'.toLowerCase();
 
     if (!authCode) {
-      navigate('/home');
+      navigate(`${userRole}/home`);
       return;
     } else {
       toast({
