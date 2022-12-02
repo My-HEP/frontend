@@ -3,6 +3,7 @@ import { Flex, VStack, Heading, Image, Text } from '@chakra-ui/react';
 import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 import AssignmentModal from './AssignmentModal';
+import ViewHEPModal from '../../patient/ViewHEPModal';
 
 
 const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, therapist, setUpdatedHEP, HEPs}) => {
@@ -53,12 +54,16 @@ const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, freq
         >
           {variables.hepTitle}
         </Heading>
-        <Image
+        { userRole === 'THERAPIST' ? 
+        (<Image
           src={variables.url}
           boxSize='200px'
           minWidth='200px'
           objectFit='cover'
-        />
+        />)
+        :
+        (<ViewHEPModal url={variables.url} hepTitle={variables.hepTitle}/>)}
+        
       </VStack>
       <VStack
         align='start'
