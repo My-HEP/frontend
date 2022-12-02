@@ -18,8 +18,6 @@ export const FirebaseAuthProvider = ({ children }) => {
 
           setUser(user);
           setUserRole(userResponse?.role);
-
-          console.log('inside context', user, userResponse?.role);
         };
         fetchUserRole();
       } else {

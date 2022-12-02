@@ -26,7 +26,6 @@ function Auth() {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const auth = getAuth();
 
   const headingColorMobile = useColorModeValue(
     'linear(to-l, cyan.600, green.500)',
@@ -38,14 +37,6 @@ function Auth() {
   );
 
   const toast = useToast();
-
-  useEffect(() => {
-    console.log('on auth', userRole);
-    if (userRole === 'THERAPIST') {
-      console.log('moving to home');
-      navigate('/home');
-    }
-  }, [userRole]);
 
   const signInHandler = async (email, password) => {
     let authRes = await signIn(email, password);

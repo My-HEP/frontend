@@ -6,22 +6,13 @@ import { BrowserTracing } from '@sentry/tracing';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useOutletContext,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FirebaseAuthProvider } from './context/FirebaseAuthContext';
 import Auth from './shared/pages/Auth';
 import TherapistHome from './therapist/pages/Home';
 import Patients from './therapist/pages/Patients';
 import HEP from './therapist/pages/HEP';
 import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
-import ProtectedRoute from './shared/components/ProtectedRoute';
-import ProtectedRouteAdmin from './shared/components/ProtectedRouteAdmin';
-const queryClient = new QueryClient();
 
 Sentry.init({
   dsn: 'https://ef4490b6aff1440b9b9ae1ee41afa685@o1372411.ingest.sentry.io/6677638',
@@ -34,30 +25,28 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ColorModeScript />
-      <ChakraProvider theme={theme}>
-        <FirebaseAuthProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/*" element={<App />} />
-              <Route index element={<Auth />} />
+    <ColorModeScript />
+    <ChakraProvider theme={theme}>
+      <FirebaseAuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<App />} />
+            <Route index element={<Auth />} />
 
-              <Route element={<ProtectedRouteAdmin />}>
-                <Route path="home" element={<TherapistHome />} />
-                <Route path="patients" element={<Patients />} />
-                {/* <Route path="hep/:uid" element={<HEP />} /> */}
-                <Route path="exerciselibrary" element={<ExerciseLibrary />} />
-              </Route>
+            <Route>
+              <Route path="home" element={<TherapistHome />} />
+              <Route path="patients" element={<Patients />} />
+              {/* <Route path="hep/:uid" element={<HEP />} /> */}
+              <Route path="exerciselibrary" element={<ExerciseLibrary />} />
+            </Route>
 
-              <Route element={<ProtectedRoute />}>
-                <Route path="hep/:uid" element={<HEP />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </FirebaseAuthProvider>
-      </ChakraProvider>
-    </QueryClientProvider>
+            <Route>
+              <Route path="hep/:uid" element={<HEP />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </FirebaseAuthProvider>
+    </ChakraProvider>
   </StrictMode>
 );
 

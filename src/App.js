@@ -14,8 +14,6 @@ import TherapistHome from './therapist/pages/Home';
 import Patients from './therapist/pages/Patients';
 import HEP from './therapist/pages/HEP';
 import ExerciseLibrary from './therapist/pages/ExerciseLibrary';
-import ProtectedRoute from './shared/components/ProtectedRoute';
-import ProtectedRouteAdmin from './shared/components/ProtectedRouteAdmin';
 
 function App() {
   initializeApp(firebaseConfig);
