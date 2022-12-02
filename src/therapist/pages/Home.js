@@ -163,6 +163,7 @@ function TherapistHome() {
                       <EditInfoForm
                         type={'self'}
                         patientId={userData.uid}
+                        currentAvatar={userData.avatar}
                         currentFirstName={userData.firstName}
                         currentLastName={userData.lastName}
                         currentPhone={userData.phone}
@@ -183,7 +184,7 @@ function TherapistHome() {
                       Currently serving {variables.patientNum} patients
                     </Text>
 
-                    <Link to='/therapist/patients'>
+                    <Link to="/therapist/patients">
                       <Button
                         leftIcon={<IconUsers />}
                         colorScheme="teal"

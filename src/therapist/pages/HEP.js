@@ -26,38 +26,37 @@ const HEP = () => {
 
   useEffect(() => {
     fetchUser();
-    
+
     const fetchHEPs = async () => {
-      let response = await fetch(`http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`);
+      let response = await fetch(
+        `http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`
+      );
       const hepExercises = await response.json();
       let reversedArray = [...hepExercises].reverse();
       setHEPs(reversedArray);
-    }
+    };
 
-    if(currentUserData.id){
-      fetchHEPs()
+    if (currentUserData.id) {
+      fetchHEPs();
     }
 
     const addHEP = () => {
-      setHEPs([...HEPs, newHEP])
-    }
+      setHEPs([...HEPs, newHEP]);
+    };
 
-    addHEP()
+    addHEP();
 
     const updateHEP = () => {
       const indexOfUpdated = HEPs.findIndex(HEP => {
         return HEP.exerciseId === updatedHEP.exerciseId;
       });
       const newHEPs = HEPs.splice(indexOfUpdated, 1);
-      setHEPs([updatedHEP, ...newHEPs])
-    }
+      setHEPs([updatedHEP, ...newHEPs]);
+    };
 
-    updateHEP()
-
+    updateHEP();
   }, [uid, currentUserData.id, newHEP, updatedHEP]);
-  
- 
- 
+
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
       let stringNumber = phoneNumber.toString();
@@ -128,6 +127,7 @@ const HEP = () => {
             <EditInfoForm
               type={'therapist'}
               patientId={uid}
+              currentAvatar={variables.avatar}
               currentFirstName={variables.firstName}
               currentLastName={variables.lastName}
               currentPhone={variables.phone}
@@ -147,7 +147,12 @@ const HEP = () => {
           <Heading as="h2" fontSize="24px">
             Home Exercise Program
           </Heading>
-          <AssignmentModal type="new" patientId={currentUserData.id} setNewHEP={setNewHEP} HEPs={HEPs} />
+          <AssignmentModal
+            type="new"
+            patientId={currentUserData.id}
+            setNewHEP={setNewHEP}
+            HEPs={HEPs}
+          />
         </Flex>
         <HEPList HEPs={HEPs} setUpdatedHEP={setUpdatedHEP} />
 
@@ -164,6 +169,6 @@ const HEP = () => {
       </Flex>
     </>
   );
-}
+};
 
 export default HEP;
