@@ -26,27 +26,32 @@ Sentry.init({
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
-
 root.render(
   <StrictMode>
     <ColorModeScript />
     <ChakraProvider theme={theme}>
       <FirebaseAuthProvider>
-        <BrowserRouter>
+        <BrowserRouter history>
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<Auth />} />
-                <Route path="/therapist" element={<ProtectedRoutes allowedRoles={['THERAPIST']} />}>
-                  <Route path="home" element={<TherapistHome />} />
-                  <Route path="patients" element={<Patients />} />
-                  <Route path="hep/:uid" element={<HEP />} />
-                  <Route path="exerciselibrary" element={<ExerciseLibrary />} />
-                </Route>
-                <Route path="/patient" element={<ProtectedRoutes allowedRoles={['PATIENT']} />}>
-                  <Route path="home" element={<PatientHome />} />
-                  <Route path="my-HEPs" element={<PatientHEPs />} />
-                </Route>
+              <Route
+                path="/therapist"
+                element={<ProtectedRoutes allowedRoles={['THERAPIST']} />}
+              >
+                <Route path="home" element={<TherapistHome />} />
+                <Route path="patients" element={<Patients />} />
+                <Route path="hep/:uid" element={<HEP />} />
+                <Route path="exerciselibrary" element={<ExerciseLibrary />} />
               </Route>
+              <Route
+                path="/patient"
+                element={<ProtectedRoutes allowedRoles={['PATIENT']} />}
+              >
+                <Route path="home" element={<PatientHome />} />
+                <Route path="my-HEPs" element={<PatientHEPs />} />
+              </Route>
+            </Route>
           </Routes>
         </BrowserRouter>
       </FirebaseAuthProvider>
