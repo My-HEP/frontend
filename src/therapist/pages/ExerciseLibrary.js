@@ -20,36 +20,9 @@ import SearchBar from '../components/SearchBar';
 import AddHEPModal from '../components/AddHEPModal';
 
 function ExerciseLibrary() {
-  // const HEPdata = [
-  //   {
-  //     title: 'Tendon Glides',
-  //     handout:
-  //       'https://images.unsplash.com/photo-1566927467984-6332be7377d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-  //   },
-  //   {
-  //     title: 'Exercise number 2',
-  //     handout:
-  //       'https://images.unsplash.com/photo-1638513848528-fe762cee75b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1626&q=80',
-  //   },
-  //   {
-  //     title: 'Exercise number 3',
-  //     handout:
-  //       'https://images.unsplash.com/photo-1591860455878-5458e029601e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-  //   },
-  //   {
-  //     title: 'Exercise number 4',
-  //     handout:
-  //       'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-  //   },
-  //   {
-  //     title: 'Exercise number 5',
-  //     handout:
-  //       'https://images.unsplash.com/photo-1636278697183-89bd33b92cf0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1041&q=80',
-  //   },
-  // ];
-
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     setIsLoaded(false);
@@ -61,6 +34,13 @@ function ExerciseLibrary() {
     };
     fetchData();
   }, []);
+
+  const handleSearch = event => {
+    setSearch(event.target.value);
+  };
+  const searchData = data.filter(item =>
+    item.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   {
     if (!isLoaded) {
@@ -152,7 +132,7 @@ function ExerciseLibrary() {
               <AddHEPModal />
             </Flex>
             <Flex justifyContent={['center', 'center', 'left']}>
-              <SearchBar />
+              <SearchBar handleSearch={handleSearch} />
             </Flex>
 
             <SimpleGrid
@@ -162,7 +142,7 @@ function ExerciseLibrary() {
               transition="200ms"
               zIndex="-10"
             >
-              {data.map(item => {
+              {searchData.map(item => {
                 return (
                   <Box
                     key={item.id}
