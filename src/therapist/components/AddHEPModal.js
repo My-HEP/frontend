@@ -64,7 +64,7 @@ function AddHEPModal() {
         Add New Exercise
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} padding={0}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add New Exercise to Library</ModalHeader>
@@ -72,6 +72,7 @@ function AddHEPModal() {
           <ModalBody>
             <Tooltip label="Select exercise to upload">
               <FormLabel
+                width="100%"
                 display="flex"
                 minWidth="300px"
                 justifyContent="center"
@@ -94,7 +95,7 @@ function AddHEPModal() {
             </Tooltip>
 
             <InputGroup justifyContent="center" marginBottom="2rem">
-              <VStack display="flex" maxWidth="100%" spacing={2}>
+              <VStack display="block" maxWidth="100%" spacing={2}>
                 <Input
                   variant="outline"
                   minWidth="300px"
