@@ -67,7 +67,21 @@ const AssignmentModal = ({
       setDurationUnits(assignmentData.durationUnits);
       setNotes(assignmentData.notes);
     }
+    
   }, [assignmentData]);
+
+  const resetModalData = () => {
+    setExerciseId('');
+    setExercise('');
+    setFrequencyByDay('');
+    setFrequencyByWeek('');
+    setDuration('');
+    setDurationUnits('');
+    setNotes('');
+    onOpen();
+  }
+
+  
 
   const handleSearch = event => {
     setSearchTerm(event.target.value);
@@ -166,7 +180,7 @@ const AssignmentModal = ({
           colorScheme="teal"
           size="lg"
           minWidth="220px"
-          onClick={onOpen}
+          onClick={resetModalData}
         >
           Assign New Exercise
         </Button>
