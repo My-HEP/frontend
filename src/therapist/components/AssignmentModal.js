@@ -54,6 +54,7 @@ const AssignmentModal = ({
 
   const [searchTerm, setSearchTerm] = useState('');
 
+
   useEffect(() => {
     if (assignmentData) {
       setExerciseId(assignmentData.exerciseId);
@@ -113,7 +114,9 @@ const AssignmentModal = ({
       notes,
       assignedById,
     };
+    let update = 'update';
     let HEPToDisplay = {
+      update,
       exerciseId,
       exercise,
       patientId,
@@ -141,6 +144,31 @@ const AssignmentModal = ({
       }
     } catch (error) {}
   };
+
+  const deleteAssignment = async () => {
+    let update = 'delete';
+    let assignmentToDelete = {
+      update,
+      patientId, 
+      exerciseId
+    }
+    try {
+      let response = await fetch(
+        'http://localhost:3001/therapist/deleteHEPExercise',
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(assignmentToDelete),
+        }
+      );
+      if (response.ok) {
+        setUpdatedHEP(assignmentToDelete);
+        onClose();
+      }
+    } catch (error) {}
+  }
 
   let assignedById = 6;
 
@@ -358,7 +386,7 @@ const AssignmentModal = ({
             </ModalFooter>
           ) : (
             <ModalFooter flexWrap='wrap'>
-              <Button backgroundColor="red.400" marginRight="auto" marginLeft={['auto', 0, 0]} minWidth="9rem" marginBottom={[10, 0, 0]}>
+              <Button backgroundColor="red.400" marginRight="auto" marginLeft={['auto', 0, 0]} minWidth="9rem" marginBottom={[10, 0, 0]}  onClick={deleteAssignment}>
                 Remove Assignment
               </Button>
               <Flex marginRight={['auto', '0', '0']} marginLeft={['auto', '0', '0']}>
