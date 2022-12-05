@@ -8,12 +8,17 @@ import EditInfoForm from '../../shared/components/EditInfoForm';
 import AssignmentModal from '../components/AssignmentModal';
 import HEPList from '../components/HEPList';
 import { useParams } from 'react-router-dom';
+import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 const HEP = () => {
   const uidFromUrl = useParams();
   const uid = uidFromUrl.uid;
 
+  const { user } = useFirebaseAuth() ?? {};
+  const therapistUid = user.auth?.currentUser?.uid;
+
   const [currentUserData, setCurrentUserData] = useState([]);
+  const [therapist, setTherapist] = useState([]);
   const [HEPs, setHEPs] = useState([]);
   const [newHEP, setNewHEP] = useState([]);
   const [updatedHEP, setUpdatedHEP] = useState([]);
@@ -24,8 +29,15 @@ const HEP = () => {
     setCurrentUserData(userResponse);
   };
 
+  const fetchTherapist = async (req, res) => {
+    const response = await fetch(`http://localhost:3001/user/${therapistUid}`);
+    const userResponse = await response.json();
+    setTherapist(userResponse);
+  };
+
   useEffect(() => {
     fetchUser();
+    fetchTherapist();
 
     const fetchHEPs = async () => {
       let response = await fetch(
@@ -156,6 +168,7 @@ const HEP = () => {
           <AssignmentModal
             type="new"
             patientId={currentUserData.id}
+            therapistId={therapist.id}
             setNewHEP={setNewHEP}
             HEPs={HEPs}
             setHEPs={setHEPs}
