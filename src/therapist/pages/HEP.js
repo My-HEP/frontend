@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import EditInfoForm from '../../shared/components/EditInfoForm';
 import AssignmentModal from '../components/AssignmentModal';
 import HEPList from '../components/HEPList';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 const HEP = () => {
@@ -44,6 +44,7 @@ const HEP = () => {
         `http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`
       );
       const hepExercises = await response.json();
+      
       let reversedArray = [...hepExercises].reverse();
       setHEPs(reversedArray);
     };
@@ -91,6 +92,12 @@ const HEP = () => {
     email: `${currentUserData.email}`,
     avatar: `${currentUserData.avatar}`,
   };
+
+  const navigate = useNavigate();
+
+  const toPatientView = () => {
+    navigate(`/therapist/hep/${uid}/patientView`);
+  }
 
   return (
     <>
@@ -175,17 +182,17 @@ const HEP = () => {
           />
         </Flex>
         <HEPList HEPs={HEPs} setUpdatedHEP={setUpdatedHEP} />
-
-        <Button
-          leftIcon={<IconEye />}
-          variant="solid"
-          colorScheme="teal"
-          size="lg"
-          width="220px"
-          margin={['0 auto', '0 0', '0 0']}
-        >
-          Patient View
-        </Button>
+          <Button
+            leftIcon={<IconEye />}
+            variant="solid"
+            colorScheme="teal"
+            size="lg"
+            width="220px"
+            margin={['0 auto', '0 0', '0 0']}
+            onClick={toPatientView}
+          >
+            Patient View
+          </Button>
       </Flex>
     </>
   );

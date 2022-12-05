@@ -42,6 +42,7 @@ root.render(
                 <Route path="home" element={<TherapistHome />} />
                 <Route path="patients" element={<Patients />} />
                 <Route path="hep/:uid" element={<HEP />} />
+                <Route path="hep/:uid/patientView" element={<PatientHEPs />} />
                 <Route path="exerciselibrary" element={<ExerciseLibrary />} />
               </Route>
               <Route
