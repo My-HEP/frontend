@@ -17,7 +17,7 @@ const HEPList = ({HEPs, setUpdatedHEP}) => {
           duration={assignment.duration}
           durationUnits={assignment.durationUnits}
           notes={assignment.notes}
-          therapist={assignment.assignedById}
+          therapist={assignment.assignedBy}
           setUpdatedHEP={setUpdatedHEP}
         /> 
       )

@@ -44,6 +44,7 @@ const HEP = () => {
         `http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`
       );
       const hepExercises = await response.json();
+      console.log(hepExercises)
       
       let reversedArray = [...hepExercises].reverse();
       setHEPs(reversedArray);
