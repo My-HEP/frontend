@@ -45,10 +45,8 @@ const PatientHEPs = () => {
         height="100%"
         direction="column"
         justify="flex-start"
-        marginLeft={['4', '10', '20%']}
-        marginRight={['4', '10', '10%']}
-        paddingTop="2rem"
-        paddingBottom="100px"
+        margin='0 auto'
+        padding='2rem 1rem 100px 1rem'
         gap="70"
         maxWidth="800px"
       >
