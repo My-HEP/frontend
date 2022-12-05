@@ -51,12 +51,18 @@ const HEP = () => {
         return HEP.exerciseId === updatedHEP.exerciseId;
       });
       const newHEPs = HEPs.splice(indexOfUpdated, 1);
-      setHEPs([updatedHEP, ...newHEPs]);
+      if(updatedHEP.update === 'delete'){
+        setHEPs([...newHEPs]);
+      }else{
+        setHEPs([updatedHEP, ...newHEPs]);
+      }
     };
 
     updateHEP();
+
   }, [uid, currentUserData.id, newHEP, updatedHEP]);
 
+   
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
       let stringNumber = phoneNumber.toString();
@@ -152,6 +158,7 @@ const HEP = () => {
             patientId={currentUserData.id}
             setNewHEP={setNewHEP}
             HEPs={HEPs}
+            setHEPs={setHEPs}
           />
         </Flex>
         <HEPList HEPs={HEPs} setUpdatedHEP={setUpdatedHEP} />
