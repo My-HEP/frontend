@@ -7,7 +7,7 @@ import App from './App';
 import ProtectedRoutes from './ProtectedRoutes';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { FirebaseAuthProvider } from './context/FirebaseAuthContext';
 import Auth from './shared/pages/Auth';
 import TherapistHome from './therapist/pages/Home';

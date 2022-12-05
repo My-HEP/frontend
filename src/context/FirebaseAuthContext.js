@@ -6,7 +6,8 @@ const FirebaseAuthContext = createContext(undefined);
 export const FirebaseAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
-  const value = { user, userRole };
+  const [loading, setLoading] = useState(true);
+  const value = { user, userRole, loading };
 
   useEffect(() => {
     const unsubscribe = getAuth().onAuthStateChanged(user => {
@@ -18,6 +19,7 @@ export const FirebaseAuthProvider = ({ children }) => {
 
           setUser(user);
           setUserRole(userResponse?.role);
+          setLoading(false);
         };
         fetchUserRole();
       } else {

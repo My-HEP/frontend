@@ -3,10 +3,10 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useFirebaseAuth } from './context/FirebaseAuthContext';
 
 const ProtectedRoutes = ({ allowedRoles }) => {
-  const { user, userRole } = useFirebaseAuth() ?? {};
+  const { user, userRole, loading } = useFirebaseAuth() ?? {};
   const location = useLocation();
 
-  console.log(location);
+  if (loading) return null;
 
   return user && userRole === allowedRoles[0] ? (
     <Outlet context={{ from: location }} />

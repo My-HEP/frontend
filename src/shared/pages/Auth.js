@@ -21,11 +21,11 @@ import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
 
 function Auth() {
-  const { userRole } = useFirebaseAuth();
+  const { userRole, loading: loadingUserRole } = useFirebaseAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const auth = getAuth();
-  console.log(auth)
+  console.log(auth);
   const navigate = useNavigate();
 
   const headingColorMobile = useColorModeValue(
@@ -38,14 +38,14 @@ function Auth() {
   );
 
   const toast = useToast();
-  
+
   useEffect(() => {
     console.log('on auth', userRole);
     const formattedUserRole = userRole?.toLowerCase();
-    if(userRole){
+    if (userRole && !loadingUserRole) {
       navigate(`/${formattedUserRole}/home`);
     }
-  }, [userRole]);
+  }, [loadingUserRole, userRole]);
 
   const signInHandler = async (email, password) => {
     let authRes = await signIn(email, password);
@@ -67,7 +67,7 @@ function Auth() {
       errorMessage =
         "We're sorry but something went wrong. Please try again later.";
     }
-    
+
     if (authCode) {
       toast({
         title: errorMessage,
