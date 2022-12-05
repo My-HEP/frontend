@@ -45,7 +45,6 @@ function Confirmation() {
       returnFocusOnClose={false}
       isOpen={isOpen}
       onClose={onClose}
-      placement="right"
       closeOnBlur={false}
     >
       <PopoverTrigger>

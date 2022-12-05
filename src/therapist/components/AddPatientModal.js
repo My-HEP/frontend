@@ -41,6 +41,15 @@ function AddNewPatientModal(props) {
   const navigate = useNavigate();
   const toast = useToast();
 
+  const formatPhoneNumber = phoneNumber => {
+    if (phoneNumber !== undefined) {
+      let stringNumber = phoneNumber.toString();
+      return stringNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    }
+  };
+
+  formatPhoneNumber(phoneNumber);
+
   // create user in db with add patient => auto generate an email that links to the create account page
   // => update user uid with firebase info in db - append uid to db
 
