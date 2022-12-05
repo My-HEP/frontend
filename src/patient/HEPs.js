@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Flex, Heading } from '@chakra-ui/react';
+import { Flex, Heading, Box } from '@chakra-ui/react';
 import Header from '../therapist/components/Header';
 import HEPList from '../therapist/components/HEPList';
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { useFirebaseAuth } from '../context/FirebaseAuthContext';
 
 const PatientHEPs = () => {
@@ -44,10 +45,8 @@ const PatientHEPs = () => {
         height="100%"
         direction="column"
         justify="flex-start"
-        marginLeft={['4', '10', '20%']}
-        marginRight={['4', '10', '10%']}
-        paddingTop="2rem"
-        paddingBottom="100px"
+        margin='0 auto'
+        padding='2rem 1rem 100px 1rem'
         gap="70"
         maxWidth="800px"
       >
@@ -64,7 +63,15 @@ const PatientHEPs = () => {
           </Heading>
         </Flex>
         <HEPList HEPs={HEPs} />
-
+        <Box
+        display="block"
+        position="fixed"
+        bottom={['10px', '10px', '30px']}
+        align="center"
+        left={['4px', '7px', '20px']}
+      >
+        <ColorModeSwitcher />
+      </Box>
       </Flex>
     </>
   );
