@@ -264,7 +264,7 @@ const AssignmentModal = ({
                     <Heading as="h3" size="sm">
                       Frequency
                     </Heading>
-                    <Flex flexDir="column" align="end" gap="2" width="50%">
+                    <Flex flexDir="column" align="end" gap="2" width="60%">
                       <Flex width="100%" justify="start" align="center" gap="5">
                         <NumberInput
                           width="5rem"
@@ -305,10 +305,10 @@ const AssignmentModal = ({
                     <Heading as="h3" size="sm">
                       Duration
                     </Heading>
-                    <Flex flexDir="column" width="50%">
+                    <Flex flexDir="column" width="60%">
                       <Flex flexDir="row" gap="5" width="100%" justify="start">
                         <NumberInput
-                          width="5rem"
+                          width="6.5rem"
                           min={1}
                           max={100}
                           focusBorderColor="teal.500"
@@ -323,7 +323,7 @@ const AssignmentModal = ({
                         </NumberInput>
                         <Select
                           placeholder="units"
-                          width="6rem"
+                          width="8rem"
                           focusBorderColor="teal.500"
                           onChange={e => setDurationUnits(e.target.value)}
                         >
@@ -357,16 +357,18 @@ const AssignmentModal = ({
               </Button>
             </ModalFooter>
           ) : (
-            <ModalFooter>
-              <Button colorScheme="red" marginRight="50%">
+            <ModalFooter flexWrap='wrap'>
+              <Button backgroundColor="red.400" marginRight="auto" marginLeft={['auto', 0, 0]} minWidth="9rem" marginBottom={[10, 0, 0]}>
                 Remove Assignment
               </Button>
-              <Button mr={3} variant="outline" onClick={onClose}>
-                Cancel
-              </Button>
-              <Button colorScheme="teal" onClick={method}>
-                {text}
-              </Button>
+              <Flex marginRight={['auto', '0', '0']} marginLeft={['auto', '0', '0']}>
+                  <Button mr={3} variant="outline" onClick={onClose} minWidth="6rem">
+                    Cancel
+                  </Button>
+                  <Button colorScheme="teal" onClick={method} minWidth="9rem">
+                    {text}
+                  </Button>
+                </Flex>
             </ModalFooter>
           )}
         </ModalContent>

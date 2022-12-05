@@ -29,14 +29,17 @@ const ViewHEPModal = ({url, hepTitle}) => {
         align="flex-end"
         position="relative"
     >
-        <Image
-            src={url}
-            boxSize='400px'
-            minWidth='200px'
-            height='250px'
-            objectFit='cover'
-        />
-        <Icon as={IconZoomCode} color="white" fontSize={38} position="absolute" right="0" bottom="0" background="teal" padding={1}/>
+      <Tooltip label="Click for expanded view" aria-label='viewing tooltip'>
+          <Image
+              src={url}
+              boxSize='400px'
+              minWidth='200px'
+              height='250px'
+              objectFit='cover'
+          />
+        
+        </Tooltip>
+          <Icon as={IconZoomCode} color="white" fontSize={38} position="absolute" right="0" bottom="0" background="teal" padding={1}/>
     </Flex>
     
 

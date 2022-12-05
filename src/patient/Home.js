@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Link, useHref } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Flex,
-  Icon,
   Heading,
   Text,
   Button,
@@ -13,14 +12,13 @@ import {
   Box,
   AspectRatio,
   Image,
-  Stack,
   Fade,
   SkeletonText,
 } from '@chakra-ui/react';
 import Confirmation from '../therapist/components/LogoutConfirmation';
 import EditInfoForm from '../shared/components/EditInfoForm';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { IconUsers, IconBarbell } from '@tabler/icons';
+import { IconBarbell } from '@tabler/icons';
 import waves from '../therapist/pages/layered-waves-haikei (1).svg';
 import { useFirebaseAuth } from '../context/FirebaseAuthContext';
 
@@ -61,6 +59,15 @@ function PatientHome() {
     exerciseNum: homeStats?.exercisesNum,
     avatar: userData?.avatar,
   };
+
+  const formatPhoneNumber = phoneNumber => {
+    if (phoneNumber !== undefined) {
+      let stringNumber = phoneNumber.toString();
+      return stringNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    }
+  };
+
+  const phone = formatPhoneNumber(userData.phone);
 
   // eslint-disable-next-line no-lone-blocks
   {
@@ -115,7 +122,7 @@ function PatientHome() {
               >
                 <VStack align={['center', 'center', 'start']}>
                   <Heading size={'3xl'} textAlign={['center', 'left']}>
-                    Welcome back, patient
+                    Welcome back
                   </Heading>
                   {userData.firstName ? (
                     <Heading size={'2xl'} textAlign={['center', 'left']}>
@@ -158,7 +165,7 @@ function PatientHome() {
                         patientId={userData.uid}
                         currentFirstName={userData.firstName}
                         currentLastName={userData.lastName}
-                        currentPhone={userData.phone}
+                        currentPhone={phone}
                         currentEmail={userData.email}
                         currentFullName={variables.patientName}
                         fetchUserData={fetchUserData}
