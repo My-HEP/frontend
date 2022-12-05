@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Link, useHref } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Flex,
-  Icon,
   Heading,
   Text,
   Button,
@@ -13,14 +12,13 @@ import {
   Box,
   AspectRatio,
   Image,
-  Stack,
   Fade,
   SkeletonText,
 } from '@chakra-ui/react';
 import Confirmation from '../therapist/components/LogoutConfirmation';
 import EditInfoForm from '../shared/components/EditInfoForm';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { IconUsers, IconBarbell } from '@tabler/icons';
+import { IconBarbell } from '@tabler/icons';
 import waves from '../therapist/pages/layered-waves-haikei (1).svg';
 import { useFirebaseAuth } from '../context/FirebaseAuthContext';
 
