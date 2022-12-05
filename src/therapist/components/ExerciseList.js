@@ -1,7 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { TableContainer, Table, Tbody, Tr, Td } from '@chakra-ui/react';
 
-const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise, HEPs }) => {
+const ExerciseList = ({
+  selectedExerciseId,
+  setSelectedExerciseId,
+  setExercise,
+  HEPs,
+  searchTerm,
+}) => {
   const [exercises, setExercises] = useState([]);
 
   const exerciseTable = useRef();
@@ -34,28 +40,46 @@ const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise, 
     styleSelected(selectedExerciseId);
   }, [selectedExerciseId]);
 
+  const searchData = exercises?.filter(item =>
+    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const selectExercise = e => {
     let exerciseId = e.target.id;
     let exerciseArray = [];
-    HEPs.forEach(HEP => exerciseArray.push(HEP.exerciseId))
-    if(exerciseArray.includes(exerciseId)){
-      return
+    HEPs.forEach(HEP => exerciseArray.push(HEP.exerciseId));
+    if (exerciseArray.includes(exerciseId)) {
+      return;
     }
-    let selectedExerciseData = exercises.find(exercise => exercise.id === exerciseId)
+    let selectedExerciseData = exercises.find(
+      exercise => exercise.id === exerciseId
+    );
     setSelectedExerciseId(exerciseId);
-    setExercise({url: selectedExerciseData.url, title: selectedExerciseData.title})
+    setExercise({
+      url: selectedExerciseData.url,
+      title: selectedExerciseData.title,
+    });
   };
 
-  const setDisabled = (currentExercise) => {
+  const setDisabled = currentExercise => {
     let exerciseArray = [];
-    HEPs.forEach(HEP => exerciseArray.push(HEP.exerciseId))
-    return exerciseArray.includes(currentExercise) ? disabledStyle : activeStyle;
-  }
+    HEPs.forEach(HEP => exerciseArray.push(HEP.exerciseId));
+    return exerciseArray.includes(currentExercise)
+      ? disabledStyle
+      : activeStyle;
+  };
 
-  
-  const disabledStyle = {backgroundColor: "RGBA(0, 0, 0, 0.16)", fontStyle: "italic", color: "gray"};
-  const activeStyle = { backgroundColor: 'initial', fontWeight: 'intial', color: 'initial' } ;
-  
+  const disabledStyle = {
+    backgroundColor: 'RGBA(0, 0, 0, 0.16)',
+    fontStyle: 'italic',
+    color: 'gray',
+  };
+  const activeStyle = {
+    backgroundColor: 'initial',
+    fontWeight: 'intial',
+    color: 'initial',
+  };
+
   return exercises ? (
     <TableContainer
       width="100%"
@@ -66,7 +90,7 @@ const ExerciseList = ({ selectedExerciseId, setSelectedExerciseId, setExercise, 
     >
       <Table variant="simple">
         <Tbody ref={exerciseTable}>
-          {exercises.map(exercise => {
+          {searchData.map(exercise => {
             return (
               <Tr key={exercise.id} style={setDisabled(exercise.id)}>
                 <Td id={exercise.id} onClick={selectExercise}>

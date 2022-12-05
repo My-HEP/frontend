@@ -139,7 +139,7 @@ const EditInfoForm = props => {
                   <Flex justify="center" align="end">
                     <Avatar
                       name={props.name}
-                      src={currentUserData.avatar}
+                      src={props.currentAvatar}
                       size="2xl"
                     />
                     <Tooltip label="Update avatar">
