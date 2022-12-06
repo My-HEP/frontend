@@ -122,7 +122,7 @@ function PatientHome() {
               >
                 <VStack align={['center', 'center', 'start']}>
                   <Heading size={'3xl'} textAlign={['center', 'left']}>
-                    Welcome back
+                    Welcome back,
                   </Heading>
                   {userData.firstName ? (
                     <Heading size={'2xl'} textAlign={['center', 'left']}>
