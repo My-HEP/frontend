@@ -8,6 +8,9 @@ import ViewHEPModal from '../../patient/ViewHEPModal';
 
 const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, frequencyByWeek, duration, durationUnits, notes, therapist, setUpdatedHEP, HEPs}) => {
   const { userRole } = useFirebaseAuth() ?? {};
+
+  let therapistName = `${therapist?.firstName} ${therapist?.lastName}`;
+
   const variables = {
     patientId,
     exerciseId,
@@ -18,7 +21,7 @@ const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, freq
     duration,
     durationUnits,
     notes,
-    therapist,
+    therapistName,
   };
 
   return (
@@ -105,7 +108,7 @@ const AssignedHEP = ({patientId, exerciseId, hepTitle, url, frequencyByDay, freq
           gap='5'
         >
           <Text>Assigned by:</Text>
-          <Text textAlign='right'>{variables.therapist}</Text>
+          <Text textAlign='right'>{variables.therapistName}</Text>
         </Flex>
         <Flex
           width='100%'

@@ -40,6 +40,7 @@ const AssignmentModal = ({
   assignmentData,
   type,
   patientId,
+  therapistId,
   setNewHEP,
   setUpdatedHEP,
   HEPs,
@@ -81,8 +82,6 @@ const AssignmentModal = ({
     setNotes('');
     onOpen();
   }
-
-  
 
   const handleSearch = event => {
     setSearchTerm(event.target.value);
@@ -184,7 +183,8 @@ const AssignmentModal = ({
     } catch (error) {}
   }
 
-  let assignedById = 6;
+
+  let assignedById = therapistId;
 
   let text, heading, method;
   if (type === 'new') {

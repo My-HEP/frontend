@@ -4,15 +4,18 @@ import Header from '../therapist/components/Header';
 import HEPList from '../therapist/components/HEPList';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { useFirebaseAuth } from '../context/FirebaseAuthContext';
+import { useParams } from 'react-router-dom';
 
 const PatientHEPs = () => {
-  const { user } = useFirebaseAuth() ?? {};
-  const uid = user?.auth?.currentUser?.uid;
+  const { user, userRole } = useFirebaseAuth() ?? {};
+  const uidFromUrl = useParams();
+
+  const uid = userRole === 'THERAPIST' ? uidFromUrl.uid : user?.auth?.currentUser?.uid;
+  
 
   const [currentUserData, setCurrentUserData] = useState([]);
   const [HEPs, setHEPs] = useState([]);
 
-  console.log(uid)
   const fetchUser = async (req, res) => {
     const response = await fetch(`http://localhost:3001/user/${uid}`);
     const userResponse = await response.json();

@@ -2,6 +2,7 @@ import React from "react";
 import AssignedHEP from './AssignedHEP';
 
 const HEPList = ({HEPs, setUpdatedHEP}) => {
+
   return(
     HEPs.map(assignment => {
       return(
@@ -16,7 +17,7 @@ const HEPList = ({HEPs, setUpdatedHEP}) => {
           duration={assignment.duration}
           durationUnits={assignment.durationUnits}
           notes={assignment.notes}
-          therapist={assignment.assignedById}
+          therapist={assignment.assignedBy}
           setUpdatedHEP={setUpdatedHEP}
         /> 
       )
