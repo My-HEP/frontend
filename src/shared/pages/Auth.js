@@ -25,7 +25,6 @@ function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const auth = getAuth();
-  console.log(auth);
   const navigate = useNavigate();
 
   const headingColorMobile = useColorModeValue(
@@ -40,7 +39,6 @@ function Auth() {
   const toast = useToast();
 
   useEffect(() => {
-    console.log('on auth', userRole);
     const formattedUserRole = userRole?.toLowerCase();
     if (userRole && !loadingUserRole) {
       navigate(`/${formattedUserRole}/home`);

@@ -39,7 +39,6 @@ import { useNavigate } from 'react-router-dom';
 const EditInfoForm = props => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [currentUserData, setCurrentUserData] = useState([]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
