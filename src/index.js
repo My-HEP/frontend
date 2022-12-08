@@ -31,7 +31,7 @@ root.render(
     <ColorModeScript />
     <ChakraProvider theme={theme}>
       <FirebaseAuthProvider>
-        <BrowserRouter history>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<Auth />} />
