@@ -81,7 +81,6 @@ function PatientHome() {
   };
 
   const phone = formatPhoneNumber(userData.phone);
-  console.log(userData);
 
   // eslint-disable-next-line no-lone-blocks
   {

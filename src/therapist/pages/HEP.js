@@ -44,8 +44,7 @@ const HEP = () => {
         `http://localhost:3001/therapist/getHEPExercises/${currentUserData.id}`
       );
       const hepExercises = await response.json();
-      console.log(hepExercises)
-      
+
       let reversedArray = [...hepExercises].reverse();
       setHEPs(reversedArray);
     };
@@ -65,18 +64,16 @@ const HEP = () => {
         return HEP.exerciseId === updatedHEP.exerciseId;
       });
       const newHEPs = HEPs.splice(indexOfUpdated, 1);
-      if(updatedHEP.update === 'delete'){
+      if (updatedHEP.update === 'delete') {
         setHEPs([...newHEPs]);
-      }else{
+      } else {
         setHEPs([updatedHEP, ...newHEPs]);
       }
     };
 
     updateHEP();
-
   }, [uid, currentUserData.id, newHEP, updatedHEP]);
 
-   
   const formatPhoneNumber = phoneNumber => {
     if (phoneNumber !== undefined) {
       let stringNumber = phoneNumber.toString();
@@ -98,7 +95,7 @@ const HEP = () => {
 
   const toPatientView = () => {
     navigate(`/therapist/hep/${uid}/patientView`);
-  }
+  };
 
   return (
     <>
@@ -183,17 +180,17 @@ const HEP = () => {
           />
         </Flex>
         <HEPList HEPs={HEPs} setUpdatedHEP={setUpdatedHEP} />
-          <Button
-            leftIcon={<IconEye />}
-            variant="solid"
-            colorScheme="teal"
-            size="lg"
-            width="220px"
-            margin={['0 auto', '0 0', '0 0']}
-            onClick={toPatientView}
-          >
-            Patient View
-          </Button>
+        <Button
+          leftIcon={<IconEye />}
+          variant="solid"
+          colorScheme="teal"
+          size="lg"
+          width="220px"
+          margin={['0 auto', '0 0', '0 0']}
+          onClick={toPatientView}
+        >
+          Patient View
+        </Button>
       </Flex>
     </>
   );

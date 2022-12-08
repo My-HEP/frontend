@@ -73,9 +73,7 @@ function AddNewPatientModal(props) {
         body: JSON.stringify(user),
       });
       const data = await response.json();
-      console.log(data.email);
       let resetEmail = await sendPasswordResetEmail(auth, data.email);
-      console.log(resetEmail);
     } catch (error) {
       console.log(error);
     }
@@ -212,7 +210,7 @@ function AddNewPatientModal(props) {
               justify="space-between"
               width="100%"
             >
-                <Button variant="outline" onClick={onClose}>
+              <Button variant="outline" onClick={onClose}>
                 Cancel
               </Button>
               <Button
@@ -229,7 +227,6 @@ function AddNewPatientModal(props) {
               >
                 {props.formButton}
               </Button>
-            
             </Stack>
           </ModalFooter>
         </ModalContent>

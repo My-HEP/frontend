@@ -29,9 +29,7 @@ function AddHEPModal() {
     try {
       const tagsArr = tagsStr.split(', ');
       const tags = tagsArr.map(tag => ({ title: tag }));
-      console.log(tags);
       const exercise = { url, title, tags };
-      console.log(exercise);
       const response = await fetch(
         'http://localhost:3001/therapist/addExercise',
         {
