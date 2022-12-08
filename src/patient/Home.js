@@ -26,7 +26,7 @@ function PatientHome() {
   const [userData, setUserData] = useState([]);
   const [homeStats, setHomeStats] = useState({});
   const [isLoaded, setIsLoaded] = useState(true);
-  
+  const [HEPs, setHEPs] = useState([]);
 
   const { user } = useFirebaseAuth() ?? {};
   const uid = user?.auth?.currentUser?.uid;
@@ -44,19 +44,32 @@ function PatientHome() {
       fetchUserData();
     }
 
-    const homeStats = async (req, res) => {
-      const response = await fetch('http://localhost:3001/therapist/homeStats');
-      const stats = await response.json();
-      setHomeStats(stats);
+    const fetchHEPs = async () => {
+      let response = await fetch(
+        `http://localhost:3001/therapist/getHEPExercises/${userData.id}`
+      );
+      const hepExercises = await response.json();
+      let reversedArray = [...hepExercises].reverse();
+      setHEPs(reversedArray);
     };
 
-    homeStats();
-  }, [uid, setHomeStats, setUserData, setIsLoaded]);
+    if (userData.id) {
+      fetchHEPs();
+    }
+
+    // const homeStats = async (req, res) => {
+    //   const response = await fetch('http://localhost:3001/therapist/homeStats');
+    //   const stats = await response.json();
+    //   setHomeStats(stats);
+    // };
+
+    // homeStats();
+  }, [uid, userData.id, setHomeStats, setUserData, setIsLoaded]);
 
   const variables = {
     userName: userData?.firstName + ' ' + userData?.lastName,
     patientNum: homeStats?.patientsNum,
-    exerciseNum: homeStats?.exercisesNum,
+    exerciseNum: HEPs.length,
     avatar: userData?.avatar,
   };
 
@@ -68,6 +81,7 @@ function PatientHome() {
   };
 
   const phone = formatPhoneNumber(userData.phone);
+  console.log(userData);
 
   // eslint-disable-next-line no-lone-blocks
   {
@@ -179,9 +193,8 @@ function PatientHome() {
                     mt={['3rem', '3rem', 0]}
                     minWidth="300px"
                   >
-                   
                     <Text as="b">
-                      You have {variables.exerciseNum}assigned HEPs.
+                      You have {variables.exerciseNum} assigned HEPs.
                     </Text>
 
                     <Link to="/patient/my-HEPs">
