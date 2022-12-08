@@ -179,6 +179,7 @@ function PatientHome() {
                         currentFirstName={userData.firstName}
                         currentLastName={userData.lastName}
                         currentPhone={phone}
+                        currentAvatar={userData.avatar}
                         currentEmail={userData.email}
                         currentFullName={variables.patientName}
                         fetchUserData={fetchUserData}
