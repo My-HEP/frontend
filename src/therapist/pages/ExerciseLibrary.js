@@ -4,7 +4,6 @@ import {
   Heading,
   SimpleGrid,
   Box,
-  Image,
   Tag,
   TagLabel,
   Skeleton,
@@ -16,6 +15,7 @@ import SideNav from '../components/SideNav';
 import BottomNav from '../components/BottomNav';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
+import ViewHEPModal from '../../patient/ViewHEPModal';
 
 import AddHEPModal from '../components/AddHEPModal';
 
@@ -151,14 +151,16 @@ function ExerciseLibrary() {
                     minWidth="200px"
                   >
                     <Skeleton isLoaded={isLoaded}>
-                      <Image
-                        key={item.url}
-                        boxSize="250px"
-                        objectFit="cover"
-                        src={item.url}
-                        alt="HEP handout"
-                        borderRadius="7px"
-                      />
+                      <ViewHEPModal 
+                      key={item.url}
+                      boxSize="250px"
+                      objectFit="cover"
+                      src={item.url}
+                      url={item.url}
+                      hepTitle={item.title}
+                      alt="HEP handout"
+                      borderRadius="7px"
+                       /> 
                     </Skeleton>
                     <Skeleton isLoaded={isLoaded}>
                       <label key={item.title}>{item.title}</label>
