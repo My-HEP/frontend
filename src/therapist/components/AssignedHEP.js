@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, VStack, Heading, Image, Text } from '@chakra-ui/react';
 import { useFirebaseAuth } from '../../context/FirebaseAuthContext';
+import { useLocation } from 'react-router-dom';
 
 import AssignmentModal from './AssignmentModal';
 import ViewHEPModal from '../../patient/ViewHEPModal';
@@ -18,6 +19,7 @@ const AssignedHEP = ({
   therapist,
   setUpdatedHEP,
   HEPs,
+
 }) => {
   const { userRole } = useFirebaseAuth() ?? {};
 
@@ -35,7 +37,10 @@ const AssignedHEP = ({
     notes,
     therapistName,
   };
-
+  
+  const location = useLocation();
+  const patientView = location.pathname.includes('patientView');
+ 
   return (
     <Flex
       flexDirection={['column', 'column', 'row']}
@@ -50,7 +55,9 @@ const AssignedHEP = ({
       boxShadow="xl"
     >
       <Flex justify="end" order={['0', '0', '3']}>
-        {userRole === 'THERAPIST' ? (
+        {userRole === 'PATIENT' || patientView ? (
+          <div></div>
+        ) : (
           <AssignmentModal
             type="edit"
             patientId={patientId}
@@ -58,8 +65,6 @@ const AssignedHEP = ({
             setUpdatedHEP={setUpdatedHEP}
             HEPs={HEPs}
           />
-        ) : (
-          <div></div>
         )}
       </Flex>
       <VStack
@@ -70,15 +75,15 @@ const AssignedHEP = ({
         <Heading as="h3" size="md">
           {variables.hepTitle}
         </Heading>
-        {userRole === 'THERAPIST' ? (
+        {userRole === 'PATIENT' || patientView ? (
+          <ViewHEPModal url={variables.url} hepTitle={variables.hepTitle} />
+        ) : (
           <Image
             src={variables.url}
             boxSize="200px"
             minWidth="200px"
             objectFit="cover"
           />
-        ) : (
-          <ViewHEPModal url={variables.url} hepTitle={variables.hepTitle} />
         )}
       </VStack>
       <VStack
