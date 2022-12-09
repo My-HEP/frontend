@@ -42,7 +42,6 @@ const ViewHEPModal = ({url, hepTitle}) => {
           <Icon as={IconZoomCode} color="white" fontSize={38} position="absolute" right="0" bottom="0" background="teal" padding={1}/>
     </Flex>
     
-
       
       <Modal size={['sm', 'lg', 'xl']} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
