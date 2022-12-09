@@ -55,7 +55,7 @@ const AssignedHEP = ({
       boxShadow="xl"
     >
       <Flex justify="end" order={['0', '0', '3']}>
-        {userRole === 'PATIENT' || patientView ? (
+        {userRole === 'PATIENT' ? (
           <div></div>
         ) : (
           <AssignmentModal
